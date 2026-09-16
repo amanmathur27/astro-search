@@ -45,8 +45,7 @@ def test_dedup_keeps_monthly_moons():
              for m in (1, 2, 3)]
     assert len(deduplicate(moons)) == 3
 
-def test_gnews_gating():
-    from astro_search.sources.gnews import has_recency, recency_window_days, edition_params
+def test_gnews_gating():    from astro_search.sources.gnews import has_recency, recency_window_days, edition_params
     from astro_search.core import AstroSearch
     assert has_recency("major discovery today") and has_recency("breaking: supernova just announced")
     assert has_recency("top developments this week") and has_recency("launched 3 hours ago")
@@ -64,3 +63,14 @@ def test_gnews_gating():
     assert "Google News" in gated
     # concept queries never admit it even when forced path differs: intent mismatch
     assert "Google News" not in [s.name for s in eng._select("concept_explanation", [], "all", allow_gnews=True)]
+
+def test_ishub_gated_without_key():
+    import os as _os
+    _os.environ.pop('ASTRO_ISH_KEY', None)
+    from astro_search.sources.ishub import ISROHubSource
+    from astro_search.core import AstroSearch
+    s = ISROHubSource()
+    assert s.is_available() is False and s.fetch('GSLV launch') == []
+    names = [x.name for x in AstroSearch()._select('mission_status', ['isro'], 'all')]
+    assert 'IndianSpaceHub' not in names  # silent when keyless
+
