@@ -45,7 +45,9 @@ def test_dedup_keeps_monthly_moons():
              for m in (1, 2, 3)]
     assert len(deduplicate(moons)) == 3
 
-def test_gnews_gating():    from astro_search.sources.gnews import has_recency, recency_window_days, edition_params
+def test_gnews_gating():
+    from astro_search.sources.gnews import has_recency, recency_window_days, edition_params
+    from astro_search.core import AstroSearch
     from astro_search.core import AstroSearch
     assert has_recency("major discovery today") and has_recency("breaking: supernova just announced")
     assert has_recency("top developments this week") and has_recency("launched 3 hours ago")
