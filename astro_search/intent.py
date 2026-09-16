@@ -59,6 +59,7 @@ KNOWN_ENTITIES = {
                  "orion nebula", "crab nebula", "ring nebula"],
     "missions": ["jwst", "james webb", "hubble", "artemis", "voyager", "cassini",
                  "perseverance", "curiosity", "new horizons", "iss",
+                 "nancy grace roman", "nancy grace", "roman space telescope", "roman telescope", "roman",
                  "isro", "gslv", "pslv", "lvm3", "sslv", "gaganyaan", "chandrayaan",
                  "spacex", "starship", "falcon", "dragon", "starlink",
                  "nasa", "esa", "jaxa", "cnsa", "roscosmos",
@@ -161,8 +162,15 @@ def classify(query: str) -> tuple[str, list[str]]:
                 intent = name
                 break
     if intent is None:
-        # object-name fallback: planet/deep-sky/mission mention => object_lookup
-        if any(e in q for e in KNOWN_ENTITIES["planets"] + KNOWN_ENTITIES["deep_sky"] + KNOWN_ENTITIES["missions"]):
+        # object-name fallback: planet/deep-sky mention => object_lookup.
+        # mission names with news-ish nouns ("telescope", "launch", "mission") want
+        # news, not object data ("nancy grace telescope" is Roman launch news).
+        hit = lambda e: (_SHORT_RE.get(e, re.compile(r"\b" + re.escape(e) + r"\b")).search(q)
+                         if len(e) <= 4 else e in q)
+        if any(hit(e) for e in KNOWN_ENTITIES["planets"] + KNOWN_ENTITIES["deep_sky"]):
+            intent = "object_lookup"
+        elif (any(hit(e) for e in KNOWN_ENTITIES["missions"])
+                and not any(k in q for k in ("telescope", "launch", "mission", "news", "update", "status"))):
             intent = "object_lookup"
         else:
             intent = DEFAULT_INTENT

@@ -179,7 +179,7 @@ class AstroSearch:
         results = deduplicate(filt)
         src_intents = {s.name: s.intents for s in sources}
         results = rank(results, query, intent, src_intents)
-        results = results[:max_results]
+        results = self._entity_gate(results, entities, max_results)
         if not results and not gnews_ok and intent in ("recent_news", "current_phenomenon",
                                                        "mission_status", "object_lookup"):
             # last resort: one gated Google News call before admitting defeat
@@ -204,6 +204,28 @@ class AstroSearch:
             except Exception:
                 pass
         return out
+
+    def _entity_gate(self, results: list[dict], entities: list[str], max_results: int) -> list[dict]:
+        """Specific-entity queries must actually mention the entity.
+
+        Without this, "nancy grace telescope" returns any article containing just
+        "telescope" (Webb/Hubble filler) or zero-hit freshest-item fallback
+        (magnetism guide). When entities were extracted, keep only results covering
+        >=1 full entity phrase; backstop to top-3 by score so agents never get nothing.
+        Broad queries (no entities) pass through untouched.
+        """
+        if not entities or not results:
+            return results[:max_results]
+        from .ranker import _tok
+        keep = []
+        for r in results:
+            doc = set(_tok(f"{r.get('title', '') or ''} {r.get('summary', '') or ''}"))
+            if any(set(_tok(e)) <= doc for e in entities):
+                keep.append(r)
+        if not keep:
+            # backstop only when the gate empties the pool: top-3 so agents get something
+            keep = results[: min(3, len(results))]
+        return keep[:max_results]
 
     def _apply_local_display(self, results: list[dict], tz) -> None:
         """Add extra.local_display converted from event_date_utc. UTC default, never guessed."""
