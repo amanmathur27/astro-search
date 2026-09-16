@@ -9,3 +9,4 @@ dist/
 .astro_cache.db
 feed_report.txt
 *.bsp
+local_demo/
