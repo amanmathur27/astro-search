@@ -25,8 +25,6 @@ INTENT_RULES = [
                                 "what time", "where to watch", "best place"]),
     ("research_lookup", ["paper", "study", "research", "arxiv", "published",
                          "journal", "findings", "peer reviewed", "abstract"]),
-    ("mission_status", ["mission", "spacecraft", "probe", "rover", "satellite",
-                        "where is voyager", "iss position", "launch", "who is in space"]),
     ("periodic_event", ["calendar", "all meteor showers", "this year events",
                         "celestial calendar", "schedule"]),
     ("celestial_event_lookup", ["next", "upcoming", "when is", "when will",
@@ -56,7 +54,9 @@ KNOWN_ENTITIES = {
               "geomagnetic storm", "aurora", "northern lights", "kp index", "solar wind"],
     "planets": ["mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune"],
     "deep_sky": ["black hole", "neutron star", "pulsar", "nebula", "galaxy", "quasar",
-                 "supernova", "white dwarf", "dark matter", "exoplanet"],
+                 "supernova", "white dwarf", "dark matter", "exoplanet",
+                 "andromeda", "betelgeuse", "rigel", "vega", "sirius", "antares",
+                 "orion nebula", "crab nebula", "ring nebula"],
     "missions": ["jwst", "james webb", "hubble", "artemis", "voyager", "cassini",
                  "perseverance", "curiosity", "new horizons", "iss",
                  "isro", "gslv", "pslv", "lvm3", "sslv", "gaganyaan", "chandrayaan",
@@ -65,7 +65,55 @@ KNOWN_ENTITIES = {
                  "rocket", "launch", "satellite", "space station"],
 }
 
-ALIASES = {"blood moon": "lunar eclipse", "jwst": "james webb", "shooting stars": "meteor shower"}
+# Structural pre-pass: unambiguous query shapes, checked before keyword rules.
+# Order: location/time-specific detail first, generic event lookup after.
+ALIASES = {"blood moon": "lunar eclipse", "jwst": "james webb", "shooting stars": "meteor shower",
+           "m31": "andromeda galaxy", "m87": "m87 black hole", "sgr a*": "sagittarius a black hole"}
+STRUCTURAL = [
+    (re.compile(r"\bvisible\s+from\b"), "celestial_event_detail"),
+    (re.compile(r"\bwhere\s+(can|could|will|would|to)\b.{0,20}\b(see|watch|observe|view|spot)\b"), "celestial_event_detail"),
+    (re.compile(r"\bwhat time\b"), "celestial_event_detail"),
+    (re.compile(r"\b(is there|will there be|any)\b.{0,15}\b(aurora|northern lights)\b"), "current_phenomenon"),
+    (re.compile(r"\b(papers?|arxiv|preprint)\b.{0,20}\b(on|about)\b"), "research_lookup"),
+    # NOTE: no leading "what is/explain" pattern here on purpose — "what is the next
+    # mission to Mars" must stay mission_status via keyword rules, not concept.
+    (re.compile(r"\b(all|every|complete|full list)\b.{0,25}\b(calendar|schedule|in 20\d\d|this year|events)\b"), "periodic_event"),
+    (re.compile(r"\bwhere is\b.{0,25}\b(iss|voyager|hubble|jwst|mars|jupiter|saturn|international space station)\b"), "mission_status"),
+    (re.compile(r"\bwhen\s+(is|will|does)\b.{0,30}\b(next|upcoming|eclipse|shower|moon|visible|occur|happen)\b"), "celestial_event_lookup"),
+]
+
+
+def structural_intent(q: str) -> str | None:
+    for rx, intent in STRUCTURAL:
+        if rx.search(q):
+            return intent
+    return None
+
+
+# Event nouns: bare "next"/"upcoming" fires event lookup ONLY beside one of these.
+# Fixes "next big thing in telescope technology" -> event misfire.
+EVENT_NOUNS = {
+    "eclipse", "moon", "meteor", "shower", "supermoon", "conjunction", "opposition",
+    "transit", "occultation", "solstice", "equinox", "alignment", "comet",
+    "aurora", "perihelion", "aphelion",
+}
+
+_RESEARCH_MARKS = ["paper", "arxiv", "preprint", "peer review", "journal", "doi", "thesis", "publication"]
+_CONCEPT_MARKS = ["what is", "what are", "how does", "how do", "explain", "define",
+                  "difference between", "why does", "why do", "meaning of"]
+_PAST_RES = [re.compile(r"\bhappened\b"), re.compile(r"\boccurred\b"),
+             re.compile(r"\bhistory of\b"), re.compile(r"\bwas\b"), re.compile(r"\bwere\b")]
+
+
+def _event_suppressed(q: str) -> bool:
+    """Negative guards: research/concept/past markers veto event lookup."""
+    if any(k in q for k in _RESEARCH_MARKS):
+        return True
+    if any(k in q for k in _CONCEPT_MARKS) and "when" not in q:
+        return True
+    if any(rx.search(q) for rx in _PAST_RES) and "next" not in q and "upcoming" not in q:
+        return True
+    return False
 
 # precompiled whole-word patterns for short entities (built once, not per query)
 _SHORT_RE: dict[str, "re.Pattern[str]"] = {
@@ -99,11 +147,19 @@ def classify(query: str) -> tuple[str, list[str]]:
     for alias, target in ALIASES.items():
         if alias in q:
             q = q.replace(alias, target)
-    intent = None
-    for name, keywords in INTENT_RULES:
-        if any(k in q for k in keywords):
-            intent = name
-            break
+    intent = structural_intent(q)
+    if intent is None:
+        for name, keywords in INTENT_RULES:
+            if name == "celestial_event_lookup":
+                # bare next/upcoming needs an event noun; research/concept/past vetoes
+                if _event_suppressed(q):
+                    continue
+                if not any(n in q for n in EVENT_NOUNS) and not any(
+                        k in q for k in ("when is", "when will", "date of")):
+                    continue
+            if any(k in q for k in keywords):
+                intent = name
+                break
     if intent is None:
         # object-name fallback: planet/deep-sky/mission mention => object_lookup
         if any(e in q for e in KNOWN_ENTITIES["planets"] + KNOWN_ENTITIES["deep_sky"] + KNOWN_ENTITIES["missions"]):

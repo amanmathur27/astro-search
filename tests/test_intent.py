@@ -16,6 +16,14 @@ CASES = [
     ("who is in space right now", "mission_status"),
     ("size of Jupiter", "object_lookup"),
     ("explain black hole", "concept_explanation"),
+    # structural + guard regressions
+    ("next big thing in telescope technology", "recent_news"),
+    ("when will the next eclipse happen", "celestial_event_lookup"),
+    ("history of lunar eclipses", "recent_news"),
+    ("papers on eclipses", "research_lookup"),
+    ("how does a lunar eclipse work", "concept_explanation"),
+    ("m31 distance", "object_lookup"),
+    ("is betelgeuse going to explode", "object_lookup"),
 ]
 
 def test_intents():
