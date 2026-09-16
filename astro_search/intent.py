@@ -58,7 +58,11 @@ KNOWN_ENTITIES = {
     "deep_sky": ["black hole", "neutron star", "pulsar", "nebula", "galaxy", "quasar",
                  "supernova", "white dwarf", "dark matter", "exoplanet"],
     "missions": ["jwst", "james webb", "hubble", "artemis", "voyager", "cassini",
-                 "perseverance", "curiosity", "new horizons", "iss"],
+                 "perseverance", "curiosity", "new horizons", "iss",
+                 "isro", "gslv", "pslv", "lvm3", "sslv", "gaganyaan", "chandrayaan",
+                 "spacex", "starship", "falcon", "dragon", "starlink",
+                 "nasa", "esa", "jaxa", "cnsa", "roscosmos",
+                 "rocket", "launch", "satellite", "space station"],
 }
 
 ALIASES = {"blood moon": "lunar eclipse", "jwst": "james webb", "shooting stars": "meteor shower"}
@@ -103,7 +107,11 @@ def classify(query: str) -> tuple[str, list[str]]:
     entities: list[str] = []
     for group in KNOWN_ENTITIES.values():
         for ent in group:
-            if ent in q:
+            if len(ent) <= 4:
+                # short codes (iss, jwst, esa...) must match whole words, not substrings ("iss" in "mission")
+                if re.search(r"\b" + re.escape(ent) + r"\b", q):
+                    entities.append(ent)
+            elif ent in q:
                 entities.append(ent)
     # fuzzy on single tokens for misspellings like persieds
     for tok in re.findall(r"[a-z]{6,}", q):
