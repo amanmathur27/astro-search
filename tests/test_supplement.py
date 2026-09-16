@@ -66,13 +66,3 @@ def test_gnews_gating():
     # concept queries never admit it even when forced path differs: intent mismatch
     assert "Google News" not in [s.name for s in eng._select("concept_explanation", [], "all", allow_gnews=True)]
 
-def test_ishub_gated_without_key():
-    import os as _os
-    _os.environ.pop('ASTRO_ISH_KEY', None)
-    from astro_search.sources.ishub import ISROHubSource
-    from astro_search.core import AstroSearch
-    s = ISROHubSource()
-    assert s.is_available() is False and s.fetch('GSLV launch') == []
-    names = [x.name for x in AstroSearch()._select('mission_status', ['isro'], 'all')]
-    assert 'IndianSpaceHub' not in names  # silent when keyless
-

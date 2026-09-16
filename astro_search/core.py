@@ -32,11 +32,10 @@ def _build_sources():
     from .sources.local_sky import LocalSkySource
     from .sources.sky_fallback import FallbackSkySource
     from .sources.gnews import GoogleNewsSource
-    from .sources.ishub import ISROHubSource
     srcs = [RSSSource(c) for c in RSS_FEEDS]
     srcs += [USNOSource(), NOAASource(), NASASource(), JPLSource(),
              ArxivSource(), ADSSource(), ExoplanetSource(), ISSSource(), LocalSkySource(), FallbackSkySource(),
-             GoogleNewsSource(), ISROHubSource()]
+             GoogleNewsSource()]
     return srcs
 
 
