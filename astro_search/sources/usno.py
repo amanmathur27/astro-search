@@ -98,20 +98,37 @@ class USNOSource(BaseSource):
 
         # --- moon phases ---
         if full_sweep or any(k in q for k in ["moon", "quarter", "supermoon"]) or not out:
-            try:
-                data = _get("/moon/phases/date", {"date": today, "nump": 4})
-                for ph in data.get("phasedata", []):
-                    iso = _iso(ph.get("year"), ph.get("month"), ph.get("day"), ph.get("time", "00:00"))
-                    out.append(normalize({
-                        "title": f"{ph.get('phase')} — {ph.get('month')}/{ph.get('day')}/{ph.get('year')}",
-                        "summary": f"{ph.get('phase')} occurs {iso} UTC."[:400],
-                        "url": "https://aa.usno.navy.mil/",
-                        "published": iso, "category": "events", "event_type": "moon_phase",
-                        "event_date": iso, "event_date_utc": iso,
-                        "extra": {"phase": ph.get("phase")},
-                    }, META))
-            except Exception:
-                pass
+            # yearly calendar mode: all phases of the year (static, ~50 entries)
+            if full_sweep:
+                try:
+                    data = _get("/moon/phases/year", {"year": year})
+                    for ph in data.get("phasedata", []):
+                        iso = _iso(ph.get("year"), ph.get("month"), ph.get("day"), ph.get("time", "00:00"))
+                        out.append(normalize({
+                            "title": f"{ph.get('phase')} — {ph.get('month')}/{ph.get('day')}/{ph.get('year')}",
+                            "summary": f"{ph.get('phase')} occurs {iso} UTC."[:400],
+                            "url": "https://aa.usno.navy.mil/",
+                            "published": iso, "category": "events", "event_type": "moon_phase",
+                            "event_date": iso, "event_date_utc": iso,
+                            "extra": {"phase": ph.get("phase")},
+                        }, META))
+                except Exception:
+                    pass
+            else:
+                try:
+                    data = _get("/moon/phases/date", {"date": today, "nump": 4})
+                    for ph in data.get("phasedata", []):
+                        iso = _iso(ph.get("year"), ph.get("month"), ph.get("day"), ph.get("time", "00:00"))
+                        out.append(normalize({
+                            "title": f"{ph.get('phase')} — {ph.get('month')}/{ph.get('day')}/{ph.get('year')}",
+                            "summary": f"{ph.get('phase')} occurs {iso} UTC."[:400],
+                            "url": "https://aa.usno.navy.mil/",
+                            "published": iso, "category": "events", "event_type": "moon_phase",
+                            "event_date": iso, "event_date_utc": iso,
+                            "extra": {"phase": ph.get("phase")},
+                        }, META))
+                except Exception:
+                    pass
 
         # --- seasons / apsides ---
         if full_sweep or any(k in q for k in ["solstice", "equinox", "season", "perihelion", "aphelion"]):

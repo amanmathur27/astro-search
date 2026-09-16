@@ -8,6 +8,4 @@ build/
 dist/
 .astro_cache.db
 feed_report.txt
-calendar/*.json
-!.gitkeep
 *.bsp

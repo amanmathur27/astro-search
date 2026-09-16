@@ -250,8 +250,11 @@ class AstroSearch:
         except Exception as e:
             logger.warning(f"meteor json: {e}")
         results = deduplicate(results)
-        results = rank(results, "celestial events", "periodic_event", None)[:50]
+        results = rank(results, "celestial events", "periodic_event", None)[:100]
         return {"query": f"celestial events {year}", "intent": "periodic_event",
                 "category": "events", "count": len(results), "results": results,
                 "markdown": self._markdown(f"celestial events {year}", "periodic_event", results, now_iso, {"is_historical": False}),
-                "cached": False, "context": {"now_utc": now_iso, "today": today_label(), "tz": "UTC"}}
+                "cached": False, "context": {"now_utc": now_iso, "today": today_label(), "tz": "UTC"},
+                "generated_at": now_iso,
+                "data_as_of": {"static_yearly": f"{year}-01-01 (eclipses, seasons, meteor peaks: fixed for the year)",
+                               "live_snapshot": now_iso + " (moon phases yearly-static; Kp/asteroids/APOD: re-query live when fresh matters)"}}

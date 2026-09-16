@@ -32,3 +32,9 @@ def test_dedup_keeps_distinct_dated_events():
                    "event_type": "moon_phase", "event_date_utc": "2026-09-26T16:49:00Z"}, META)
     out = deduplicate([a, b, c])
     assert len(out) == 2  # true duplicate collapsed, distinct dates kept
+
+def test_dedup_keeps_monthly_moons():
+    moons = [normalize({"title": f"Full Moon — {m}/1/2026", "url": "https://aa.usno.navy.mil/",
+                        "event_type": "moon_phase", "event_date_utc": f"2026-{m:02d}-01T10:00:00Z"}, META)
+             for m in (1, 2, 3)]
+    assert len(deduplicate(moons)) == 3

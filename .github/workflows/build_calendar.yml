@@ -7,6 +7,8 @@ on:
 jobs:
   build-calendar:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -25,3 +27,10 @@ jobs:
           ASTRO_ADS_KEY: ${{ secrets.ASTRO_ADS_KEY }}
       - uses: actions/upload-artifact@v4
         with: {name: celestial-calendar, path: calendar/*.json, retention-days: 90}
+      - name: Commit updated calendar
+        run: |
+          git config user.name "astro-calendar-bot"
+          git config user.email "astro-calendar-bot@users.noreply.github.com"
+          git add calendar/*.json
+          git diff --cached --quiet || git commit -m "Calendar refresh $(date -u +%Y-%m-%d)"
+          git push
