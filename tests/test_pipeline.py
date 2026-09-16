@@ -22,3 +22,25 @@ def test_ranker_bm25():
             for i,(t,s) in enumerate([("Perseid meteor shower peak August", "meteor shower peak date"), ("JWST galaxy image", "deep space"), ("Perseids tonight", "meteor shower tonight")])]
     ranked = rank(docs, "Perseid meteor shower peak", "celestial_event_lookup")
     assert ranked[0]["title"].lower().startswith("perseid")
+
+def test_ranker_edge_cases():
+    assert rank([], "moon", "recent_news") == []
+    # empty query + empty docs must not raise (avgdl guard)
+    docs = [normalize({"title": "", "summary": "", "url": "https://x/1"}, {"name": "S", "authority": 2})]
+    out = rank(docs, "", "recent_news")
+    assert out and out[0]["_score"] == 0.0
+    # duplicate query terms must not inflate: same order as single mention
+    docs = [normalize({"title": "Mars rover photo", "summary": "curiosity", "url": "https://x/2"}, {"name": "S", "authority": 2}),
+            normalize({"title": "Venus clouds", "summary": "atmosphere", "url": "https://x/3"}, {"name": "S", "authority": 2})]
+    r1 = [d["title"] for d in rank([dict(x) for x in docs], "mars mars mars", "recent_news")]
+    r2 = [d["title"] for d in rank([dict(x) for x in docs], "mars", "recent_news")]
+    assert r1 == r2
+    # malformed authority / non-string fields never raise; scores bounded
+    weird = [{"title": None, "summary": 123, "url": "https://x/4", "authority": "high", "freshness_h": True, "source": "S"}]
+    out = rank(weird, "test query", "recent_news", {"S": ["recent_news"]})
+    assert 0.0 <= out[0]["_score"] <= 1.0
+    # determinism: same input -> same order
+    docs = [normalize({"title": t, "summary": "", "url": f"https://x/{i}"}, {"name": "S", "authority": 2})
+            for i, t in enumerate(["aurora forecast tonight kp", "lunar eclipse date", "aurora borealis kp storm"])]
+    assert [d["title"] for d in rank([dict(x) for x in docs], "aurora kp tonight", "current_phenomenon")] == \
+           [d["title"] for d in rank([dict(x) for x in docs], "aurora kp tonight", "current_phenomenon")]
