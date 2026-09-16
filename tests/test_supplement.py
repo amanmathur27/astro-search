@@ -45,6 +45,22 @@ def test_dedup_keeps_monthly_moons():
              for m in (1, 2, 3)]
     assert len(deduplicate(moons)) == 3
 
+def test_entity_gate_filters_and_backstops():
+    from astro_search.core import AstroSearch
+    eng = AstroSearch()
+    pool = [normalize({"title": t, "summary": s, "url": f"https://x/{i}"},
+                       {"name": "S", "authority": 2})
+            for i, (t, s) in enumerate([
+                ("Roman lifts off survey infrared sky", "Nancy Grace Roman Space Telescope launch"),
+                ("Webb panorama star formation", "James Webb Space Telescope image"),
+                ("Educator magnetism guide", "students discover magnetic fields"),
+                ("Moon crater found", "lunar orbiter spots crater"),
+                ("Starlink launch mission", "SpaceX Falcon booster flight")])]
+    kept, back = eng._entity_gate(pool, ["nancy grace"], 8)
+    assert not back and len(kept) == 1 and "Roman" in kept[0]["title"]
+    kept, back = eng._entity_gate(pool, ["gaganyaan"], 8)
+    assert back and len(kept) == 3  # empty gate -> top-3 backstop, flagged
+
 def test_gnews_gating():
     from astro_search.sources.gnews import has_recency, recency_window_days, edition_params
     from astro_search.core import AstroSearch

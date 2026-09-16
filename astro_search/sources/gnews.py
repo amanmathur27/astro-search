@@ -76,7 +76,7 @@ class GoogleNewsSource(BaseSource):
     name = "Google News"
     source_type = "rss"
     authority = 1
-    intents = ["recent_news", "current_phenomenon"]
+    intents = ["recent_news", "current_phenomenon", "mission_status"]
     entities = ["*"]
     timeout = 12
 

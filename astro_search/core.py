@@ -138,6 +138,10 @@ class AstroSearch:
                 return d
         from .sources.gnews import GoogleNewsSource, has_recency
         gnews_ok = bool(trends) or has_recency(query)
+        if edition is None and any(k in query.lower() for k in (
+                "isro", "gslv", "pslv", "lvm3", "sslv", "gaganyaan", "chandrayaan",
+                "india", "indian", "nsil", "skyroot", "agnikul")):
+            edition = "IN"  # Indian outlets carry ISRO coverage western press skips
         sources = self._select(intent, entities, category, allow_gnews=gnews_ok)
         kw = {"max_results": max_results, "intent": intent, "category": category,
               "lat": lat, "lon": lon, "tz": tz, "year": year or datetime.now(timezone.utc).year,
@@ -179,7 +183,7 @@ class AstroSearch:
         results = deduplicate(filt)
         src_intents = {s.name: s.intents for s in sources}
         results = rank(results, query, intent, src_intents)
-        results = self._entity_gate(results, entities, max_results)
+        results, backstopped = self._entity_gate(results, entities, max_results)
         if not results and not gnews_ok and intent in ("recent_news", "current_phenomenon",
                                                        "mission_status", "object_lookup"):
             # last resort: one gated Google News call before admitting defeat
@@ -194,9 +198,18 @@ class AstroSearch:
         md = self._markdown(query, intent, results, now_iso, dates)
         out = {"query": query, "intent": intent, "category": category,
                "count": len(results), "results": results, "markdown": md,
-               "cached": False,
+               "cached": False, "backstopped": backstopped,
                "context": {"now_utc": now_iso, "today": today_label(), "tz": str(tz),
                            "is_historical": dates["is_historical"]}}
+        if entities:
+            from .ranker import _tok
+            covered = any(any(set(_tok(e)) <= set(_tok(f"{r.get('title', '') or ''} {r.get('summary', '') or ''}"))
+                              for e in entities) for r in results)
+            out["coverage"] = "full" if covered else "partial"
+            if not covered and results:
+                out["markdown"] = ("_Note: no direct coverage of the requested subject found; "
+                                   "showing closest related items. Try `astro_fetch` on the primary "
+                                   "source (e.g. isro.gov.in/Press.html) or `trends: true`._\n\n" + md)
         self.mem.set(key, out)
         if self.disk:
             try:
@@ -205,7 +218,7 @@ class AstroSearch:
                 pass
         return out
 
-    def _entity_gate(self, results: list[dict], entities: list[str], max_results: int) -> list[dict]:
+    def _entity_gate(self, results: list[dict], entities: list[str], max_results: int) -> tuple[list[dict], bool]:
         """Specific-entity queries must actually mention the entity.
 
         Without this, "nancy grace telescope" returns any article containing just
@@ -213,19 +226,31 @@ class AstroSearch:
         (magnetism guide). When entities were extracted, keep only results covering
         >=1 full entity phrase; backstop to top-3 by score so agents never get nothing.
         Broad queries (no entities) pass through untouched.
+        Returns (results, backstopped).
         """
         if not entities or not results:
-            return results[:max_results]
+            return results[:max_results], False
         from .ranker import _tok
+        # programme families: "isro" is satisfied by Chandrayaan/GSLV/etc. mentions
+        EQUIV = {"isro": {"isro", "chandrayaan", "gaganyaan", "pslv", "gslv", "lvm3", "sslv",
+                          "navic", "aditya", "mangalyaan", "xposat", "astrosat", "india", "indian"},
+                 "spacex": {"spacex", "starship", "falcon", "starlink", "dragon"}}
         keep = []
         for r in results:
             doc = set(_tok(f"{r.get('title', '') or ''} {r.get('summary', '') or ''}"))
-            if any(set(_tok(e)) <= doc for e in entities):
+            ok = False
+            for e in entities:
+                need = EQUIV.get(e, set(_tok(e)))
+                if need <= doc:
+                    ok = True
+                    break
+            if ok:
                 keep.append(r)
         if not keep:
             # backstop only when the gate empties the pool: top-3 so agents get something
             keep = results[: min(3, len(results))]
-        return keep[:max_results]
+            return keep[:max_results], True
+        return keep[:max_results], False
 
     def _apply_local_display(self, results: list[dict], tz) -> None:
         """Add extra.local_display converted from event_date_utc. UTC default, never guessed."""
