@@ -11,6 +11,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.11'}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.skyfield
+          key: skyfield-de421-v1
       - run: pip install -e ".[local]"
         env:
           ASTRO_NASA_KEY: ${{ secrets.ASTRO_NASA_KEY }}
