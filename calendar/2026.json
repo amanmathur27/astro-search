@@ -420,7 +420,7 @@
       "source_type": "api",
       "authority": 3,
       "category": "space_weather",
-      "published": "2026-09-16T11:58:00Z",
+      "published": "2026-09-16T11:59:00Z",
       "freshness_h": 0,
       "entities": [],
       "location": null,
@@ -436,7 +436,7 @@
         "bz": 0.0,
         "alert": "Quiet conditions. Aurora unlikely except at polar regions.",
         "kp_sample": {
-          "time_tag": "2026-09-16T11:58:00",
+          "time_tag": "2026-09-16T11:59:00",
           "kp_index": 2,
           "estimated_kp": 1.67,
           "kp": "2M"
@@ -445,14 +445,14 @@
       "_score": 1.0
     },
     {
-      "title": "Solar X-ray flux now: 3.2e-07 W/m² (class B)",
-      "summary": "GOES primary X-ray 3.2e-07 W/m² ≈ B-class. M/X = flare in progress.",
+      "title": "Solar X-ray flux now: 3.0e-07 W/m² (class B)",
+      "summary": "GOES primary X-ray 3.0e-07 W/m² ≈ B-class. M/X = flare in progress.",
       "url": "https://www.swpc.noaa.gov/products/goes-x-ray-flux",
       "source": "NOAA SWPC",
       "source_type": "api",
       "authority": 3,
       "category": "space_weather",
-      "published": "2026-09-16T11:58:00Z",
+      "published": "2026-09-16T12:01:00Z",
       "freshness_h": 0,
       "entities": [],
       "location": null,
@@ -464,7 +464,7 @@
       "visibility_url": null,
       "authors": [],
       "extra": {
-        "xray_flux": 3.2108377467920945e-07,
+        "xray_flux": 3.0357037417161337e-07,
         "flare_class": "B"
       },
       "_score": 1.0
@@ -841,7 +841,7 @@
     {
       "title": "Draconids peak 2026-10-08T15:00:00Z",
       "summary": "Peak 2026-10-08T15:00:00Z UTC. ZHR 10. Best: Northern. Radiant Draco. Moon: check USNO phase that night.",
-      "url": "https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/",
+      "url": "https://www.imo.net/members/imo_showers/calendar/",
       "source": "IMO/AMS",
       "source_type": "local",
       "authority": 2,
@@ -863,14 +863,15 @@
         "parent": "21P/Giacobini-Zinner",
         "peak": "2026-10-08T15:00:00Z",
         "radiant": "Draco",
-        "zhr": 10
+        "zhr": 10,
+        "exact": true
       },
       "_score": 0.8462
     },
     {
       "title": "Orionids peak 2026-10-21T05:00:00Z",
       "summary": "Peak 2026-10-21T05:00:00Z UTC. ZHR 20. Best: Both. Radiant Orion. Moon: check USNO phase that night.",
-      "url": "https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/",
+      "url": "https://www.imo.net/members/imo_showers/calendar/",
       "source": "IMO/AMS",
       "source_type": "local",
       "authority": 2,
@@ -892,14 +893,15 @@
         "parent": "1P/Halley",
         "peak": "2026-10-21T05:00:00Z",
         "radiant": "Orion",
-        "zhr": 20
+        "zhr": 20,
+        "exact": true
       },
       "_score": 0.8462
     },
     {
       "title": "Southern Taurids peak 2026-11-05T04:00:00Z",
       "summary": "Peak 2026-11-05T04:00:00Z UTC. ZHR 10. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.",
-      "url": "https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/",
+      "url": "https://www.imo.net/members/imo_showers/calendar/",
       "source": "IMO/AMS",
       "source_type": "local",
       "authority": 2,
@@ -921,14 +923,15 @@
         "parent": "2P/Encke",
         "peak": "2026-11-05T04:00:00Z",
         "radiant": "Taurus",
-        "zhr": 10
+        "zhr": 10,
+        "exact": true
       },
       "_score": 0.8462
     },
     {
       "title": "Northern Taurids peak 2026-11-12T04:00:00Z",
       "summary": "Peak 2026-11-12T04:00:00Z UTC. ZHR 5. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.",
-      "url": "https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/",
+      "url": "https://www.imo.net/members/imo_showers/calendar/",
       "source": "IMO/AMS",
       "source_type": "local",
       "authority": 2,
@@ -950,14 +953,15 @@
         "parent": "2P/Encke",
         "peak": "2026-11-12T04:00:00Z",
         "radiant": "Taurus",
-        "zhr": 5
+        "zhr": 5,
+        "exact": true
       },
       "_score": 0.8462
     },
     {
       "title": "Leonids peak 2026-11-17T22:00:00Z",
       "summary": "Peak 2026-11-17T22:00:00Z UTC. ZHR 15. Best: Northern. Radiant Leo. Moon: check USNO phase that night.",
-      "url": "https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/",
+      "url": "https://www.imo.net/members/imo_showers/calendar/",
       "source": "IMO/AMS",
       "source_type": "local",
       "authority": 2,
@@ -979,14 +983,15 @@
         "parent": "55P/Tempel-Tuttle",
         "peak": "2026-11-17T22:00:00Z",
         "radiant": "Leo",
-        "zhr": 15
+        "zhr": 15,
+        "exact": true
       },
       "_score": 0.8462
     },
     {
       "title": "Geminids peak 2026-12-14T02:00:00Z",
       "summary": "Peak 2026-12-14T02:00:00Z UTC. ZHR 150. Best: Northern. Radiant Gemini. Moon: check USNO phase that night.",
-      "url": "https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/",
+      "url": "https://www.imo.net/members/imo_showers/calendar/",
       "source": "IMO/AMS",
       "source_type": "local",
       "authority": 2,
@@ -1008,14 +1013,15 @@
         "parent": "3200 Phaethon",
         "peak": "2026-12-14T02:00:00Z",
         "radiant": "Gemini",
-        "zhr": 150
+        "zhr": 150,
+        "exact": true
       },
       "_score": 0.8462
     },
     {
       "title": "Ursids peak 2026-12-22T10:00:00Z",
       "summary": "Peak 2026-12-22T10:00:00Z UTC. ZHR 10. Best: Northern. Radiant Ursa Minor. Moon: check USNO phase that night.",
-      "url": "https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/",
+      "url": "https://www.imo.net/members/imo_showers/calendar/",
       "source": "IMO/AMS",
       "source_type": "local",
       "authority": 2,
@@ -1037,7 +1043,8 @@
         "parent": "8P/Tuttle",
         "peak": "2026-12-22T10:00:00Z",
         "radiant": "Ursa Minor",
-        "zhr": 10
+        "zhr": 10,
+        "exact": true
       },
       "_score": 0.8462
     },
@@ -1132,7 +1139,7 @@
       "authority": 3,
       "category": "events",
       "published": "2026-01-03T10:03:00Z",
-      "freshness_h": 6145,
+      "freshness_h": 6146,
       "entities": [],
       "location": null,
       "event_type": "moon_phase",
@@ -1780,7 +1787,7 @@
       "authority": 3,
       "category": "events",
       "published": "2026-07-21T11:05:00Z",
-      "freshness_h": 1368,
+      "freshness_h": 1369,
       "entities": [],
       "location": null,
       "event_type": "moon_phase",
@@ -2038,7 +2045,7 @@
     {
       "title": "Quadrantids peak 2026-01-03T15:00:00Z",
       "summary": "Peak 2026-01-03T15:00:00Z UTC. ZHR 110. Best: Northern. Radiant Bootes. Moon: check USNO phase that night.",
-      "url": "https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/",
+      "url": "https://www.imo.net/members/imo_showers/calendar/",
       "source": "IMO/AMS",
       "source_type": "local",
       "authority": 2,
@@ -2060,14 +2067,15 @@
         "parent": "2003 EH1",
         "peak": "2026-01-03T15:00:00Z",
         "radiant": "Bootes",
-        "zhr": 110
+        "zhr": 110,
+        "exact": true
       },
       "_score": 0.5385
     },
     {
       "title": "Lyrids peak 2026-04-22T18:00:00Z",
       "summary": "Peak 2026-04-22T18:00:00Z UTC. ZHR 18. Best: Northern. Radiant Lyra. Moon: check USNO phase that night.",
-      "url": "https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/",
+      "url": "https://www.imo.net/members/imo_showers/calendar/",
       "source": "IMO/AMS",
       "source_type": "local",
       "authority": 2,
@@ -2089,14 +2097,15 @@
         "parent": "C/1861 G1 Thatcher",
         "peak": "2026-04-22T18:00:00Z",
         "radiant": "Lyra",
-        "zhr": 18
+        "zhr": 18,
+        "exact": true
       },
       "_score": 0.5385
     },
     {
       "title": "Eta Aquariids peak 2026-05-06T04:00:00Z",
       "summary": "Peak 2026-05-06T04:00:00Z UTC. ZHR 50. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.",
-      "url": "https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/",
+      "url": "https://www.imo.net/members/imo_showers/calendar/",
       "source": "IMO/AMS",
       "source_type": "local",
       "authority": 2,
@@ -2118,14 +2127,15 @@
         "parent": "1P/Halley",
         "peak": "2026-05-06T04:00:00Z",
         "radiant": "Aquarius",
-        "zhr": 50
+        "zhr": 50,
+        "exact": true
       },
       "_score": 0.5385
     },
     {
       "title": "Southern Delta Aquariids peak 2026-07-30T03:00:00Z",
       "summary": "Peak 2026-07-30T03:00:00Z UTC. ZHR 25. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.",
-      "url": "https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/",
+      "url": "https://www.imo.net/members/imo_showers/calendar/",
       "source": "IMO/AMS",
       "source_type": "local",
       "authority": 2,
@@ -2147,14 +2157,15 @@
         "parent": "96P/Machholz",
         "peak": "2026-07-30T03:00:00Z",
         "radiant": "Aquarius",
-        "zhr": 25
+        "zhr": 25,
+        "exact": true
       },
       "_score": 0.5385
     },
     {
       "title": "Perseids peak 2026-08-13T03:00:00Z",
       "summary": "Peak 2026-08-13T03:00:00Z UTC. ZHR 100. Best: Northern. Radiant Perseus. Moon: check USNO phase that night.",
-      "url": "https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/",
+      "url": "https://www.imo.net/members/imo_showers/calendar/",
       "source": "IMO/AMS",
       "source_type": "local",
       "authority": 2,
@@ -2176,21 +2187,22 @@
         "parent": "109P/Swift-Tuttle",
         "peak": "2026-08-13T03:00:00Z",
         "radiant": "Perseus",
-        "zhr": 100
+        "zhr": 100,
+        "exact": true
       },
       "_score": 0.5385
     }
   ],
-  "markdown": "_Context: Wednesday, 2026-09-16 2026-09-16T12:02:53.081496Z (intent: periodic_event)._\n\n- **[First Quarter — 9/18/2026](https://aa.usno.navy.mil/)** — USNO, 2026-09-18\n  First Quarter occurs 2026-09-18T20:44:00Z UTC.\n  Event (UTC): 2026-09-18T20:44:00Z\n- **[Full Moon — 9/26/2026](https://aa.usno.navy.mil/)** — USNO, 2026-09-26\n  Full Moon occurs 2026-09-26T16:49:00Z UTC.\n  Event (UTC): 2026-09-26T16:49:00Z\n- **[Last Quarter — 10/3/2026](https://aa.usno.navy.mil/)** — USNO, 2026-10-03\n  Last Quarter occurs 2026-10-03T13:25:00Z UTC.\n  Event (UTC): 2026-10-03T13:25:00Z\n- **[New Moon — 10/10/2026](https://aa.usno.navy.mil/)** — USNO, 2026-10-10\n  New Moon occurs 2026-10-10T15:50:00Z UTC.\n  Event (UTC): 2026-10-10T15:50:00Z\n- **[First Quarter — 10/18/2026](https://aa.usno.navy.mil/)** — USNO, 2026-10-18\n  First Quarter occurs 2026-10-18T16:12:00Z UTC.\n  Event (UTC): 2026-10-18T16:12:00Z\n- **[Full Moon — 10/26/2026](https://aa.usno.navy.mil/)** — USNO, 2026-10-26\n  Full Moon occurs 2026-10-26T04:12:00Z UTC.\n  Event (UTC): 2026-10-26T04:12:00Z\n- **[Last Quarter — 11/1/2026](https://aa.usno.navy.mil/)** — USNO, 2026-11-01\n  Last Quarter occurs 2026-11-01T20:28:00Z UTC.\n  Event (UTC): 2026-11-01T20:28:00Z\n- **[New Moon — 11/9/2026](https://aa.usno.navy.mil/)** — USNO, 2026-11-09\n  New Moon occurs 2026-11-09T07:02:00Z UTC.\n  Event (UTC): 2026-11-09T07:02:00Z\n- **[First Quarter — 11/17/2026](https://aa.usno.navy.mil/)** — USNO, 2026-11-17\n  First Quarter occurs 2026-11-17T11:48:00Z UTC.\n  Event (UTC): 2026-11-17T11:48:00Z\n- **[Full Moon — 11/24/2026](https://aa.usno.navy.mil/)** — USNO, 2026-11-24\n  Full Moon occurs 2026-11-24T14:53:00Z UTC.\n  Event (UTC): 2026-11-24T14:53:00Z\n- **[Last Quarter — 12/1/2026](https://aa.usno.navy.mil/)** — USNO, 2026-12-01\n  Last Quarter occurs 2026-12-01T06:08:00Z UTC.\n  Event (UTC): 2026-12-01T06:08:00Z\n- **[New Moon — 12/9/2026](https://aa.usno.navy.mil/)** — USNO, 2026-12-09\n  New Moon occurs 2026-12-09T00:52:00Z UTC.\n  Event (UTC): 2026-12-09T00:52:00Z\n- **[First Quarter — 12/17/2026](https://aa.usno.navy.mil/)** — USNO, 2026-12-17\n  First Quarter occurs 2026-12-17T05:42:00Z UTC.\n  Event (UTC): 2026-12-17T05:42:00Z\n- **[Full Moon — 12/24/2026](https://aa.usno.navy.mil/)** — USNO, 2026-12-24\n  Full Moon occurs 2026-12-24T01:28:00Z UTC.\n  Event (UTC): 2026-12-24T01:28:00Z\n- **[Last Quarter — 12/30/2026](https://aa.usno.navy.mil/)** — USNO, 2026-12-30\n  Last Quarter occurs 2026-12-30T18:59:00Z UTC.\n  Event (UTC): 2026-12-30T18:59:00Z\n- **[Equinox 2026](https://aa.usno.navy.mil/)** — USNO, 2026-09-23\n  Equinox occurs 2026-09-23T00:05:00Z UTC (global instant).\n  Event (UTC): 2026-09-23T00:05:00Z | Visible: Global\n- **[Solstice 2026](https://aa.usno.navy.mil/)** — USNO, 2026-12-21\n  Solstice occurs 2026-12-21T20:50:00Z UTC (global instant).\n  Event (UTC): 2026-12-21T20:50:00Z | Visible: Global\n- **[Aurora / geomagnetic now: Kp 1.7 — Quiet conditions. Aurora unlikely except at polar regions.](https://www.swpc.noaa.gov/products-and-data)** — NOAA SWPC, 2026-09-16\n  Current estimated Kp 1.7 (1-min SWPC). IMF Bz 0.0 nT. Quiet conditions. Aurora unlikely except at polar regions.\n- **[Solar X-ray flux now: 3.2e-07 W/m² (class B)](https://www.swpc.noaa.gov/products/goes-x-ray-flux)** — NOAA SWPC, 2026-09-16\n  GOES primary X-ray 3.2e-07 W/m² ≈ B-class. M/X = flare in progress.\n- **[Asteroid (2012 EP5) close approach 2026-09-19](https://cneos.jpl.nasa.gov/)** — NASA, 2026-09-19\n  (2012 EP5) (non-hazardous), miss 49646713.428502636 km, vel 46610.7653869711 km/h.\n- **[Close approach (2026 RB39) on 2026-Sep-17 02:30](https://cneos.jpl.nasa.gov/ca/)** — JPL, 2026-09-17\n  Dist 0.0025684476393133 AU, v_rel 9.25207206873187 km/s, H 28.81.\n  Event (UTC): 2026-09-17T02:30:00Z\n- **[Geomagnetic storm scale now: G0 (Kp 0)](https://www.swpc.noaa.gov/noaa-scales-explanation)** — NOAA SWPC, 2026-09-16\n  No storm per NOAA planetary K-index.\n- **[Close approach (2026 RA4) on 2026-Sep-16 07:40](https://cneos.jpl.nasa.gov/ca/)** — JPL, 2026-09-16\n  Dist 0.00860596725322986 AU, v_rel 11.6517302529079 km/s, H 26.231.\n  Event (UTC): 2026-09-16T07:40:00Z\n- **[Close approach (2023 SZ3) on 2026-Sep-16 06:10](https://cneos.jpl.nasa.gov/ca/)** — JPL, 2026-09-16\n  Dist 0.0172077643556589 AU, v_rel 10.3433862754637 km/s, H 23.95.\n  Event (UTC): 2026-09-16T06:10:00Z\n- **[Space Weather Message Code: WARK04 Serial Number: 5418 Issue Time: 2026 Sep 16 0538 UTC EXTENDED WARNING: Geomagnetic K-index of 4 expected Extension to Serial Number: 5417 Valid From: 2026 Sep 15](https://www.swpc.noaa.gov/products/alerts)** — NOAA SWPC, 2026-09-16\n  Space Weather Message Code: WARK04 Serial Number: 5418 Issue Time: 2026 Sep 16 0538 UTC EXTENDED WARNING: Geomagnetic K-index of 4 expected Extension to Serial Number: 5417 Valid From: 2026 Sep 15 1849 UTC Now Valid Until: 2026 Sep 16 1800 UTC Warning Condition: Persistence NOAA Space Weather Scale \n- **[Close approach (2026 RF39) on 2026-Sep-16 05:39](https://cneos.jpl.nasa.gov/ca/)** — JPL, 2026-09-16\n  Dist 0.0145973314178402 AU, v_rel 7.64794294701425 km/s, H 26.03.\n  Event (UTC): 2026-09-16T05:39:00Z\n- **[Close approach (2026 RM39) on 2026-Sep-16 05:49](https://cneos.jpl.nasa.gov/ca/)** — JPL, 2026-09-16\n  Dist 0.0108919220908052 AU, v_rel 9.84282702589968 km/s, H 27.687.\n  Event (UTC): 2026-09-16T05:49:00Z\n- **[APOD: Webb's View of M64](https://apod.nasa.gov/apod/image/2609/M64_Webb.jpg)** — NASA, 2026-09-16\n  Sometimes where Hubble finds darkness, Webb sees light. An example is today’s composite images of Messier 64 (M64), a nearby spiral galaxy of many names. The dark band of dust partially blocking its bright core earned it the moniker “the Black Eye Galaxy.” Webb’s Mid-InfraRed Instrument (MIRI) sees \n- **[Fireball 2026-09-15 11:26:13 — 2.2 kt](https://cneos.jpl.nasa.gov/fireballs/)** — JPL, 2026-09-15\n  {'date': '2026-09-15 11:26:13', 'energy': '2.2', 'impact-e': '0.079', 'lat': '37.6', 'lat-dir': 'S', 'lon': '161.6', 'lon-dir': 'W', 'alt': '37.0', 'vel': None}\n- **[Lunar eclipses 2026 — NASA eclipse catalog](https://eclipse.gsfc.nasa.gov/LEcat/LE1991-2030.html)** — USNO\n  USNO serves solar eclipses only. Full lunar list with visibility maps: NASA eclipse site.\n- **[NOAA 3-day space weather forecast](https://www.swpc.noaa.gov/)** — NOAA SWPC\n  :Product: 3-Day Forecast :Issued: 2026 Sep 16 0030 UTC # Prepared by the U.S. Dept. of Commerce, NOAA, Space Weather Prediction Center # A. NOAA Geomagnetic Activity Observation and Forecast The greatest observed 3 hr Kp over the past 24 hours was 3 (below NOAA Scale levels). The greatest expected 3\n- **[Draconids peak 2026-10-08T15:00:00Z](https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/)** — IMO/AMS, 2026-10-08\n  Peak 2026-10-08T15:00:00Z UTC. ZHR 10. Best: Northern. Radiant Draco. Moon: check USNO phase that night.\n  Event (UTC): 2026-10-08T15:00:00Z | Visible: Northern\n- **[Orionids peak 2026-10-21T05:00:00Z](https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/)** — IMO/AMS, 2026-10-21\n  Peak 2026-10-21T05:00:00Z UTC. ZHR 20. Best: Both. Radiant Orion. Moon: check USNO phase that night.\n  Event (UTC): 2026-10-21T05:00:00Z | Visible: Both\n- **[Southern Taurids peak 2026-11-05T04:00:00Z](https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/)** — IMO/AMS, 2026-11-05\n  Peak 2026-11-05T04:00:00Z UTC. ZHR 10. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.\n  Event (UTC): 2026-11-05T04:00:00Z | Visible: Northern\n- **[Northern Taurids peak 2026-11-12T04:00:00Z](https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/)** — IMO/AMS, 2026-11-12\n  Peak 2026-11-12T04:00:00Z UTC. ZHR 5. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.\n  Event (UTC): 2026-11-12T04:00:00Z | Visible: Northern\n- **[Leonids peak 2026-11-17T22:00:00Z](https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/)** — IMO/AMS, 2026-11-17\n  Peak 2026-11-17T22:00:00Z UTC. ZHR 15. Best: Northern. Radiant Leo. Moon: check USNO phase that night.\n  Event (UTC): 2026-11-17T22:00:00Z | Visible: Northern\n- **[Geminids peak 2026-12-14T02:00:00Z](https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/)** — IMO/AMS, 2026-12-14\n  Peak 2026-12-14T02:00:00Z UTC. ZHR 150. Best: Northern. Radiant Gemini. Moon: check USNO phase that night.\n  Event (UTC): 2026-12-14T02:00:00Z | Visible: Northern\n- **[Ursids peak 2026-12-22T10:00:00Z](https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/)** — IMO/AMS, 2026-12-22\n  Peak 2026-12-22T10:00:00Z UTC. ZHR 10. Best: Northern. Radiant Ursa Minor. Moon: check USNO phase that night.\n  Event (UTC): 2026-12-22T10:00:00Z | Visible: Northern\n- **[New Moon — 9/11/2026](https://aa.usno.navy.mil/)** — USNO, 2026-09-11\n  New Moon occurs 2026-09-11T03:27:00Z UTC.\n  Event (UTC): 2026-09-11T03:27:00Z\n- **[Annular Solar Eclipse of 17 February 2026 (2026)](https://eclipse.gsfc.nasa.gov/)** — USNO, 2026-02-17\n  Annular Solar Eclipse of 17 February 2026 occurs 2026-02-17. Local circumstances: query with lat/lon for magnitude/obscuration.\n  Event (UTC): 2026-02-17T00:00:00Z | Visible: See NASA eclipse maps for path\n- **[Total Solar Eclipse of 12 August 2026 (2026)](https://eclipse.gsfc.nasa.gov/)** — USNO, 2026-08-12\n  Total Solar Eclipse of 12 August 2026 occurs 2026-08-12. Local circumstances: query with lat/lon for magnitude/obscuration.\n  Event (UTC): 2026-08-12T00:00:00Z | Visible: See NASA eclipse maps for path\n- **[Full Moon — 1/3/2026](https://aa.usno.navy.mil/)** — USNO, 2026-01-03\n  Full Moon occurs 2026-01-03T10:03:00Z UTC.\n  Event (UTC): 2026-01-03T10:03:00Z\n- **[Last Quarter — 1/10/2026](https://aa.usno.navy.mil/)** — USNO, 2026-01-10\n  Last Quarter occurs 2026-01-10T15:48:00Z UTC.\n  Event (UTC): 2026-01-10T15:48:00Z\n- **[New Moon — 1/18/2026](https://aa.usno.navy.mil/)** — USNO, 2026-01-18\n  New Moon occurs 2026-01-18T19:52:00Z UTC.\n  Event (UTC): 2026-01-18T19:52:00Z\n- **[First Quarter — 1/26/2026](https://aa.usno.navy.mil/)** — USNO, 2026-01-26\n  First Quarter occurs 2026-01-26T04:47:00Z UTC.\n  Event (UTC): 2026-01-26T04:47:00Z\n- **[Full Moon — 2/1/2026](https://aa.usno.navy.mil/)** — USNO, 2026-02-01\n  Full Moon occurs 2026-02-01T22:09:00Z UTC.\n  Event (UTC): 2026-02-01T22:09:00Z\n- **[Last Quarter — 2/9/2026](https://aa.usno.navy.mil/)** — USNO, 2026-02-09\n  Last Quarter occurs 2026-02-09T12:43:00Z UTC.\n  Event (UTC): 2026-02-09T12:43:00Z\n- **[New Moon — 2/17/2026](https://aa.usno.navy.mil/)** — USNO, 2026-02-17\n  New Moon occurs 2026-02-17T12:01:00Z UTC.\n  Event (UTC): 2026-02-17T12:01:00Z\n- **[First Quarter — 2/24/2026](https://aa.usno.navy.mil/)** — USNO, 2026-02-24\n  First Quarter occurs 2026-02-24T12:27:00Z UTC.\n  Event (UTC): 2026-02-24T12:27:00Z\n- **[Full Moon — 3/3/2026](https://aa.usno.navy.mil/)** — USNO, 2026-03-03\n  Full Moon occurs 2026-03-03T11:38:00Z UTC.\n  Event (UTC): 2026-03-03T11:38:00Z\n- **[Last Quarter — 3/11/2026](https://aa.usno.navy.mil/)** — USNO, 2026-03-11\n  Last Quarter occurs 2026-03-11T09:38:00Z UTC.\n  Event (UTC): 2026-03-11T09:38:00Z\n- **[New Moon — 3/19/2026](https://aa.usno.navy.mil/)** — USNO, 2026-03-19\n  New Moon occurs 2026-03-19T01:23:00Z UTC.\n  Event (UTC): 2026-03-19T01:23:00Z\n- **[First Quarter — 3/25/2026](https://aa.usno.navy.mil/)** — USNO, 2026-03-25\n  First Quarter occurs 2026-03-25T19:18:00Z UTC.\n  Event (UTC): 2026-03-25T19:18:00Z\n- **[Full Moon — 4/2/2026](https://aa.usno.navy.mil/)** — USNO, 2026-04-02\n  Full Moon occurs 2026-04-02T02:12:00Z UTC.\n  Event (UTC): 2026-04-02T02:12:00Z\n- **[Last Quarter — 4/10/2026](https://aa.usno.navy.mil/)** — USNO, 2026-04-10\n  Last Quarter occurs 2026-04-10T04:51:00Z UTC.\n  Event (UTC): 2026-04-10T04:51:00Z\n- **[New Moon — 4/17/2026](https://aa.usno.navy.mil/)** — USNO, 2026-04-17\n  New Moon occurs 2026-04-17T11:52:00Z UTC.\n  Event (UTC): 2026-04-17T11:52:00Z\n- **[First Quarter — 4/24/2026](https://aa.usno.navy.mil/)** — USNO, 2026-04-24\n  First Quarter occurs 2026-04-24T02:32:00Z UTC.\n  Event (UTC): 2026-04-24T02:32:00Z\n- **[Full Moon — 5/1/2026](https://aa.usno.navy.mil/)** — USNO, 2026-05-01\n  Full Moon occurs 2026-05-01T17:23:00Z UTC.\n  Event (UTC): 2026-05-01T17:23:00Z\n- **[Last Quarter — 5/9/2026](https://aa.usno.navy.mil/)** — USNO, 2026-05-09\n  Last Quarter occurs 2026-05-09T21:10:00Z UTC.\n  Event (UTC): 2026-05-09T21:10:00Z\n- **[New Moon — 5/16/2026](https://aa.usno.navy.mil/)** — USNO, 2026-05-16\n  New Moon occurs 2026-05-16T20:01:00Z UTC.\n  Event (UTC): 2026-05-16T20:01:00Z\n- **[First Quarter — 5/23/2026](https://aa.usno.navy.mil/)** — USNO, 2026-05-23\n  First Quarter occurs 2026-05-23T11:11:00Z UTC.\n  Event (UTC): 2026-05-23T11:11:00Z\n- **[Full Moon — 5/31/2026](https://aa.usno.navy.mil/)** — USNO, 2026-05-31\n  Full Moon occurs 2026-05-31T08:45:00Z UTC.\n  Event (UTC): 2026-05-31T08:45:00Z\n- **[Last Quarter — 6/8/2026](https://aa.usno.navy.mil/)** — USNO, 2026-06-08\n  Last Quarter occurs 2026-06-08T10:00:00Z UTC.\n  Event (UTC): 2026-06-08T10:00:00Z\n- **[New Moon — 6/15/2026](https://aa.usno.navy.mil/)** — USNO, 2026-06-15\n  New Moon occurs 2026-06-15T02:54:00Z UTC.\n  Event (UTC): 2026-06-15T02:54:00Z\n- **[First Quarter — 6/21/2026](https://aa.usno.navy.mil/)** — USNO, 2026-06-21\n  First Quarter occurs 2026-06-21T21:55:00Z UTC.\n  Event (UTC): 2026-06-21T21:55:00Z\n- **[Full Moon — 6/29/2026](https://aa.usno.navy.mil/)** — USNO, 2026-06-29\n  Full Moon occurs 2026-06-29T23:56:00Z UTC.\n  Event (UTC): 2026-06-29T23:56:00Z\n- **[Last Quarter — 7/7/2026](https://aa.usno.navy.mil/)** — USNO, 2026-07-07\n  Last Quarter occurs 2026-07-07T19:29:00Z UTC.\n  Event (UTC): 2026-07-07T19:29:00Z\n- **[New Moon — 7/14/2026](https://aa.usno.navy.mil/)** — USNO, 2026-07-14\n  New Moon occurs 2026-07-14T09:43:00Z UTC.\n  Event (UTC): 2026-07-14T09:43:00Z\n- **[First Quarter — 7/21/2026](https://aa.usno.navy.mil/)** — USNO, 2026-07-21\n  First Quarter occurs 2026-07-21T11:05:00Z UTC.\n  Event (UTC): 2026-07-21T11:05:00Z\n- **[Full Moon — 7/29/2026](https://aa.usno.navy.mil/)** — USNO, 2026-07-29\n  Full Moon occurs 2026-07-29T14:36:00Z UTC.\n  Event (UTC): 2026-07-29T14:36:00Z\n- **[Last Quarter — 8/6/2026](https://aa.usno.navy.mil/)** — USNO, 2026-08-06\n  Last Quarter occurs 2026-08-06T02:21:00Z UTC.\n  Event (UTC): 2026-08-06T02:21:00Z\n- **[New Moon — 8/12/2026](https://aa.usno.navy.mil/)** — USNO, 2026-08-12\n  New Moon occurs 2026-08-12T17:37:00Z UTC.\n  Event (UTC): 2026-08-12T17:37:00Z\n- **[First Quarter — 8/20/2026](https://aa.usno.navy.mil/)** — USNO, 2026-08-20\n  First Quarter occurs 2026-08-20T02:46:00Z UTC.\n  Event (UTC): 2026-08-20T02:46:00Z\n- **[Full Moon — 8/28/2026](https://aa.usno.navy.mil/)** — USNO, 2026-08-28\n  Full Moon occurs 2026-08-28T04:18:00Z UTC.\n  Event (UTC): 2026-08-28T04:18:00Z\n- **[Last Quarter — 9/4/2026](https://aa.usno.navy.mil/)** — USNO, 2026-09-04\n  Last Quarter occurs 2026-09-04T07:51:00Z UTC.\n  Event (UTC): 2026-09-04T07:51:00Z\n- **[Perihelion 2026](https://aa.usno.navy.mil/)** — USNO, 2026-01-03\n  Perihelion occurs 2026-01-03T17:15:00Z UTC (global instant).\n  Event (UTC): 2026-01-03T17:15:00Z | Visible: Global\n- **[Equinox 2026](https://aa.usno.navy.mil/)** — USNO, 2026-03-20\n  Equinox occurs 2026-03-20T14:46:00Z UTC (global instant).\n  Event (UTC): 2026-03-20T14:46:00Z | Visible: Global\n- **[Solstice 2026](https://aa.usno.navy.mil/)** — USNO, 2026-06-21\n  Solstice occurs 2026-06-21T08:24:00Z UTC (global instant).\n  Event (UTC): 2026-06-21T08:24:00Z | Visible: Global\n- **[Aphelion 2026](https://aa.usno.navy.mil/)** — USNO, 2026-07-06\n  Aphelion occurs 2026-07-06T17:30:00Z UTC (global instant).\n  Event (UTC): 2026-07-06T17:30:00Z | Visible: Global\n- **[Quadrantids peak 2026-01-03T15:00:00Z](https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/)** — IMO/AMS, 2026-01-03\n  Peak 2026-01-03T15:00:00Z UTC. ZHR 110. Best: Northern. Radiant Bootes. Moon: check USNO phase that night.\n  Event (UTC): 2026-01-03T15:00:00Z | Visible: Northern\n- **[Lyrids peak 2026-04-22T18:00:00Z](https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/)** — IMO/AMS, 2026-04-22\n  Peak 2026-04-22T18:00:00Z UTC. ZHR 18. Best: Northern. Radiant Lyra. Moon: check USNO phase that night.\n  Event (UTC): 2026-04-22T18:00:00Z | Visible: Northern\n- **[Eta Aquariids peak 2026-05-06T04:00:00Z](https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/)** — IMO/AMS, 2026-05-06\n  Peak 2026-05-06T04:00:00Z UTC. ZHR 50. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.\n  Event (UTC): 2026-05-06T04:00:00Z | Visible: Southern\n- **[Southern Delta Aquariids peak 2026-07-30T03:00:00Z](https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/)** — IMO/AMS, 2026-07-30\n  Peak 2026-07-30T03:00:00Z UTC. ZHR 25. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.\n  Event (UTC): 2026-07-30T03:00:00Z | Visible: Southern\n- **[Perseids peak 2026-08-13T03:00:00Z](https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/)** — IMO/AMS, 2026-08-13\n  Peak 2026-08-13T03:00:00Z UTC. ZHR 100. Best: Northern. Radiant Perseus. Moon: check USNO phase that night.\n  Event (UTC): 2026-08-13T03:00:00Z | Visible: Northern",
+  "markdown": "_Context: Wednesday, 2026-09-16 2026-09-16T12:07:18.312768Z (intent: periodic_event)._\n\n- **[First Quarter — 9/18/2026](https://aa.usno.navy.mil/)** — USNO, 2026-09-18\n  First Quarter occurs 2026-09-18T20:44:00Z UTC.\n  Event (UTC): 2026-09-18T20:44:00Z\n- **[Full Moon — 9/26/2026](https://aa.usno.navy.mil/)** — USNO, 2026-09-26\n  Full Moon occurs 2026-09-26T16:49:00Z UTC.\n  Event (UTC): 2026-09-26T16:49:00Z\n- **[Last Quarter — 10/3/2026](https://aa.usno.navy.mil/)** — USNO, 2026-10-03\n  Last Quarter occurs 2026-10-03T13:25:00Z UTC.\n  Event (UTC): 2026-10-03T13:25:00Z\n- **[New Moon — 10/10/2026](https://aa.usno.navy.mil/)** — USNO, 2026-10-10\n  New Moon occurs 2026-10-10T15:50:00Z UTC.\n  Event (UTC): 2026-10-10T15:50:00Z\n- **[First Quarter — 10/18/2026](https://aa.usno.navy.mil/)** — USNO, 2026-10-18\n  First Quarter occurs 2026-10-18T16:12:00Z UTC.\n  Event (UTC): 2026-10-18T16:12:00Z\n- **[Full Moon — 10/26/2026](https://aa.usno.navy.mil/)** — USNO, 2026-10-26\n  Full Moon occurs 2026-10-26T04:12:00Z UTC.\n  Event (UTC): 2026-10-26T04:12:00Z\n- **[Last Quarter — 11/1/2026](https://aa.usno.navy.mil/)** — USNO, 2026-11-01\n  Last Quarter occurs 2026-11-01T20:28:00Z UTC.\n  Event (UTC): 2026-11-01T20:28:00Z\n- **[New Moon — 11/9/2026](https://aa.usno.navy.mil/)** — USNO, 2026-11-09\n  New Moon occurs 2026-11-09T07:02:00Z UTC.\n  Event (UTC): 2026-11-09T07:02:00Z\n- **[First Quarter — 11/17/2026](https://aa.usno.navy.mil/)** — USNO, 2026-11-17\n  First Quarter occurs 2026-11-17T11:48:00Z UTC.\n  Event (UTC): 2026-11-17T11:48:00Z\n- **[Full Moon — 11/24/2026](https://aa.usno.navy.mil/)** — USNO, 2026-11-24\n  Full Moon occurs 2026-11-24T14:53:00Z UTC.\n  Event (UTC): 2026-11-24T14:53:00Z\n- **[Last Quarter — 12/1/2026](https://aa.usno.navy.mil/)** — USNO, 2026-12-01\n  Last Quarter occurs 2026-12-01T06:08:00Z UTC.\n  Event (UTC): 2026-12-01T06:08:00Z\n- **[New Moon — 12/9/2026](https://aa.usno.navy.mil/)** — USNO, 2026-12-09\n  New Moon occurs 2026-12-09T00:52:00Z UTC.\n  Event (UTC): 2026-12-09T00:52:00Z\n- **[First Quarter — 12/17/2026](https://aa.usno.navy.mil/)** — USNO, 2026-12-17\n  First Quarter occurs 2026-12-17T05:42:00Z UTC.\n  Event (UTC): 2026-12-17T05:42:00Z\n- **[Full Moon — 12/24/2026](https://aa.usno.navy.mil/)** — USNO, 2026-12-24\n  Full Moon occurs 2026-12-24T01:28:00Z UTC.\n  Event (UTC): 2026-12-24T01:28:00Z\n- **[Last Quarter — 12/30/2026](https://aa.usno.navy.mil/)** — USNO, 2026-12-30\n  Last Quarter occurs 2026-12-30T18:59:00Z UTC.\n  Event (UTC): 2026-12-30T18:59:00Z\n- **[Equinox 2026](https://aa.usno.navy.mil/)** — USNO, 2026-09-23\n  Equinox occurs 2026-09-23T00:05:00Z UTC (global instant).\n  Event (UTC): 2026-09-23T00:05:00Z | Visible: Global\n- **[Solstice 2026](https://aa.usno.navy.mil/)** — USNO, 2026-12-21\n  Solstice occurs 2026-12-21T20:50:00Z UTC (global instant).\n  Event (UTC): 2026-12-21T20:50:00Z | Visible: Global\n- **[Aurora / geomagnetic now: Kp 1.7 — Quiet conditions. Aurora unlikely except at polar regions.](https://www.swpc.noaa.gov/products-and-data)** — NOAA SWPC, 2026-09-16\n  Current estimated Kp 1.7 (1-min SWPC). IMF Bz 0.0 nT. Quiet conditions. Aurora unlikely except at polar regions.\n- **[Solar X-ray flux now: 3.0e-07 W/m² (class B)](https://www.swpc.noaa.gov/products/goes-x-ray-flux)** — NOAA SWPC, 2026-09-16\n  GOES primary X-ray 3.0e-07 W/m² ≈ B-class. M/X = flare in progress.\n- **[Asteroid (2012 EP5) close approach 2026-09-19](https://cneos.jpl.nasa.gov/)** — NASA, 2026-09-19\n  (2012 EP5) (non-hazardous), miss 49646713.428502636 km, vel 46610.7653869711 km/h.\n- **[Close approach (2026 RB39) on 2026-Sep-17 02:30](https://cneos.jpl.nasa.gov/ca/)** — JPL, 2026-09-17\n  Dist 0.0025684476393133 AU, v_rel 9.25207206873187 km/s, H 28.81.\n  Event (UTC): 2026-09-17T02:30:00Z\n- **[Geomagnetic storm scale now: G0 (Kp 0)](https://www.swpc.noaa.gov/noaa-scales-explanation)** — NOAA SWPC, 2026-09-16\n  No storm per NOAA planetary K-index.\n- **[Close approach (2026 RA4) on 2026-Sep-16 07:40](https://cneos.jpl.nasa.gov/ca/)** — JPL, 2026-09-16\n  Dist 0.00860596725322986 AU, v_rel 11.6517302529079 km/s, H 26.231.\n  Event (UTC): 2026-09-16T07:40:00Z\n- **[Close approach (2023 SZ3) on 2026-Sep-16 06:10](https://cneos.jpl.nasa.gov/ca/)** — JPL, 2026-09-16\n  Dist 0.0172077643556589 AU, v_rel 10.3433862754637 km/s, H 23.95.\n  Event (UTC): 2026-09-16T06:10:00Z\n- **[Space Weather Message Code: WARK04 Serial Number: 5418 Issue Time: 2026 Sep 16 0538 UTC EXTENDED WARNING: Geomagnetic K-index of 4 expected Extension to Serial Number: 5417 Valid From: 2026 Sep 15](https://www.swpc.noaa.gov/products/alerts)** — NOAA SWPC, 2026-09-16\n  Space Weather Message Code: WARK04 Serial Number: 5418 Issue Time: 2026 Sep 16 0538 UTC EXTENDED WARNING: Geomagnetic K-index of 4 expected Extension to Serial Number: 5417 Valid From: 2026 Sep 15 1849 UTC Now Valid Until: 2026 Sep 16 1800 UTC Warning Condition: Persistence NOAA Space Weather Scale \n- **[Close approach (2026 RF39) on 2026-Sep-16 05:39](https://cneos.jpl.nasa.gov/ca/)** — JPL, 2026-09-16\n  Dist 0.0145973314178402 AU, v_rel 7.64794294701425 km/s, H 26.03.\n  Event (UTC): 2026-09-16T05:39:00Z\n- **[Close approach (2026 RM39) on 2026-Sep-16 05:49](https://cneos.jpl.nasa.gov/ca/)** — JPL, 2026-09-16\n  Dist 0.0108919220908052 AU, v_rel 9.84282702589968 km/s, H 27.687.\n  Event (UTC): 2026-09-16T05:49:00Z\n- **[APOD: Webb's View of M64](https://apod.nasa.gov/apod/image/2609/M64_Webb.jpg)** — NASA, 2026-09-16\n  Sometimes where Hubble finds darkness, Webb sees light. An example is today’s composite images of Messier 64 (M64), a nearby spiral galaxy of many names. The dark band of dust partially blocking its bright core earned it the moniker “the Black Eye Galaxy.” Webb’s Mid-InfraRed Instrument (MIRI) sees \n- **[Fireball 2026-09-15 11:26:13 — 2.2 kt](https://cneos.jpl.nasa.gov/fireballs/)** — JPL, 2026-09-15\n  {'date': '2026-09-15 11:26:13', 'energy': '2.2', 'impact-e': '0.079', 'lat': '37.6', 'lat-dir': 'S', 'lon': '161.6', 'lon-dir': 'W', 'alt': '37.0', 'vel': None}\n- **[Lunar eclipses 2026 — NASA eclipse catalog](https://eclipse.gsfc.nasa.gov/LEcat/LE1991-2030.html)** — USNO\n  USNO serves solar eclipses only. Full lunar list with visibility maps: NASA eclipse site.\n- **[NOAA 3-day space weather forecast](https://www.swpc.noaa.gov/)** — NOAA SWPC\n  :Product: 3-Day Forecast :Issued: 2026 Sep 16 0030 UTC # Prepared by the U.S. Dept. of Commerce, NOAA, Space Weather Prediction Center # A. NOAA Geomagnetic Activity Observation and Forecast The greatest observed 3 hr Kp over the past 24 hours was 3 (below NOAA Scale levels). The greatest expected 3\n- **[Draconids peak 2026-10-08T15:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2026-10-08\n  Peak 2026-10-08T15:00:00Z UTC. ZHR 10. Best: Northern. Radiant Draco. Moon: check USNO phase that night.\n  Event (UTC): 2026-10-08T15:00:00Z | Visible: Northern\n- **[Orionids peak 2026-10-21T05:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2026-10-21\n  Peak 2026-10-21T05:00:00Z UTC. ZHR 20. Best: Both. Radiant Orion. Moon: check USNO phase that night.\n  Event (UTC): 2026-10-21T05:00:00Z | Visible: Both\n- **[Southern Taurids peak 2026-11-05T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2026-11-05\n  Peak 2026-11-05T04:00:00Z UTC. ZHR 10. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.\n  Event (UTC): 2026-11-05T04:00:00Z | Visible: Northern\n- **[Northern Taurids peak 2026-11-12T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2026-11-12\n  Peak 2026-11-12T04:00:00Z UTC. ZHR 5. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.\n  Event (UTC): 2026-11-12T04:00:00Z | Visible: Northern\n- **[Leonids peak 2026-11-17T22:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2026-11-17\n  Peak 2026-11-17T22:00:00Z UTC. ZHR 15. Best: Northern. Radiant Leo. Moon: check USNO phase that night.\n  Event (UTC): 2026-11-17T22:00:00Z | Visible: Northern\n- **[Geminids peak 2026-12-14T02:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2026-12-14\n  Peak 2026-12-14T02:00:00Z UTC. ZHR 150. Best: Northern. Radiant Gemini. Moon: check USNO phase that night.\n  Event (UTC): 2026-12-14T02:00:00Z | Visible: Northern\n- **[Ursids peak 2026-12-22T10:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2026-12-22\n  Peak 2026-12-22T10:00:00Z UTC. ZHR 10. Best: Northern. Radiant Ursa Minor. Moon: check USNO phase that night.\n  Event (UTC): 2026-12-22T10:00:00Z | Visible: Northern\n- **[New Moon — 9/11/2026](https://aa.usno.navy.mil/)** — USNO, 2026-09-11\n  New Moon occurs 2026-09-11T03:27:00Z UTC.\n  Event (UTC): 2026-09-11T03:27:00Z\n- **[Annular Solar Eclipse of 17 February 2026 (2026)](https://eclipse.gsfc.nasa.gov/)** — USNO, 2026-02-17\n  Annular Solar Eclipse of 17 February 2026 occurs 2026-02-17. Local circumstances: query with lat/lon for magnitude/obscuration.\n  Event (UTC): 2026-02-17T00:00:00Z | Visible: See NASA eclipse maps for path\n- **[Total Solar Eclipse of 12 August 2026 (2026)](https://eclipse.gsfc.nasa.gov/)** — USNO, 2026-08-12\n  Total Solar Eclipse of 12 August 2026 occurs 2026-08-12. Local circumstances: query with lat/lon for magnitude/obscuration.\n  Event (UTC): 2026-08-12T00:00:00Z | Visible: See NASA eclipse maps for path\n- **[Full Moon — 1/3/2026](https://aa.usno.navy.mil/)** — USNO, 2026-01-03\n  Full Moon occurs 2026-01-03T10:03:00Z UTC.\n  Event (UTC): 2026-01-03T10:03:00Z\n- **[Last Quarter — 1/10/2026](https://aa.usno.navy.mil/)** — USNO, 2026-01-10\n  Last Quarter occurs 2026-01-10T15:48:00Z UTC.\n  Event (UTC): 2026-01-10T15:48:00Z\n- **[New Moon — 1/18/2026](https://aa.usno.navy.mil/)** — USNO, 2026-01-18\n  New Moon occurs 2026-01-18T19:52:00Z UTC.\n  Event (UTC): 2026-01-18T19:52:00Z\n- **[First Quarter — 1/26/2026](https://aa.usno.navy.mil/)** — USNO, 2026-01-26\n  First Quarter occurs 2026-01-26T04:47:00Z UTC.\n  Event (UTC): 2026-01-26T04:47:00Z\n- **[Full Moon — 2/1/2026](https://aa.usno.navy.mil/)** — USNO, 2026-02-01\n  Full Moon occurs 2026-02-01T22:09:00Z UTC.\n  Event (UTC): 2026-02-01T22:09:00Z\n- **[Last Quarter — 2/9/2026](https://aa.usno.navy.mil/)** — USNO, 2026-02-09\n  Last Quarter occurs 2026-02-09T12:43:00Z UTC.\n  Event (UTC): 2026-02-09T12:43:00Z\n- **[New Moon — 2/17/2026](https://aa.usno.navy.mil/)** — USNO, 2026-02-17\n  New Moon occurs 2026-02-17T12:01:00Z UTC.\n  Event (UTC): 2026-02-17T12:01:00Z\n- **[First Quarter — 2/24/2026](https://aa.usno.navy.mil/)** — USNO, 2026-02-24\n  First Quarter occurs 2026-02-24T12:27:00Z UTC.\n  Event (UTC): 2026-02-24T12:27:00Z\n- **[Full Moon — 3/3/2026](https://aa.usno.navy.mil/)** — USNO, 2026-03-03\n  Full Moon occurs 2026-03-03T11:38:00Z UTC.\n  Event (UTC): 2026-03-03T11:38:00Z\n- **[Last Quarter — 3/11/2026](https://aa.usno.navy.mil/)** — USNO, 2026-03-11\n  Last Quarter occurs 2026-03-11T09:38:00Z UTC.\n  Event (UTC): 2026-03-11T09:38:00Z\n- **[New Moon — 3/19/2026](https://aa.usno.navy.mil/)** — USNO, 2026-03-19\n  New Moon occurs 2026-03-19T01:23:00Z UTC.\n  Event (UTC): 2026-03-19T01:23:00Z\n- **[First Quarter — 3/25/2026](https://aa.usno.navy.mil/)** — USNO, 2026-03-25\n  First Quarter occurs 2026-03-25T19:18:00Z UTC.\n  Event (UTC): 2026-03-25T19:18:00Z\n- **[Full Moon — 4/2/2026](https://aa.usno.navy.mil/)** — USNO, 2026-04-02\n  Full Moon occurs 2026-04-02T02:12:00Z UTC.\n  Event (UTC): 2026-04-02T02:12:00Z\n- **[Last Quarter — 4/10/2026](https://aa.usno.navy.mil/)** — USNO, 2026-04-10\n  Last Quarter occurs 2026-04-10T04:51:00Z UTC.\n  Event (UTC): 2026-04-10T04:51:00Z\n- **[New Moon — 4/17/2026](https://aa.usno.navy.mil/)** — USNO, 2026-04-17\n  New Moon occurs 2026-04-17T11:52:00Z UTC.\n  Event (UTC): 2026-04-17T11:52:00Z\n- **[First Quarter — 4/24/2026](https://aa.usno.navy.mil/)** — USNO, 2026-04-24\n  First Quarter occurs 2026-04-24T02:32:00Z UTC.\n  Event (UTC): 2026-04-24T02:32:00Z\n- **[Full Moon — 5/1/2026](https://aa.usno.navy.mil/)** — USNO, 2026-05-01\n  Full Moon occurs 2026-05-01T17:23:00Z UTC.\n  Event (UTC): 2026-05-01T17:23:00Z\n- **[Last Quarter — 5/9/2026](https://aa.usno.navy.mil/)** — USNO, 2026-05-09\n  Last Quarter occurs 2026-05-09T21:10:00Z UTC.\n  Event (UTC): 2026-05-09T21:10:00Z\n- **[New Moon — 5/16/2026](https://aa.usno.navy.mil/)** — USNO, 2026-05-16\n  New Moon occurs 2026-05-16T20:01:00Z UTC.\n  Event (UTC): 2026-05-16T20:01:00Z\n- **[First Quarter — 5/23/2026](https://aa.usno.navy.mil/)** — USNO, 2026-05-23\n  First Quarter occurs 2026-05-23T11:11:00Z UTC.\n  Event (UTC): 2026-05-23T11:11:00Z\n- **[Full Moon — 5/31/2026](https://aa.usno.navy.mil/)** — USNO, 2026-05-31\n  Full Moon occurs 2026-05-31T08:45:00Z UTC.\n  Event (UTC): 2026-05-31T08:45:00Z\n- **[Last Quarter — 6/8/2026](https://aa.usno.navy.mil/)** — USNO, 2026-06-08\n  Last Quarter occurs 2026-06-08T10:00:00Z UTC.\n  Event (UTC): 2026-06-08T10:00:00Z\n- **[New Moon — 6/15/2026](https://aa.usno.navy.mil/)** — USNO, 2026-06-15\n  New Moon occurs 2026-06-15T02:54:00Z UTC.\n  Event (UTC): 2026-06-15T02:54:00Z\n- **[First Quarter — 6/21/2026](https://aa.usno.navy.mil/)** — USNO, 2026-06-21\n  First Quarter occurs 2026-06-21T21:55:00Z UTC.\n  Event (UTC): 2026-06-21T21:55:00Z\n- **[Full Moon — 6/29/2026](https://aa.usno.navy.mil/)** — USNO, 2026-06-29\n  Full Moon occurs 2026-06-29T23:56:00Z UTC.\n  Event (UTC): 2026-06-29T23:56:00Z\n- **[Last Quarter — 7/7/2026](https://aa.usno.navy.mil/)** — USNO, 2026-07-07\n  Last Quarter occurs 2026-07-07T19:29:00Z UTC.\n  Event (UTC): 2026-07-07T19:29:00Z\n- **[New Moon — 7/14/2026](https://aa.usno.navy.mil/)** — USNO, 2026-07-14\n  New Moon occurs 2026-07-14T09:43:00Z UTC.\n  Event (UTC): 2026-07-14T09:43:00Z\n- **[First Quarter — 7/21/2026](https://aa.usno.navy.mil/)** — USNO, 2026-07-21\n  First Quarter occurs 2026-07-21T11:05:00Z UTC.\n  Event (UTC): 2026-07-21T11:05:00Z\n- **[Full Moon — 7/29/2026](https://aa.usno.navy.mil/)** — USNO, 2026-07-29\n  Full Moon occurs 2026-07-29T14:36:00Z UTC.\n  Event (UTC): 2026-07-29T14:36:00Z\n- **[Last Quarter — 8/6/2026](https://aa.usno.navy.mil/)** — USNO, 2026-08-06\n  Last Quarter occurs 2026-08-06T02:21:00Z UTC.\n  Event (UTC): 2026-08-06T02:21:00Z\n- **[New Moon — 8/12/2026](https://aa.usno.navy.mil/)** — USNO, 2026-08-12\n  New Moon occurs 2026-08-12T17:37:00Z UTC.\n  Event (UTC): 2026-08-12T17:37:00Z\n- **[First Quarter — 8/20/2026](https://aa.usno.navy.mil/)** — USNO, 2026-08-20\n  First Quarter occurs 2026-08-20T02:46:00Z UTC.\n  Event (UTC): 2026-08-20T02:46:00Z\n- **[Full Moon — 8/28/2026](https://aa.usno.navy.mil/)** — USNO, 2026-08-28\n  Full Moon occurs 2026-08-28T04:18:00Z UTC.\n  Event (UTC): 2026-08-28T04:18:00Z\n- **[Last Quarter — 9/4/2026](https://aa.usno.navy.mil/)** — USNO, 2026-09-04\n  Last Quarter occurs 2026-09-04T07:51:00Z UTC.\n  Event (UTC): 2026-09-04T07:51:00Z\n- **[Perihelion 2026](https://aa.usno.navy.mil/)** — USNO, 2026-01-03\n  Perihelion occurs 2026-01-03T17:15:00Z UTC (global instant).\n  Event (UTC): 2026-01-03T17:15:00Z | Visible: Global\n- **[Equinox 2026](https://aa.usno.navy.mil/)** — USNO, 2026-03-20\n  Equinox occurs 2026-03-20T14:46:00Z UTC (global instant).\n  Event (UTC): 2026-03-20T14:46:00Z | Visible: Global\n- **[Solstice 2026](https://aa.usno.navy.mil/)** — USNO, 2026-06-21\n  Solstice occurs 2026-06-21T08:24:00Z UTC (global instant).\n  Event (UTC): 2026-06-21T08:24:00Z | Visible: Global\n- **[Aphelion 2026](https://aa.usno.navy.mil/)** — USNO, 2026-07-06\n  Aphelion occurs 2026-07-06T17:30:00Z UTC (global instant).\n  Event (UTC): 2026-07-06T17:30:00Z | Visible: Global\n- **[Quadrantids peak 2026-01-03T15:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2026-01-03\n  Peak 2026-01-03T15:00:00Z UTC. ZHR 110. Best: Northern. Radiant Bootes. Moon: check USNO phase that night.\n  Event (UTC): 2026-01-03T15:00:00Z | Visible: Northern\n- **[Lyrids peak 2026-04-22T18:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2026-04-22\n  Peak 2026-04-22T18:00:00Z UTC. ZHR 18. Best: Northern. Radiant Lyra. Moon: check USNO phase that night.\n  Event (UTC): 2026-04-22T18:00:00Z | Visible: Northern\n- **[Eta Aquariids peak 2026-05-06T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2026-05-06\n  Peak 2026-05-06T04:00:00Z UTC. ZHR 50. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.\n  Event (UTC): 2026-05-06T04:00:00Z | Visible: Southern\n- **[Southern Delta Aquariids peak 2026-07-30T03:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2026-07-30\n  Peak 2026-07-30T03:00:00Z UTC. ZHR 25. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.\n  Event (UTC): 2026-07-30T03:00:00Z | Visible: Southern\n- **[Perseids peak 2026-08-13T03:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2026-08-13\n  Peak 2026-08-13T03:00:00Z UTC. ZHR 100. Best: Northern. Radiant Perseus. Moon: check USNO phase that night.\n  Event (UTC): 2026-08-13T03:00:00Z | Visible: Northern",
   "cached": false,
   "context": {
-    "now_utc": "2026-09-16T12:02:53.081496Z",
+    "now_utc": "2026-09-16T12:07:18.312768Z",
     "today": "Wednesday, 2026-09-16",
     "tz": "UTC"
   },
-  "generated_at": "2026-09-16T12:02:53.081496Z",
+  "generated_at": "2026-09-16T12:07:18.312768Z",
   "data_as_of": {
     "static_yearly": "2026-01-01 (eclipses, seasons, meteor peaks: fixed for the year)",
-    "live_snapshot": "2026-09-16T12:02:53.081496Z (moon phases yearly-static; Kp/asteroids/APOD: re-query live when fresh matters)"
+    "live_snapshot": "2026-09-16T12:07:18.312768Z (moon phases yearly-static; Kp/asteroids/APOD: re-query live when fresh matters)"
   }
 }

@@ -231,24 +231,21 @@ class AstroSearch:
                     results.extend(f.result() or [])
                 except Exception:
                     continue
-        # static meteor peaks
+        # static meteor peaks (per-year IMO file, else templated base)
         try:
-            import json as _j
-            from pathlib import Path
-            p = Path(__file__).resolve().parent.parent / "data" / "meteor_showers.json"
-            if p.exists():
-                for m in _j.loads(p.read_text()):
-                    if str(year) in str(m.get("peak", "")) or True:
-                        from .normalizer import normalize as _n
-                        results.append(_n({
-                            "title": f"{m['name']} peak {m['peak']}", "summary": f"Peak {m['peak']} UTC. ZHR {m.get('zhr')}. Best: {m.get('hemisphere')}. Radiant {m.get('radiant')}. Moon: check USNO phase that night."[:400],
-                            "url": "https://www.amsmeteors.org/meteor-showers/meteor-shower-calendar/",
-                            "published": m["peak"], "category": "events", "event_type": "meteor_shower",
-                            "event_date": m["peak"], "event_date_utc": m["peak"],
-                            "visibility": m.get("hemisphere"), "extra": m,
-                        }, {"name": "IMO/AMS", "source_type": "local", "authority": 2, "category": "events"}))
+            from .showers import load_showers
+            from .normalizer import normalize as _n
+            for m in load_showers(year):
+                vis = m.get("hemisphere", "") + ("" if m.get("exact", True) else " (approx peak ±1d)")
+                results.append(_n({
+                    "title": f"{m['name']} peak {m['peak']}", "summary": f"Peak {m['peak']} UTC. ZHR {m.get('zhr')}. Best: {m.get('hemisphere')}. Radiant {m.get('radiant')}. Moon: check USNO phase that night."[:400],
+                    "url": "https://www.imo.net/members/imo_showers/calendar/",
+                    "published": m["peak"], "category": "events", "event_type": "meteor_shower",
+                    "event_date": m["peak"], "event_date_utc": m["peak"],
+                    "visibility": vis, "extra": m,
+                }, {"name": "IMO/AMS", "source_type": "local", "authority": 2, "category": "events"}))
         except Exception as e:
-            logger.warning(f"meteor json: {e}")
+            logger.warning(f"meteor data: {e}")
         results = deduplicate(results)
         results = rank(results, "celestial events", "periodic_event", None)[:100]
         return {"query": f"celestial events {year}", "intent": "periodic_event",

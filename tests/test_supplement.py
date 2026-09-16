@@ -15,7 +15,8 @@ def test_local_sky_moon():
     assert len(r) == 1 and r[0]["event_date_utc"] and r[0]["extra"]["computed"] is True
 
 def test_meteor_calendar_complete():
-    data = json.loads((Path(__file__).resolve().parent.parent / "data" / "meteor_showers.json").read_text())
+    from astro_search.showers import load_showers
+    data = load_showers(2026)  # exact IMO file
     names = {m["name"] for m in data}
     for need in ["Quadrantids", "Lyrids", "Eta Aquariids", "Southern Delta Aquariids", "Perseids",
                  "Draconids", "Orionids", "Southern Taurids", "Northern Taurids", "Leonids",
@@ -32,6 +33,11 @@ def test_dedup_keeps_distinct_dated_events():
                    "event_type": "moon_phase", "event_date_utc": "2026-09-26T16:49:00Z"}, META)
     out = deduplicate([a, b, c])
     assert len(out) == 2  # true duplicate collapsed, distinct dates kept
+
+def test_meteor_templated_year():
+    from astro_search.showers import load_showers
+    data = load_showers(2027)  # no exact file -> templated base
+    assert len(data) == 12 and all(m["peak"].startswith("2027-") and m["exact"] is False for m in data)
 
 def test_dedup_keeps_monthly_moons():
     moons = [normalize({"title": f"Full Moon — {m}/1/2026", "url": "https://aa.usno.navy.mil/",
