@@ -10,3 +10,4 @@ dist/
 feed_report.txt
 calendar/*.json
 !.gitkeep
+*.bsp

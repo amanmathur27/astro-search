@@ -88,4 +88,36 @@ class NASASource(BaseSource):
                         }, {"name": "NASA", "source_type": "api", "authority": 3, "category": "discoveries"}))
             except Exception:
                 pass
+        # EONET natural events (severeStorms) for space-weather queries
+        if any(k in q for k in ["storm", "space weather", "aurora", "geomagnetic", "solar"]):
+            try:
+                r = requests.get("https://eonet.gsfc.nasa.gov/api/v3/events",
+                                 params={"category": "severeStorms", "status": "open", "limit": 5}, timeout=TIMEOUT)
+                if r.ok:
+                    for ev in (r.json().get("events", []) or [])[:5]:
+                        out.append(normalize({
+                            "title": ev.get("title", "EONET severe storm"),
+                            "summary": f"{ev.get('description', '')} Sources: {len(ev.get('sources', []))}."[:400],
+                            "url": "https://eonet.gsfc.nasa.gov/",
+                            "published": str((ev.get("geometry") or [{}])[0].get("date", "")),
+                            "category": "space_weather", "extra": {"eonet_id": ev.get("id")},
+                        }, {"name": "NASA", "source_type": "api", "authority": 3, "category": "space_weather"}))
+            except Exception:
+                pass
+        # Mars rover photos for Mars queries
+        if "mars" in q and any(k in q for k in ["photo", "image", "rover", "curiosity", "perseverance"]):
+            try:
+                r = requests.get(f"{BASE}/mars-photos/api/v1/rovers/curiosity/photos",
+                                 params={"sol": 1000, "api_key": KEY}, timeout=TIMEOUT)
+                if r.ok:
+                    for p in (r.json().get("photos", []) or [])[:3]:
+                        out.append(normalize({
+                            "title": f"Mars photo {p.get('id')} sol {p.get('sol')} ({(p.get('camera') or {}).get('full_name', '')})",
+                            "summary": f"Curiosity {p.get('earth_date')} sol {p.get('sol')}."[:400],
+                            "url": p.get("img_src", "https://mars.nasa.gov/"),
+                            "published": str(p.get("earth_date", "")), "category": "discoveries",
+                            "extra": {"rover": "curiosity", "sol": p.get("sol")},
+                        }, {"name": "NASA", "source_type": "api", "authority": 3, "category": "discoveries"}))
+            except Exception:
+                pass
         return out

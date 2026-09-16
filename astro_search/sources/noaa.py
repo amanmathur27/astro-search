@@ -86,4 +86,39 @@ class NOAASource(BaseSource):
             }, {"name": "NOAA SWPC", "source_type": "api", "authority": 3, "category": "space_weather"}))
         except Exception:
             pass
+        # GOES primary X-ray flux -> flare class (A/B/C/M/X)
+        try:
+            xray = _json("/json/goes/primary/xrays-7-day.json")
+            last = [p for p in xray if isinstance(p, dict) and p.get("flux")] or []
+            if not last and isinstance(xray, list) and xray and isinstance(xray[-1], list):
+                pass  # unexpected shape; skip
+            if last:
+                flux = float(last[-1].get("flux", 0) or 0)
+                cls = "A" if flux < 1e-7 else ("B" if flux < 1e-6 else ("C" if flux < 1e-5 else ("M" if flux < 1e-4 else "X")))
+                out.append(normalize({
+                    "title": f"Solar X-ray flux now: {flux:.1e} W/m² (class {cls})",
+                    "summary": f"GOES primary X-ray {flux:.1e} W/m² ≈ {cls}-class. M/X = flare in progress."[:400],
+                    "url": "https://www.swpc.noaa.gov/products/goes-x-ray-flux",
+                    "published": str(last[-1].get("time_tag", "")), "category": "space_weather",
+                    "extra": {"xray_flux": flux, "flare_class": cls},
+                }, {"name": "NOAA SWPC", "source_type": "api", "authority": 3, "category": "space_weather"}))
+        except Exception:
+            pass
+        # G-scale from planetary K index (G1 kp>=5 ... G5 kp>=9)
+        try:
+            pk = _json("/products/noaa-planetary-k-index.json")
+            rows = pk if isinstance(pk, list) else pk.get("data", [])
+            if rows:
+                row = rows[-1] if isinstance(rows[-1], dict) else {}
+                kp_v = float(row.get("kp_index", row.get("kp", 0)) or 0)
+                g = 0 if kp_v < 5 else min(int(kp_v - 4), 5)
+                out.append(normalize({
+                    "title": f"Geomagnetic storm scale now: G{g} (Kp {kp_v:.0f})",
+                    "summary": ("No storm" if g == 0 else f"G{g} storm conditions") + f" per NOAA planetary K-index."[:400],
+                    "url": "https://www.swpc.noaa.gov/noaa-scales-explanation",
+                    "published": str(row.get("time_tag", "")), "category": "space_weather",
+                    "extra": {"g_scale": g, "kp": kp_v},
+                }, {"name": "NOAA SWPC", "source_type": "api", "authority": 3, "category": "space_weather"}))
+        except Exception:
+            pass
         return out

@@ -13,7 +13,7 @@ from .cache_sqlite import SQLiteCache
 
 logger = logging.getLogger("astro_search")
 
-FALLBACK_CHAINS = {"USNO": "local", "NASA": "rss", "EarthSky": "rss",
+FALLBACK_CHAINS = {"USNO": "Local Sky", "NASA": "rss", "EarthSky": "rss",
                    "JPL": "nasa", "NOAA SWPC": "rss", "arXiv": "rss"}
 PAYWALLED = ["New Scientist"]
 ASTRONOMY_THRESHOLD = 0.1
@@ -25,10 +25,15 @@ def _build_sources():
     from .sources.noaa import NOAASource
     from .sources.nasa import NASASource
     from .sources.jpl import JPLSource
-    from .sources.papers import ArxivSource, ADSSource, ExoplanetSource, ISSSource
+    from .sources.arxiv import ArxivSource
+    from .sources.ads import ADSSource
+    from .sources.tap import ExoplanetSource
+    from .sources.iss import ISSSource
+    from .sources.local_sky import LocalSkySource
+    from .sources.sky_fallback import FallbackSkySource
     srcs = [RSSSource(c) for c in RSS_FEEDS]
     srcs += [USNOSource(), NOAASource(), NASASource(), JPLSource(),
-             ArxivSource(), ADSSource(), ExoplanetSource(), ISSSource()]
+             ArxivSource(), ADSSource(), ExoplanetSource(), ISSSource(), LocalSkySource(), FallbackSkySource()]
     return srcs
 
 
@@ -74,7 +79,18 @@ class AstroSearch:
                     pass
             cands.append(s)
         cands.sort(key=lambda s: getattr(s, "authority", 2), reverse=True)
-        return cands[:5]
+        selected = cands[:5]
+        # fallback guarantee: if a selected source has a named fallback not yet selected, append it
+        names = {getattr(s, "name", "") for s in selected}
+        for s in selected:
+            fb = FALLBACK_CHAINS.get(getattr(s, "name", ""))
+            if fb and fb not in names:
+                for cand in self.sources:
+                    if getattr(cand, "name", "") == fb:
+                        selected.append(cand)
+                        names.add(fb)
+                        break
+        return selected
 
     def _safe_fetch(self, source, query: str, **kw) -> list[dict]:
         try:
@@ -109,7 +125,22 @@ class AstroSearch:
         sources = self._select(intent, entities, category)
         kw = {"max_results": max_results, "intent": intent, "category": category,
               "lat": lat, "lon": lon, "tz": tz, "year": year or datetime.now(timezone.utc).year,
-              "date": dates.get("date_min")}
+              "date": dates.get("date_min"), "now_utc": now_iso}
+        # location-aware: guarantee Twilight Fallback when lat/lon supplied
+        if lat is not None and lon is not None and not any(getattr(s, "name", "") == "Twilight Fallback" for s in sources):
+            for cand in self.sources:
+                if getattr(cand, "name", "") == "Twilight Fallback":
+                    sources.append(cand)
+                    break
+        # moon-aware: guarantee USNO or Local Sky when query mentions moon
+        if "moon" in query.lower() and not any(getattr(s, "name", "") in ("USNO", "Local Sky") for s in sources):
+            for want in ("USNO", "Local Sky"):
+                for cand in self.sources:
+                    if getattr(cand, "name", "") == want and intent in getattr(cand, "intents", []):
+                        sources.append(cand)
+                        break
+                if any(getattr(s, "name", "") in ("USNO", "Local Sky") for s in sources):
+                    break
         results: list[dict] = []
         with ThreadPoolExecutor(max_workers=5) as ex:
             futs = [ex.submit(self._safe_fetch, s, query, **kw) for s in sources]
@@ -131,6 +162,7 @@ class AstroSearch:
         src_intents = {s.name: s.intents for s in sources}
         results = rank(results, query, intent, src_intents)
         results = results[: min(max_results, 20)]
+        self._apply_local_display(results, tz)
         md = self._markdown(query, intent, results, now_iso, dates)
         out = {"query": query, "intent": intent, "category": category,
                "count": len(results), "results": results, "markdown": md,
@@ -144,6 +176,30 @@ class AstroSearch:
             except Exception:
                 pass
         return out
+
+    def _apply_local_display(self, results: list[dict], tz) -> None:
+        """Add extra.local_display converted from event_date_utc. UTC default, never guessed."""
+        if not tz or str(tz).upper() == "UTC" or tz == 0:
+            return
+        try:
+            from dateutil import parser as _p, tz as _tz
+            zone = _tz.gettz(str(tz)) if isinstance(tz, str) else _tz.tzoffset(None, int(tz) * 3600)
+            if zone is None:
+                return
+            for r in results:
+                iso = r.get("event_date_utc")
+                if not iso:
+                    continue
+                try:
+                    dt = _p.parse(iso)
+                    if dt.tzinfo is None:
+                        dt = dt.replace(tzinfo=timezone.utc)
+                    r.setdefault("extra", {})["local_display"] = dt.astimezone(zone).isoformat()
+                    r["extra"]["local_tz"] = str(tz)
+                except Exception:
+                    continue
+        except Exception:
+            pass
 
     def _markdown(self, query, intent, results, now_iso, dates) -> str:
         if not results:
@@ -194,7 +250,7 @@ class AstroSearch:
         except Exception as e:
             logger.warning(f"meteor json: {e}")
         results = deduplicate(results)
-        results = rank(results, "celestial events", "periodic_event", None)[:30]
+        results = rank(results, "celestial events", "periodic_event", None)[:50]
         return {"query": f"celestial events {year}", "intent": "periodic_event",
                 "category": "events", "count": len(results), "results": results,
                 "markdown": self._markdown(f"celestial events {year}", "periodic_event", results, now_iso, {"is_historical": False}),

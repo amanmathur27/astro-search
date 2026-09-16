@@ -12,15 +12,25 @@ def title_similarity(a: str, b: str) -> float:
     return len(ta & tb) / max(len(ta), len(tb))
 
 
+def _identity(r: dict) -> str:
+    url = (r.get("url") or "").strip().lower().rstrip("/")
+    # dated events from one agency URL (USNO, IMO) are distinct results
+    stamp = r.get("event_date_utc") or r.get("event_date") or ""
+    etype = r.get("event_type") or ""
+    if stamp or etype:
+        return f"{url}|{etype}|{stamp}"
+    return url or r.get("title", "")
+
+
 def deduplicate(results: list[dict]) -> list[dict]:
-    seen_urls: set[str] = set()
+    seen: set[str] = set()
     out: list[dict] = []
     for r in results:
-        url = (r.get("url") or "").strip().lower().rstrip("/")
-        if url and url in seen_urls:
+        key = _identity(r)
+        if key and key in seen:
             continue
-        if url:
-            seen_urls.add(url)
+        if key:
+            seen.add(key)
         dup_idx = -1
         for i, kept in enumerate(out):
             if title_similarity(r.get("title", ""), kept.get("title", "")) > 0.65:

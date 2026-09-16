@@ -73,4 +73,69 @@ class JPLSource(BaseSource):
                         }, {"name": "JPL", "source_type": "api", "authority": 3, "category": "events"}))
             except Exception:
                 pass
+        # Sentry impact risk (defensive parse — schema varies)
+        if any(k in q for k in ["impact", "risk", "sentry", "hazard", "collision"]):
+            try:
+                r = requests.get(f"{BASE}/sentry.api", timeout=TIMEOUT)
+                if r.ok:
+                    d = r.json()
+                    rows = d.get("data", []) if isinstance(d, dict) else []
+                    fields = d.get("fields", []) if isinstance(d, dict) else []
+                    summ = d.get("summary", "") if isinstance(d, dict) else ""
+                    for row in rows[:5]:
+                        rec = dict(zip(fields, row)) if fields else (row if isinstance(row, dict) else {"raw": row})
+                        out.append(normalize({
+                            "title": f"Impact risk: {rec.get('des', rec.get('fullname', 'object'))}",
+                            "summary": f"{summ} {rec}".strip()[:400],
+                            "url": "https://cneos.jpl.nasa.gov/sentry/",
+                            "published": "", "category": "events",
+                            "event_type": "impact_risk", "extra": {"sentry": rec},
+                        }, {"name": "JPL", "source_type": "api", "authority": 3, "category": "events"}))
+            except Exception:
+                pass
+        # Scout fresh NEO candidates (defensive parse)
+        if any(k in q for k in ["newly discovered", "new asteroid", "scout", "fresh discovery", "just discovered"]):
+            try:
+                r = requests.get(f"{BASE}/scout.api", timeout=TIMEOUT)
+                if r.ok:
+                    d = r.json()
+                    rows = d.get("data", []) if isinstance(d, dict) else (d if isinstance(d, list) else [])
+                    for row in rows[:5]:
+                        rec = row if isinstance(row, dict) else {"raw": row}
+                        out.append(normalize({
+                            "title": f"New NEO candidate: {rec.get('objectName', rec.get('des', 'unknown'))}",
+                            "summary": str(rec)[:400],
+                            "url": "https://cneos.jpl.nasa.gov/scout/",
+                            "published": str(rec.get("firstObs", "")), "category": "discoveries",
+                            "extra": {"scout": rec},
+                        }, {"name": "JPL", "source_type": "api", "authority": 3, "category": "discoveries"}))
+            except Exception:
+                pass
+        # Horizons OBSERVER table when lat/lon + planetary/body query
+        if kwargs.get("lat") is not None and kwargs.get("lon") is not None and any(
+                k in q for k in ["conjunction", "opposition", "position", "rise", "set", "where is", "jupiter", "saturn", "mars", "venus", "mercury"]):
+            bodies = {"sun": "10", "moon": "301", "mercury": "199", "venus": "299", "mars": "499",
+                      "jupiter": "599", "saturn": "699", "uranus": "799", "neptune": "899"}
+            cmd = next((c for name, c in bodies.items() if name in q), "499")
+            try:
+                r = requests.get("https://ssd.jpl.nasa.gov/api/horizons.api", params={
+                    "format": "json", "COMMAND": f"'{cmd}'", "OBJ_DATA": "'NO'",
+                    "MAKE_EPHEM": "'YES'", "EPHEM_TYPE": "'OBSERVER'",
+                    "CENTER": f"'coord@399'", "COORD_TYPE": "'GEODETIC'",
+                    "SITE_COORD": f"'{kwargs['lon']},{kwargs['lat']},0'",
+                    "START_TIME": f"'{today}'", "STOP_TIME": f"'{today}'",
+                    "STEP_SIZE": "'1d'", "QUANTITIES": "'1,4,9'",
+                }, timeout=25)
+                if r.ok:
+                    d = r.json()
+                    txt = d.get("result", "") or ""
+                    out.append(normalize({
+                        "title": f"Horizons ephemeris {cmd} for {kwargs['lat']},{kwargs['lon']} on {today}",
+                        "summary": txt[-1200:][:400] if txt else "Horizons returned no ephemeris text.",
+                        "url": "https://ssd.jpl.nasa.gov/horizons/",
+                        "published": today, "category": "events", "event_type": "ephemeris",
+                        "extra": {"horizons_command": cmd, "raw_tail": txt[-1500:]},
+                    }, {"name": "JPL", "source_type": "api", "authority": 3, "category": "events"}))
+            except Exception:
+                pass
         return out

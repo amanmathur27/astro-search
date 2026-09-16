@@ -1,0 +1,23 @@
+name: Build Celestial Calendar
+on:
+  schedule: [{cron: '0 6 * * 0'}]  # weekly Sunday 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      year: {description: 'Year', required: false, default: '2026'}
+jobs:
+  build-calendar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: pip install -e ".[local]"
+        env:
+          ASTRO_NASA_KEY: ${{ secrets.ASTRO_NASA_KEY }}
+          ASTRO_ADS_KEY: ${{ secrets.ASTRO_ADS_KEY }}
+      - run: python tools/build_calendar.py ${{ inputs.year || '2026' }}
+        env:
+          ASTRO_NASA_KEY: ${{ secrets.ASTRO_NASA_KEY }}
+          ASTRO_ADS_KEY: ${{ secrets.ASTRO_ADS_KEY }}
+      - uses: actions/upload-artifact@v4
+        with: {name: celestial-calendar, path: calendar/*.json, retention-days: 90}
