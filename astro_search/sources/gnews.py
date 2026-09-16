@@ -19,6 +19,7 @@ RECENCY_RES = [
     re.compile(r"\bbreaking\b"), re.compile(r"\bright now\b"), re.compile(r"\bthis hour\b"),
     re.compile(r"\bjust\b"), re.compile(r"\btoday\b"), re.compile(r"\blatest\b"),
     re.compile(r"\btonight\b"), re.compile(r"\byesterday\b"), re.compile(r"\bthis morning\b"),
+    re.compile(r"\bhours ago\b"), re.compile(r"\bthis week\b"), re.compile(r"\bpast week\b"),
 ]
 
 EDITIONS = {
@@ -31,6 +32,20 @@ EDITIONS = {
 def has_recency(query: str) -> bool:
     q = (query or "").lower()
     return any(rx.search(q) for rx in RECENCY_RES)
+
+
+# week-phrased queries ("developments this week") need the 7-day window, not 1-day
+WEEK_RES = [re.compile(r"\bthis week\b"), re.compile(r"\bpast week\b")]
+
+
+def recency_window_days(query: str, trends: bool) -> int:
+    """Date-window for the GNews query + freshness cutoff basis."""
+    if trends:
+        return 7
+    q = (query or "").lower()
+    if any(rx.search(q) for rx in WEEK_RES):
+        return 7
+    return 1
 
 
 def edition_params(edition: str | None) -> tuple[str, str, str]:
@@ -74,11 +89,11 @@ class GoogleNewsSource(BaseSource):
         # hits flood in and the freshness cutoff drops everything.
         q = query.strip()
         if not re.search(r"\b(after|before|when):", q, re.I):
-            days = 7 if trends else 1
+            days = recency_window_days(query, trends)
             since = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d")
             q = f"{q} after:{since}"
         hl, gl, ceid = edition_params(kwargs.get("edition"))
-        max_age_h = 168 if trends else 12  # trends: 7-day topic volume; auto: breaking only
+        max_age_h = 168 if recency_window_days(query, trends) == 7 else 12
         try:
             r = requests.get(BASE, params={"q": q, "hl": hl, "gl": gl, "ceid": ceid},
                              headers=HEADERS, timeout=self.timeout)
@@ -102,12 +117,17 @@ class GoogleNewsSource(BaseSource):
         items.sort(key=lambda x: x["pub"], reverse=True)
         out = []
         for i, it in enumerate(items[: 8 if trends else 5]):
-            url = resolve_url(it["link"]) if i < 3 else it["link"]
+            resolved = False
+            url = it["link"]
+            if i < 3:
+                direct = resolve_url(it["link"])
+                resolved = direct != it["link"]
+                url = direct
             rec = normalize({
                 "title": it["title"], "summary": f"Via {it['publisher'] or 'Google News'}."[:400],
                 "url": url, "published": it["pub"], "category": "news",
                 "extra": {"publisher": it["publisher"], "via": "google_news_rss",
-                          "resolved": url != it["link"]},
+                          "resolved": resolved, "fetch_compatible": resolved},
             }, {"name": "Google News", "source_type": "rss", "authority": 1, "category": "news"})
             fh = rec.get("freshness_h")
             if isinstance(fh, int) and not isinstance(fh, bool) and fh <= max_age_h:
