@@ -67,6 +67,26 @@ def freshness_hours(published_iso: str) -> int | None:
         return None
 
 
+def freshness_display(hours: int | None) -> str | None:
+    """Humanized age: minutes/hours/days/months. Numeric freshness_h stays for ranking."""
+    if hours is None:
+        return None
+    if not isinstance(hours, (int, float)) or isinstance(hours, bool):
+        return None
+    h = max(int(hours), 0)
+    if h < 1:
+        return "just now"
+    if h < 24:
+        return f"{h}h ago"
+    d = h // 24
+    if d < 30:
+        return f"{d}d ago"
+    mo = d // 30
+    if mo < 12:
+        return f"{mo}mo ago"
+    return f"{mo // 12}y ago"
+
+
 def normalize(raw: dict, source_meta: dict) -> dict:
     """Merge raw + source_meta into strict contract (handoff §4 + supplement §5)."""
     if not isinstance(raw, dict):
@@ -88,6 +108,7 @@ def normalize(raw: dict, source_meta: dict) -> dict:
     pub = to_iso_utc(raw.get("published") or raw.get("event_date_utc") or "")
     out["published"] = pub
     out["freshness_h"] = freshness_hours(pub)
+    out["freshness_display"] = freshness_display(out["freshness_h"])
     out["entities"] = list(raw.get("entities", []) or [])[:10]
     out["location"] = raw.get("location")
     out["event_type"] = raw.get("event_type")

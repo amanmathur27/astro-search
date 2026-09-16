@@ -1,4 +1,4 @@
-from astro_search.normalizer import normalize, clean_text, to_iso_utc
+from astro_search.normalizer import normalize, clean_text, to_iso_utc, freshness_display
 from astro_search.deduplicator import deduplicate, title_similarity
 from astro_search.ranker import rank
 from astro_search.intent import classify
@@ -59,3 +59,6 @@ def test_input_hardening():
     assert r["title"] == "Untitled" and r["authority"] == 2
     assert to_iso_utc(12345) == ""  # type: ignore[arg-type]
     assert clean_text("", limit=0) == ""
+    assert freshness_display(394) == "16d ago" and freshness_display(0) == "just now"
+    assert freshness_display(None) is None and freshness_display(True) is None
+    assert normalize({"title": "t"}, {})["freshness_display"] is None
