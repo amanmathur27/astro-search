@@ -18,9 +18,14 @@ K1, B = 1.5, 0.75
 _FRESH_WINDOW_H = 168.0  # 7 days
 
 
+def _text(value: object) -> str:
+    if value is None:
+        return ""
+    return value if isinstance(value, str) else str(value)
+
+
 def _tok(s: object) -> list[str]:
-    if not isinstance(s, str):
-        s = "" if s is None else str(s)
+    s = _text(s)
     return [t for t in "".join(c.lower() if c.isalnum() else " " for c in s).split() if t]
 
 
@@ -45,7 +50,7 @@ def rank(results: list[dict], query: str, intent: str, source_intents: dict | No
         return []
     # unique query terms, order-preserved (duplicates must not inflate BM25)
     qterms = list(dict.fromkeys(_tok(query)))
-    docs = [_tok((r.get("title", "") or "") + " " + (r.get("summary", "") or "")) for r in results]
+    docs = [_tok(_text(r.get("title", "")) + " " + _text(r.get("summary", ""))) for r in results]
     doc_sets = [set(d) for d in docs]
     lens = [len(d) for d in docs]
     N = len(docs)
