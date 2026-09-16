@@ -69,14 +69,11 @@ class AstroSearch:
                 # allow broad RSS through; skip narrow mismatches
                 if getattr(s, "source_type", "") != "rss":
                     continue
-            if category not in ("all", None):
-                pass  # category filters at rank stage via summary; keep routing by intent
-            if isinstance(s, type) or (hasattr(s, "is_available") and not s.is_available()):
-                try:
-                    if not s.is_available():
-                        continue
-                except Exception:
-                    pass
+            try:
+                if not s.is_available():
+                    continue
+            except Exception:
+                pass  # availability check itself failed -> try the source anyway
             cands.append(s)
         cands.sort(key=lambda s: getattr(s, "authority", 2), reverse=True)
         selected = cands[:5]
@@ -104,6 +101,11 @@ class AstroSearch:
                lat: float | None = None, lon: float | None = None,
                tz: str | int = "UTC", now_utc: str | None = None,
                year: int | None = None) -> dict:
+        try:
+            max_results = int(max_results)  # type: ignore[arg-type]
+        except (TypeError, ValueError):
+            max_results = 8
+        max_results = max(1, min(max_results, 20))
         now_iso = now_utc or now_utc_iso()
         if not (query or "").strip():
             return self.get_celestial_events(year=year, lat=lat, lon=lon)
@@ -142,7 +144,7 @@ class AstroSearch:
                 if any(getattr(s, "name", "") in ("USNO", "Local Sky") for s in sources):
                     break
         results: list[dict] = []
-        with ThreadPoolExecutor(max_workers=5) as ex:
+        with ThreadPoolExecutor(max_workers=min(max(len(sources), 1), 6)) as ex:
             futs = [ex.submit(self._safe_fetch, s, query, **kw) for s in sources]
             for f in futs:
                 try:
@@ -155,13 +157,14 @@ class AstroSearch:
             if r.get("source") in PAYWALLED:
                 r.setdefault("extra", {})["paywalled"] = True
             fh = r.get("freshness_h")
-            if not dates["is_historical"] and isinstance(fh, int) and fh > 90 * 24:
+            if (not dates["is_historical"] and isinstance(fh, int) and not isinstance(fh, bool)
+                    and fh > 90 * 24):
                 continue
             filt.append(r)
         results = deduplicate(filt)
         src_intents = {s.name: s.intents for s in sources}
         results = rank(results, query, intent, src_intents)
-        results = results[: min(max_results, 20)]
+        results = results[:max_results]
         self._apply_local_display(results, tz)
         md = self._markdown(query, intent, results, now_iso, dates)
         out = {"query": query, "intent": intent, "category": category,
@@ -222,7 +225,7 @@ class AstroSearch:
         with ThreadPoolExecutor(max_workers=4) as ex:
             jobs = []
             for s in self.sources:
-                if s.name in ("USNO", "JPL", "NASA", "NOAA SWPC"):
+                if s.name in ("USNO", "Local Sky", "JPL", "NASA", "NOAA SWPC"):
                     jobs.append(ex.submit(self._safe_fetch, s,
                                           "moon phases eclipses meteor showers seasons",
                                           intent="periodic_event", year=year, lat=lat, lon=lon, max_results=10))

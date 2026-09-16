@@ -1,6 +1,8 @@
 from astro_search.normalizer import normalize, clean_text, to_iso_utc
 from astro_search.deduplicator import deduplicate, title_similarity
 from astro_search.ranker import rank
+from astro_search.intent import classify
+from astro_search.core import AstroSearch
 
 def test_normalize_html():
     r = normalize({"title": "<b>Hello</b>", "summary": "<p>" + "x"*500 + "</p>", "url": "https://a.com", "published": "2026-09-16"},
@@ -44,3 +46,16 @@ def test_ranker_edge_cases():
             for i, t in enumerate(["aurora forecast tonight kp", "lunar eclipse date", "aurora borealis kp storm"])]
     assert [d["title"] for d in rank([dict(x) for x in docs], "aurora kp tonight", "current_phenomenon")] == \
            [d["title"] for d in rank([dict(x) for x in docs], "aurora kp tonight", "current_phenomenon")]
+
+def test_input_hardening():
+    eng = AstroSearch()
+    # max_results abuse: zero / huge / string / None all clamp, never raise or blow up sources
+    for bad in (0, -5, 10**6, "8", "abc", None):
+        out = eng.search("test hardening query xyz", max_results=bad)
+        assert 1 <= out["count"] <= 20
+    assert classify(None)[0] == "recent_news"  # type: ignore[arg-type]
+    assert classify("")[1] == []
+    r = normalize(None, None)  # type: ignore[arg-type]
+    assert r["title"] == "Untitled" and r["authority"] == 2
+    assert to_iso_utc(12345) == ""  # type: ignore[arg-type]
+    assert clean_text("", limit=0) == ""

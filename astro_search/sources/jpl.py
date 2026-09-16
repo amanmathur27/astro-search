@@ -118,13 +118,14 @@ class JPLSource(BaseSource):
                       "jupiter": "599", "saturn": "699", "uranus": "799", "neptune": "899"}
             cmd = next((c for name, c in bodies.items() if name in q), "499")
             try:
+                # NOTE: JPL tolerates unquoted scalars; quotes kept only where docs require them
                 r = requests.get("https://ssd.jpl.nasa.gov/api/horizons.api", params={
-                    "format": "json", "COMMAND": f"'{cmd}'", "OBJ_DATA": "'NO'",
-                    "MAKE_EPHEM": "'YES'", "EPHEM_TYPE": "'OBSERVER'",
-                    "CENTER": f"'coord@399'", "COORD_TYPE": "'GEODETIC'",
-                    "SITE_COORD": f"'{kwargs['lon']},{kwargs['lat']},0'",
-                    "START_TIME": f"'{today}'", "STOP_TIME": f"'{today}'",
-                    "STEP_SIZE": "'1d'", "QUANTITIES": "'1,4,9'",
+                    "format": "json", "COMMAND": cmd, "OBJ_DATA": "NO",
+                    "MAKE_EPHEM": "YES", "EPHEM_TYPE": "OBSERVER",
+                    "CENTER": "coord@399", "COORD_TYPE": "GEODETIC",
+                    "SITE_COORD": f"{kwargs['lon']},{kwargs['lat']},0",
+                    "START_TIME": today, "STOP_TIME": today,
+                    "STEP_SIZE": "1d", "QUANTITIES": "1,4,9",
                 }, timeout=25)
                 if r.ok:
                     d = r.json()

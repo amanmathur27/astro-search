@@ -69,6 +69,10 @@ def freshness_hours(published_iso: str) -> int | None:
 
 def normalize(raw: dict, source_meta: dict) -> dict:
     """Merge raw + source_meta into strict contract (handoff §4 + supplement §5)."""
+    if not isinstance(raw, dict):
+        raw = {}
+    if not isinstance(source_meta, dict):
+        source_meta = {}
     out: dict = dict(REQUIRED_DEFAULTS)
     out["title"] = clean_text(str(raw.get("title", "")), limit=200) or "Untitled"
     out["summary"] = clean_text(str(raw.get("summary", "")), limit=400)

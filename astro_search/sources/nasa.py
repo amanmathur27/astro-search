@@ -7,7 +7,11 @@ from ..normalizer import normalize
 
 BASE = "https://api.nasa.gov"
 TIMEOUT = 15
-KEY = os.environ.get("ASTRO_NASA_KEY", "DEMO_KEY")
+
+
+def _key() -> str:
+    # read at call time (not import) so .env/tests can set it any time before fetching
+    return os.environ.get("ASTRO_NASA_KEY", "DEMO_KEY") or "DEMO_KEY"
 
 
 class NASASource(BaseSource):
@@ -26,7 +30,7 @@ class NASASource(BaseSource):
         week_ago = (datetime.now(timezone.utc) - timedelta(days=7)).strftime("%Y-%m-%d")
         # APOD for news/discovery/object queries
         try:
-            r = requests.get(f"{BASE}/planetary/apod", params={"api_key": KEY, "date": today}, timeout=TIMEOUT)
+            r = requests.get(f"{BASE}/planetary/apod", params={"api_key": _key(), "date": today}, timeout=TIMEOUT)
             if r.ok:
                 d = r.json()
                 out.append(normalize({
@@ -40,7 +44,7 @@ class NASASource(BaseSource):
         # NeoWs for asteroid queries or event lookups
         if any(k in q for k in ["asteroid", "near-earth", "neo", "close approach", "flyby"]) or kwargs.get("category") in ("events", "all", None):
             try:
-                r = requests.get(f"{BASE}/neo/rest/v1/feed", params={"start_date": today, "api_key": KEY}, timeout=TIMEOUT)
+                r = requests.get(f"{BASE}/neo/rest/v1/feed", params={"start_date": today, "api_key": _key()}, timeout=TIMEOUT)
                 if r.ok:
                     objs = []
                     for day, lst in (r.json().get("near_earth_objects", {}) or {}).items():
@@ -61,7 +65,7 @@ class NASASource(BaseSource):
         if any(k in q for k in ["flare", "cme", "solar storm", "geomagnetic", "aurora", "space weather"]):
             for kind, path in [("flare", "/DONKI/FLR"), ("cme", "/DONKI/CME"), ("storm", "/DONKI/GST")]:
                 try:
-                    r = requests.get(f"{BASE}{path}", params={"startDate": week_ago, "api_key": KEY}, timeout=TIMEOUT)
+                    r = requests.get(f"{BASE}{path}", params={"startDate": week_ago, "api_key": _key()}, timeout=TIMEOUT)
                     if r.ok and isinstance(r.json(), list):
                         for ev in r.json()[:3]:
                             out.append(normalize({
@@ -108,7 +112,7 @@ class NASASource(BaseSource):
         if "mars" in q and any(k in q for k in ["photo", "image", "rover", "curiosity", "perseverance"]):
             try:
                 r = requests.get(f"{BASE}/mars-photos/api/v1/rovers/curiosity/photos",
-                                 params={"sol": 1000, "api_key": KEY}, timeout=TIMEOUT)
+                                 params={"sol": 1000, "api_key": _key()}, timeout=TIMEOUT)
                 if r.ok:
                     for p in (r.json().get("photos", []) or [])[:3]:
                         out.append(normalize({

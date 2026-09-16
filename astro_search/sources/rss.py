@@ -87,28 +87,34 @@ class RSSSource(BaseSource):
         self.timeout = 12
 
     def fetch(self, query: str, **kwargs) -> list[dict]:
-        max_items = int(kwargs.get("max_results", 8))
+        try:
+            max_results = int(kwargs.get("max_results", 8))
+        except (TypeError, ValueError):
+            max_results = 8
+        max_results = max(1, min(max_results, 20))
         try:
             resp = requests.get(self.cfg["url"], headers=HEADERS, timeout=self.timeout)
+            resp.raise_for_status()
             feed = feedparser.parse(resp.content)
         except Exception:
             return []
         qtok = set(query.lower().split())
         scored = []
         for e in feed.entries[:30]:
-            title = _clean(getattr(e, "title", ""))
-            summary = _clean(getattr(e, "summary", getattr(e, "description", "")))
-            url = getattr(e, "link", "")
-            pub = getattr(e, "published", getattr(e, "updated", ""))
+            g = (lambda k, d="": e.get(k, d) if hasattr(e, "get") else getattr(e, k, d))
+            title = _clean(g("title"))
+            summary = _clean(g("summary") or g("description"))
+            url = g("link")
+            pub = g("published") or g("updated")
             blob = (title + " " + summary).lower()
             hits = sum(1 for t in qtok if len(t) > 2 and t in blob)
             scored.append((hits, {"title": title, "summary": summary, "url": url,
                                   "published": pub, "category": self.cfg.get("category", "news")}))
         # keyword hit first, then recency order
         scored.sort(key=lambda x: x[0], reverse=True)
-        top = [s for _, s in scored[:max_items]]
+        top = [s for _, s in scored[:max_results]]
         # if no hits at all, still return freshest 3 (keeps agents useful)
-        if top and all(h == 0 for h, _ in scored[:max_items]) and qtok:
+        if top and all(h == 0 for h, _ in scored[:max_results]) and qtok:
             top = [s for _, s in scored[:3]]
         return [normalize(r, {"name": self.name, "source_type": "rss",
                               "authority": self.authority, "category": self.cfg.get("category", "news")})

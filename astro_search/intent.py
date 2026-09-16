@@ -67,6 +67,12 @@ KNOWN_ENTITIES = {
 
 ALIASES = {"blood moon": "lunar eclipse", "jwst": "james webb", "shooting stars": "meteor shower"}
 
+# precompiled whole-word patterns for short entities (built once, not per query)
+_SHORT_RE: dict[str, "re.Pattern[str]"] = {
+    ent: re.compile(r"\b" + re.escape(ent) + r"\b")
+    for group in KNOWN_ENTITIES.values() for ent in group if len(ent) <= 4
+}
+
 
 def _edit_distance(a: str, b: str) -> int:
     if abs(len(a) - len(b)) > 2:
@@ -89,7 +95,7 @@ def fuzzy_fix(token: str) -> str:
 
 
 def classify(query: str) -> tuple[str, list[str]]:
-    q = query.lower()
+    q = (query or "").lower()
     for alias, target in ALIASES.items():
         if alias in q:
             q = q.replace(alias, target)
@@ -109,7 +115,7 @@ def classify(query: str) -> tuple[str, list[str]]:
         for ent in group:
             if len(ent) <= 4:
                 # short codes (iss, jwst, esa...) must match whole words, not substrings ("iss" in "mission")
-                if re.search(r"\b" + re.escape(ent) + r"\b", q):
+                if _SHORT_RE.get(ent, re.compile(r"\b" + re.escape(ent) + r"\b")).search(q):
                     entities.append(ent)
             elif ent in q:
                 entities.append(ent)
