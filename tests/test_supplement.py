@@ -44,3 +44,19 @@ def test_dedup_keeps_monthly_moons():
                         "event_type": "moon_phase", "event_date_utc": f"2026-{m:02d}-01T10:00:00Z"}, META)
              for m in (1, 2, 3)]
     assert len(deduplicate(moons)) == 3
+
+def test_gnews_gating():
+    from astro_search.sources.gnews import has_recency, edition_params
+    from astro_search.core import AstroSearch
+    assert has_recency("major discovery today") and has_recency("breaking: supernova just announced")
+    assert not has_recency("what is a pulsar") and not has_recency("next lunar eclipse")
+    assert edition_params(None) == ("en-US", "US", "US:en")
+    assert edition_params("IN") == ("en-IN", "IN", "IN:en")
+    assert edition_params("IN:en") == ("en-IN", "IN", "IN:en")
+    eng = AstroSearch()
+    plain = [s.name for s in eng._select("recent_news", [], "all")]
+    assert "Google News" not in plain  # default-off: no noise
+    gated = [s.name for s in eng._select("recent_news", [], "all", allow_gnews=True)]
+    assert "Google News" in gated
+    # concept queries never admit it even when forced path differs: intent mismatch
+    assert "Google News" not in [s.name for s in eng._select("concept_explanation", [], "all", allow_gnews=True)]

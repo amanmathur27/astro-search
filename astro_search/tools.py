@@ -11,6 +11,8 @@ TOOL_DECLARATIONS = [
                         "query": {"type": "string", "description": "Natural query, e.g. next lunar eclipse, Perseids 2026 peak, aurora tonight, Kp now"},
                         "category": {"type": "string", "enum": ["news", "discoveries", "events", "papers", "space_weather", "all"]},
                         "max_results": {"type": "integer", "description": "Default 8, max 20"},
+                        "trends": {"type": "boolean", "description": "Gap-analysis mode: include 7-day Google News topic volume. Default false."},
+                        "edition": {"type": "string", "description": "News edition for breaking coverage, e.g. US, IN, UK or IN:en. Default US."},
                         "lat": {"type": "number"}, "lon": {"type": "number"},
                         "timezone": {"type": "string", "description": "IANA tz, default UTC"},
                         "now_utc": {"type": "string", "description": "ISO now UTC; omit for server time"}},
@@ -47,7 +49,9 @@ def tool_handler(tool_name: str, tool_args: dict) -> str:
             out = eng.search(query=tool_args.get("query", ""), category=tool_args.get("category", "all"),
                              max_results=min(int(tool_args.get("max_results", 8)), 20),
                              lat=tool_args.get("lat"), lon=tool_args.get("lon"),
-                             tz=tool_args.get("timezone", "UTC"), now_utc=tool_args.get("now_utc"))
+                             tz=tool_args.get("timezone", "UTC"), now_utc=tool_args.get("now_utc"),
+                             trends=bool(tool_args.get("trends", False)),
+                             edition=tool_args.get("edition"))
         elif tool_name == "astro_fetch":
             from .sources.fetch import fetch_article
             out = fetch_article(tool_args.get("url", ""))

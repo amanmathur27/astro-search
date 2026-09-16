@@ -31,9 +31,11 @@ def _build_sources():
     from .sources.iss import ISSSource
     from .sources.local_sky import LocalSkySource
     from .sources.sky_fallback import FallbackSkySource
+    from .sources.gnews import GoogleNewsSource
     srcs = [RSSSource(c) for c in RSS_FEEDS]
     srcs += [USNOSource(), NOAASource(), NASASource(), JPLSource(),
-             ArxivSource(), ADSSource(), ExoplanetSource(), ISSSource(), LocalSkySource(), FallbackSkySource()]
+             ArxivSource(), ADSSource(), ExoplanetSource(), ISSSource(), LocalSkySource(), FallbackSkySource(),
+             GoogleNewsSource()]
     return srcs
 
 
@@ -52,7 +54,8 @@ class AstroSearch:
             self._sources = _build_sources()
         return self._sources
 
-    def _select(self, intent: str, entities: list[str], category: str) -> list:
+    def _select(self, intent: str, entities: list[str], category: str,
+                allow_gnews: bool = False) -> list:
         from .intent import KNOWN_ENTITIES
         # map entity values -> group keys (e.g. "aurora" -> "solar")
         val_to_group: dict[str, str] = {}
@@ -62,6 +65,8 @@ class AstroSearch:
         qgroups = {val_to_group.get(e, e) for e in (entities or [])} | set(entities or [])
         cands = []
         for s in self.sources:
+            if getattr(s, "name", "") == "Google News" and not allow_gnews:
+                continue  # gated supplemental: recency / trends / empty-pool only
             if intent not in getattr(s, "intents", []):
                 continue
             ents = getattr(s, "entities", ["*"])
@@ -77,6 +82,12 @@ class AstroSearch:
             cands.append(s)
         cands.sort(key=lambda s: getattr(s, "authority", 2), reverse=True)
         selected = cands[:5]
+        # gated Google News: allowed paths always carry it despite authority 1
+        if allow_gnews and not any(getattr(s, "name", "") == "Google News" for s in selected):
+            for cand in cands[5:]:
+                if getattr(cand, "name", "") == "Google News":
+                    selected.append(cand)
+                    break
         # fallback guarantee: if a selected source has a named fallback not yet selected, append it
         names = {getattr(s, "name", "") for s in selected}
         for s in selected:
@@ -100,7 +111,8 @@ class AstroSearch:
     def search(self, query: str = "", category: str = "all", max_results: int = 8,
                lat: float | None = None, lon: float | None = None,
                tz: str | int = "UTC", now_utc: str | None = None,
-               year: int | None = None) -> dict:
+               year: int | None = None, trends: bool = False,
+               edition: str | None = None) -> dict:
         try:
             max_results = int(max_results)  # type: ignore[arg-type]
         except (TypeError, ValueError):
@@ -111,7 +123,7 @@ class AstroSearch:
             return self.get_celestial_events(year=year, lat=lat, lon=lon)
         intent, entities = classify(query)
         dates = resolve_dates(query)
-        key = (query, category, max_results)
+        key = (query, category, max_results, bool(trends), edition or "")
         cached = self.mem.get(key)
         if cached:
             cached = dict(cached)
@@ -124,10 +136,13 @@ class AstroSearch:
                 d["cached"] = True
                 self.mem.set(key, d)
                 return d
-        sources = self._select(intent, entities, category)
+        from .sources.gnews import GoogleNewsSource, has_recency
+        gnews_ok = bool(trends) or has_recency(query)
+        sources = self._select(intent, entities, category, allow_gnews=gnews_ok)
         kw = {"max_results": max_results, "intent": intent, "category": category,
               "lat": lat, "lon": lon, "tz": tz, "year": year or datetime.now(timezone.utc).year,
-              "date": dates.get("date_min"), "now_utc": now_iso}
+              "date": dates.get("date_min"), "now_utc": now_iso,
+              "trends": bool(trends), "edition": edition}
         # location-aware: guarantee Twilight Fallback when lat/lon supplied
         if lat is not None and lon is not None and not any(getattr(s, "name", "") == "Twilight Fallback" for s in sources):
             for cand in self.sources:
@@ -165,6 +180,16 @@ class AstroSearch:
         src_intents = {s.name: s.intents for s in sources}
         results = rank(results, query, intent, src_intents)
         results = results[:max_results]
+        if not results and not gnews_ok and intent in ("recent_news", "current_phenomenon",
+                                                       "mission_status", "object_lookup"):
+            # last resort: one gated Google News call before admitting defeat
+            try:
+                gn = next(s for s in self.sources if getattr(s, "name", "") == "Google News")
+                extra = self._safe_fetch(gn, query, **{**kw, "max_results": 5})
+                if extra:
+                    results = rank(deduplicate(extra), query, intent, src_intents)[:max_results]
+            except Exception:
+                pass
         self._apply_local_display(results, tz)
         md = self._markdown(query, intent, results, now_iso, dates)
         out = {"query": query, "intent": intent, "category": category,
