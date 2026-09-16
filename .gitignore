@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.astro_cache.db
+feed_report.txt
+calendar/*.json
+!.gitkeep
