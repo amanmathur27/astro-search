@@ -1,6 +1,7 @@
 """arXiv astro-ph API (Atom XML, no key, 3s politeness)."""
 from __future__ import annotations
 import time
+from threading import Lock
 import requests
 import xml.etree.ElementTree as ET
 from .base import BaseSource
@@ -12,6 +13,16 @@ CATS = {"astrophysics": "astro-ph", "cosmology": "astro-ph.CO", "galaxies": "ast
         "high_energy": "astro-ph.HE", "solar": "astro-ph.SR", "planets": "astro-ph.EP",
         "instrumentation": "astro-ph.IM"}
 _LAST = [0.0]
+_THROTTLE_LOCK = Lock()
+
+
+def _throttle():
+    # Reserve each request start under one process-wide lock, including failures.
+    with _THROTTLE_LOCK:
+        delay = 3.0 - (time.monotonic() - _LAST[0])
+        if delay > 0:
+            time.sleep(delay)
+        _LAST[0] = time.monotonic()
 
 
 class ArxivSource(BaseSource):
@@ -25,14 +36,11 @@ class ArxivSource(BaseSource):
     def fetch(self, query: str, **kwargs) -> list[dict]:
         topic = kwargs.get("topic", "astrophysics")
         cat = CATS.get(topic, "astro-ph")
-        dt = time.time() - _LAST[0]
-        if dt < 3.0:
-            time.sleep(3.0 - dt)
         try:
+            _throttle()
             r = requests.get(ARXIV, params={"search_query": f"all:{query} AND cat:{cat}",
                                             "start": 0, "max_results": kwargs.get("max_results", 5),
                                             "sortBy": "submittedDate", "sortOrder": "descending"}, timeout=self.timeout)
-            _LAST[0] = time.time()
             r.raise_for_status()
             root = ET.fromstring(r.content)
             out = []
@@ -49,4 +57,5 @@ class ArxivSource(BaseSource):
                 }, {"name": "arXiv", "source_type": "api", "authority": 2, "category": "papers"}))
             return out
         except Exception:
+            self.report_error(kwargs)
             return []

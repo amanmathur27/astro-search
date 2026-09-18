@@ -39,5 +39,6 @@ class ISSSource(BaseSource):
                         "category": "news", "extra": {"people": d2.get("people", [])},
                     }, {"name": "Open Notify ISS", "source_type": "api", "authority": 2, "category": "news"}))
         except Exception:
+            self.report_error(kwargs)
             pass
         return out

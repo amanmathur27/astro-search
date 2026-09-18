@@ -47,12 +47,27 @@ def test_ranker_edge_cases():
     assert [d["title"] for d in rank([dict(x) for x in docs], "aurora kp tonight", "current_phenomenon")] == \
            [d["title"] for d in rank([dict(x) for x in docs], "aurora kp tonight", "current_phenomenon")]
 
-def test_input_hardening():
+def test_input_hardening(monkeypatch):
+    from astro_search import core
+    monkeypatch.setattr(core, "SQLiteCache", lambda: None)
     eng = AstroSearch()
-    # max_results abuse: zero / huge / string / None all clamp, never raise or blow up sources
-    for bad in (0, -5, 10**6, "8", "abc", None):
-        out = eng.search("test hardening query xyz", max_results=bad)
-        assert 1 <= out["count"] <= 20
+    eng._sources = []
+
+    class FixtureSource:
+        name = "Input fixture"
+        intents = ["recent_news"]
+
+        def fetch(self, query, **kwargs):
+            assert 1 <= kwargs["max_results"] <= 20
+            return [{"title": f"Result {i}", "url": f"https://example.org/{i}",
+                     "source": self.name, "summary": str(i)} for i in range(20)]
+
+    monkeypatch.setattr(eng, "_select", lambda *a, **kw: [FixtureSource()])
+    monkeypatch.setattr(core, "deduplicate", lambda rows: rows)
+    # Clamp at the public entry point, independently of remote availability.
+    for bad, expected in ((0, 1), (-5, 1), (10**6, 20), ("8", 8), ("abc", 8), (None, 8)):
+        out = eng.search("latest astronomy news", max_results=bad)
+        assert out["count"] == expected
     assert classify(None)[0] == "recent_news"  # type: ignore[arg-type]
     assert classify("")[1] == []
     r = normalize(None, None)  # type: ignore[arg-type]

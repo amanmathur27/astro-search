@@ -1,0 +1,155 @@
+{
+  "scope": "Offline fixture interpretation/routing/ranking only; no live retrieval, citations or scientific verification",
+  "cases": 6,
+  "intent_accuracy": 1,
+  "source_coverage": 1,
+  "mean_reciprocal_rank": 1.0,
+  "mean_precision_at_5": 0.2,
+  "mean_recall_at_5": 1.0,
+  "median_latency_ms": 3.592200002458412,
+  "p95_latency_ms": 168.4151999943424,
+  "details": [
+    {
+      "id": "iss",
+      "intent": "mission_status",
+      "answer_status": "not_evaluated",
+      "candidates": true,
+      "required_sources_selected": true,
+      "selected_sources": [
+        "ESA News",
+        "NASA",
+        "NASA News",
+        "Open Notify ISS",
+        "Space.com"
+      ],
+      "intent_correct": true,
+      "ranked_ids": [
+        "iss",
+        "moon"
+      ],
+      "precision_at_5": 0.2,
+      "precision_at_available_k": 0.5,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 168.4151999943424
+    },
+    {
+      "id": "papers",
+      "intent": "research_lookup",
+      "answer_status": "not_evaluated",
+      "candidates": true,
+      "required_sources_selected": true,
+      "selected_sources": [
+        "NASA ADS",
+        "arXiv"
+      ],
+      "intent_correct": true,
+      "ranked_ids": [
+        "paper",
+        "launch"
+      ],
+      "precision_at_5": 0.2,
+      "precision_at_available_k": 0.5,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 3.7921000039204955
+    },
+    {
+      "id": "catalog",
+      "intent": "object_lookup",
+      "answer_status": "not_evaluated",
+      "candidates": true,
+      "required_sources_selected": true,
+      "selected_sources": [
+        "Exoplanet Archive",
+        "Hubble",
+        "JWST",
+        "NASA",
+        "NASA News"
+      ],
+      "intent_correct": true,
+      "ranked_ids": [
+        "hd",
+        "mars"
+      ],
+      "precision_at_5": 0.2,
+      "precision_at_available_k": 0.5,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 4.009399999631569
+    },
+    {
+      "id": "catalog-question",
+      "intent": "object_lookup",
+      "answer_status": "not_evaluated",
+      "candidates": true,
+      "required_sources_selected": true,
+      "selected_sources": [
+        "Exoplanet Archive",
+        "Hubble",
+        "JWST",
+        "NASA",
+        "NASA News"
+      ],
+      "intent_correct": true,
+      "ranked_ids": [
+        "kepler",
+        "telescope"
+      ],
+      "precision_at_5": 0.2,
+      "precision_at_available_k": 0.5,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 3.392300000996329
+    },
+    {
+      "id": "lunar-phase",
+      "intent": "celestial_event_lookup",
+      "answer_status": "not_evaluated",
+      "candidates": true,
+      "required_sources_selected": true,
+      "selected_sources": [
+        "EarthSky",
+        "Local Sky",
+        "NASA",
+        "NASA News",
+        "Sky & Telescope",
+        "Twilight Fallback",
+        "USNO"
+      ],
+      "intent_correct": true,
+      "ranked_ids": [
+        "full",
+        "solar"
+      ],
+      "precision_at_5": 0.2,
+      "precision_at_available_k": 0.5,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 1.2030999932903796
+    },
+    {
+      "id": "concept",
+      "intent": "concept_explanation",
+      "answer_status": "not_evaluated",
+      "candidates": true,
+      "required_sources_selected": true,
+      "selected_sources": [
+        "Astronomy Magazine",
+        "Centauri Dreams",
+        "EarthSky",
+        "Universe Today"
+      ],
+      "intent_correct": true,
+      "ranked_ids": [
+        "fission",
+        "iss"
+      ],
+      "precision_at_5": 0.2,
+      "precision_at_available_k": 0.5,
+      "recall_at_5": 1.0,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 2.7329000004101545
+    }
+  ]
+}

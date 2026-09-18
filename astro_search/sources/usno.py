@@ -37,9 +37,11 @@ class USNOSource(BaseSource):
     def fetch(self, query: str, **kwargs) -> list[dict]:
         from datetime import datetime, timezone
         from dateutil import parser as _p
+        from ..timeparse import reference_time
         q = query.lower()
-        year = kwargs.get("year") or datetime.now(timezone.utc).year
-        today = kwargs.get("date") or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        now = reference_time(kwargs.get("now_utc"))
+        year = kwargs.get("year") or now.year
+        today = kwargs.get("date") or now.strftime("%Y-%m-%d")
         lat, lon = kwargs.get("lat"), kwargs.get("lon")
         full_sweep = kwargs.get("intent") == "periodic_event" or "calendar" in q
         out: list[dict] = []
@@ -52,17 +54,17 @@ class USNOSource(BaseSource):
                     data = _get("/eclipses/solar/year", {"year": year})
                     for ev in data.get("eclipses_in_year", []):
                         label = ev.get("event", "Solar eclipse")
-                        try:
-                            dt = _p.parse(label, fuzzy=True)
-                            iso = dt.replace(tzinfo=timezone.utc).isoformat().replace("+00:00", "Z")
-                        except Exception:
-                            iso = f"{ev.get('year', year)}-{int(ev.get('month', 1)):02d}-{int(ev.get('day', 1)):02d}T00:00:00Z"
+                        if all(ev.get(k) is not None for k in ("year", "month", "day")):
+                            iso = datetime(int(ev["year"]), int(ev["month"]), int(ev["day"])).date().isoformat()
+                        else:
+                            iso = _p.parse(label, fuzzy=True, default=datetime(int(year), 1, 1)).date().isoformat()
                         out.append(normalize({
                             "title": f"{label} ({ev.get('year', year)})",
                             "summary": f"{label} occurs {iso[:10]}. Local circumstances: query with lat/lon for magnitude/obscuration."[:400],
                             "url": "https://eclipse.gsfc.nasa.gov/",
                             "published": iso, "category": "events", "event_type": "solar_eclipse",
-                            "event_date": iso, "event_date_utc": iso,
+                            "event_date": iso, "event_date_utc": None, "date_only": True,
+                            "precision": "day",
                             "visibility": "See NASA eclipse maps for path",
                             "visibility_url": "https://eclipse.gsfc.nasa.gov/",
                             "extra": {"raw": ev},
@@ -82,8 +84,10 @@ class USNOSource(BaseSource):
                                     "extra": {"local_eclipse": props},
                                 }, META))
                         except Exception:
+                            self.report_error(kwargs)
                             pass
                 except Exception:
+                    self.report_error(kwargs)
                     pass
             if "lunar" in q or ("eclipse" in q and "solar" not in q):
                 # USNO has no lunar endpoint: link out explicitly instead of failing silently
@@ -113,6 +117,7 @@ class USNOSource(BaseSource):
                             "extra": {"phase": ph.get("phase")},
                         }, META))
                 except Exception:
+                    self.report_error(kwargs)
                     pass
             else:
                 try:
@@ -128,6 +133,7 @@ class USNOSource(BaseSource):
                             "extra": {"phase": ph.get("phase")},
                         }, META))
                 except Exception:
+                    self.report_error(kwargs)
                     pass
 
         # --- seasons / apsides ---
@@ -145,12 +151,15 @@ class USNOSource(BaseSource):
                         "extra": {"phenom": ev.get("phenom")},
                     }, META))
             except Exception:
+                self.report_error(kwargs)
                 pass
 
         # --- rise/set/transit (GeoJSON aware) ---
         if lat is not None and lon is not None and any(k in q for k in ["sunrise", "sunset", "moonrise", "rise", "tonight"]):
             try:
-                data = _get("/rstt/oneday", {"date": today, "coords": f"{lat},{lon}", "tz": kwargs.get("tz", 0)})
+                from ..timeparse import timezone_for
+                # Ask for UTC output to avoid ambiguous offsets on DST transition days.
+                data = _get("/rstt/oneday", {"date": today, "coords": f"{lat},{lon}", "tz": 0, "dst": False})
                 props = data.get("properties", {}) if isinstance(data, dict) else {}
                 info = props.get("data", props) if isinstance(props, dict) else {}
                 sun = (info.get("sundata") or []) if isinstance(info, dict) else []
@@ -166,15 +175,16 @@ class USNOSource(BaseSource):
                     "title": f"Sun/Moon rise-set {today} @ {lat},{lon}",
                     "summary": summ, "url": "https://aa.usno.navy.mil/",
                     "published": "", "category": "events", "event_type": "rise_set",
-                    "extra": {"rstt": data},
+                    "extra": {"rstt": data, "times_timezone": "UTC", "requested_timezone": str(kwargs.get("tz", "UTC"))},
                 }, META))
             except Exception:
+                self.report_error(kwargs)
                 pass
 
         # --- sidereal (requires time param per docs) ---
         if lat is not None and lon is not None and any(k in q for k in ["sidereal", "lst", "transit"]):
             try:
-                now_t = datetime.now(timezone.utc).strftime("%H:%M:%S")
+                now_t = now.strftime("%H:%M:%S")
                 data = _get("/siderealtime", {"date": today, "time": now_t, "coords": f"{lat},{lon}"})
                 out.append(normalize({
                     "title": "Local sidereal time (USNO)",
@@ -183,5 +193,6 @@ class USNOSource(BaseSource):
                     "extra": {"sidereal": data},
                 }, META))
             except Exception:
+                self.report_error(kwargs)
                 pass
         return out

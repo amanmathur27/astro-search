@@ -19,6 +19,8 @@ def _db_path() -> Path:
 
 
 class SQLiteCache:
+    MAX_ROWS = 5000
+
     def __init__(self, path: str | None = None):
         self.path = Path(path) if path else _db_path()
         self._ok = True
@@ -28,6 +30,7 @@ class SQLiteCache:
             con.execute(
                 "CREATE TABLE IF NOT EXISTS cache (k TEXT PRIMARY KEY, ts REAL, v TEXT)"
             )
+            con.execute("DELETE FROM cache WHERE ts < ?", (time.time() - 7 * 86400,))
             con.commit()
             con.close()
         except Exception:
@@ -57,6 +60,12 @@ class SQLiteCache:
             con.execute(
                 "REPLACE INTO cache (k, ts, v) VALUES (?,?,?)",
                 (key, time.time(), json.dumps(value, ensure_ascii=False)),
+            )
+            # bounded: evict oldest rows past the cap
+            con.execute(
+                "DELETE FROM cache WHERE k IN "
+                "(SELECT k FROM cache ORDER BY ts DESC LIMIT -1 OFFSET ?)",
+                (self.MAX_ROWS,),
             )
             con.commit()
             con.close()

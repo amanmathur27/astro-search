@@ -2,6 +2,9 @@
 from __future__ import annotations
 import html
 import re
+import ipaddress
+import socket
+from urllib.parse import urlsplit, urljoin
 import requests
 
 HEADERS = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
@@ -10,16 +13,60 @@ TAG2_RE = re.compile(r"<[^>]+>")
 WS_RE = re.compile(r"\s+")
 
 
-def fetch_article(url: str) -> dict:
+MAX_BYTES = 2 * 1024 * 1024
+
+
+def validate_public_url(url):
+    parts = urlsplit(url)
+    if parts.scheme not in ("https", "http") or not parts.hostname or parts.username or parts.password:
+        raise ValueError("public HTTP(S) URL required")
+    port = parts.port or (443 if parts.scheme == "https" else 80)
+    addresses = socket.getaddrinfo(parts.hostname, port, type=socket.SOCK_STREAM)
+    if not addresses or any(not ipaddress.ip_address(row[4][0]).is_global for row in addresses):
+        raise ValueError("nonpublic destination blocked")
+    return url
+
+
+def _download(url, deadline=None):
+    current = url
+    # Disable automatic redirects: inspect each target before contacting it.
+    for _ in range(6):
+        import time
+        if deadline is not None and time.monotonic() >= deadline:
+            raise TimeoutError("article deadline exceeded")
+        validate_public_url(current)
+        timeout = 15 if deadline is None else max(0.01, min(15, deadline - time.monotonic()))
+        with requests.get(current, headers=HEADERS, timeout=timeout, stream=True, allow_redirects=False) as response:
+            if response.status_code in (301, 302, 303, 307, 308):
+                target = response.headers.get("location")
+                if not target:
+                    raise ValueError("redirect has no destination")
+                current = urljoin(current, target)
+                continue
+            response.raise_for_status()
+            ctype = response.headers.get("content-type", "").lower()
+            if not any(kind in ctype for kind in ("text/", "html", "xml")):
+                raise ValueError("non-text response")
+            length = response.headers.get("content-length")
+            if length and int(length) > MAX_BYTES:
+                raise ValueError("response exceeds size limit")
+            chunks, size = [], 0
+            for chunk in response.iter_content(chunk_size=16384):
+                if deadline is not None and time.monotonic() >= deadline:
+                    raise TimeoutError("article deadline exceeded")
+                size += len(chunk)
+                if size > MAX_BYTES:
+                    raise ValueError("response exceeds size limit")
+                chunks.append(chunk)
+            return b"".join(chunks).decode(response.encoding or "utf-8", errors="replace"), current
+    raise ValueError("too many redirects")
+
+
+def fetch_article(url: str, *, deadline=None) -> dict:
     if not url:
         return {"url": url, "title": "", "text": "", "word_count": 0, "fetch_ok": False, "error": "empty url"}
     try:
-        r = requests.get(url, headers=HEADERS, timeout=15)
-        r.raise_for_status()
-        ctype = r.headers.get("content-type", "")
-        if "html" not in ctype and "text" not in ctype and "xml" not in ctype and "rss" not in ctype:
-            return {"url": url, "title": "", "text": "", "word_count": 0, "fetch_ok": False, "error": f"non-text {ctype}"}
-        body = r.text
+        body, final_url = _download(url) if deadline is None else _download(url, deadline=deadline)
         m = re.search(r"<article[^>]*>(.*?)</article>", body, re.S | re.I) or re.search(r"<main[^>]*>(.*?)</main>", body, re.S | re.I)
         chunk = m.group(1) if m else body
         chunk = TAG_RE.sub(" ", chunk)
@@ -30,6 +77,14 @@ def fetch_article(url: str) -> dict:
         words = text.split()
         if len(words) > 6000:
             text = " ".join(words[:6000])
-        return {"url": url, "title": title, "text": text, "word_count": min(len(words), 6000), "fetch_ok": True, "error": None}
+        usable = len(words) >= 40
+        from ..metadata import extract_metadata
+        metadata = extract_metadata(body)
+        from datetime import datetime, timezone
+        return {"url": url, "final_url": final_url, "title": title, "text": text,
+                "metadata": metadata, "retrieved_at": datetime.now(timezone.utc).isoformat(),
+                "word_count": min(len(words), 6000), "fetch_ok": usable,
+                "error": None if usable else "insufficient extracted text",
+                "truncated": len(words) > 6000, "content_trust": "untrusted_external"}
     except Exception as e:
         return {"url": url, "title": "", "text": "", "word_count": 0, "fetch_ok": False, "error": str(e)[:300]}

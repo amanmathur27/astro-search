@@ -4,8 +4,8 @@
 
 ## Install
 ```
-pip install git+https://github.com/USER/astro-search.git@main
-pip install -e ".[local]"  # skyfield+ephem for local event precision (optional)
+pip install git+https://github.com/amanmathur27/astro-search.git@main
+pip install -e ".[local]"  # optional offline moon appearance; cached Skyfield only
 ```
 
 ## Use
@@ -23,17 +23,31 @@ print(tool_handler("astro_fetch", {"url": "https://earthsky.org/..."}))
 - `ASTRO_CACHE_PATH` (else ~/.astro_cache.db)
 
 ## Docs
-- `AGENT_HANDOFF.md` — build spec, contracts
-- `astro_source_registry.md` — source universe
-- `SUPPLEMENT_HANDOFF.md` — deployment, BM25, time injection, event precision (wins on conflicts)
-- `calendar/{year}.json` — precomputed events, plain HTTPS (`python tools/build_calendar.py`)
+- `CAPABILITIES.md` — current implementation, verification limits and remaining work (wins on current-status conflicts)
+- `AGENT_HANDOFF.md` — historical build spec and intended contracts
+- `astro_source_registry.md` — source-discovery universe, not guaranteed adapter coverage
+- `SUPPLEMENT_HANDOFF.md` — historical deployment and precision requirements
+- `calendar/{year}.json` — precomputed events (`python tools/build_calendar.py`); existing files may use the legacy schema
+
+### Calendar v2 and verification
+
+Fresh calendar output has `schema_version: 2`: `results` contains chronological,
+requested-year events; `live_snapshots` and `references` are separate. Date-only
+solar eclipses carry `event_date: YYYY-MM-DD`, `date_only: true` and
+`event_date_utc: null`. Inspect `completeness` and uncertainty metadata before use.
+The build script validates every requested year before replacing any file. It will
+fail rather than publish incomplete annual coverage. Lunar eclipses remain reference-only.
+
+Run offline regressions with `python -m pytest tests -q`; tests block live Requests
+traffic and isolate persistent caches. CI also checks built-wheel resource loading.
+No hosted service or automatic ephemeris download is required.
 
 ## Yearly rituals (the only manual maintenance)
 1. **Meteor showers (once a year, ~10 min).** Open the IMO shower calendar
    (https://www.imo.net/members/imo_showers/calendar/), transcribe exact peak
-   datetimes + ZHR into `data/meteor_showers_{year}.json` (copy the 2026 file's
+   datetimes + ZHR into `astro_search/data/meteor_showers_{year}.json` (copy the 2026 file's
    shape), push. Until that file exists, the engine serves templated peaks from
-   `data/meteor_showers_base.json` (accurate to ~±1 day, flagged `exact: false`).
+   `astro_search/data/meteor_showers_base.json` (accurate to ~±1 day, flagged `exact: false`).
    We deliberately ingest IMO once instead of scraping it per-query (no API, HTML/PDF only).
 2. **Calendar spot-check (weekly, automatic).** `build_calendar.yml` rebuilds current +
    next year every Sunday and commits. Just glance at the bot commit occasionally.

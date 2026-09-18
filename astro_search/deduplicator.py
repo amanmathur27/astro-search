@@ -34,7 +34,8 @@ def deduplicate(results: list[dict]) -> list[dict]:
         dup_idx = -1
         for i, kept in enumerate(out):
             # distinct dated events never merge on title alone (e.g. monthly Full Moons)
-            d1, d2 = r.get("event_date_utc"), kept.get("event_date_utc")
+            d1 = r.get("event_date_utc") or r.get("event_date")
+            d2 = kept.get("event_date_utc") or kept.get("event_date")
             if d1 and d2 and d1 != d2:
                 if r.get("event_type") and r.get("event_type") == kept.get("event_type"):
                     continue  # same type, different date -> keep both

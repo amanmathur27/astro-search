@@ -3,6 +3,12 @@
 > Purpose: close the registry-vs-handoff drift, lock deployment for GitHub Actions + Cloudflare, fix time/timezone handling, define BM25 on Actions, and nail celestial-event precision (date/time + where visible).
 > Last updated: 2026-09-16. All live checks re-verified this date: USNO v4.0.1 OK, NOAA Kp 1-min OK, JPL CAD v1.5 OK, arXiv OK (105k astro-ph), ADS 401-gated OK, Open Notify ISS OK.
 
+> Implementation update (2026-09-17): [CAPABILITIES.md](CAPABILITIES.md) is the current
+> status reference. The live-check date above is historical, not a new verification.
+> USNO lunar-eclipse year retrieval is not implemented; annual output now separates
+> snapshots and references and does not invent UTC instants for date-only events.
+
+
 ---
 
 ## 1. Deployment Decision for Immediate Need

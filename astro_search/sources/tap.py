@@ -1,5 +1,6 @@
 """TAP services: Exoplanet Archive live (v2); SIMBAD/VizieR/NED/Gaia helper (v2.1). No keys."""
 from __future__ import annotations
+from ..intent import CATALOG_RE
 import requests
 from .base import BaseSource
 from ..normalizer import normalize
@@ -19,6 +20,14 @@ def query_tap(base_url: str, adql: str, timeout: int = 20) -> list:
     return []
 
 
+def object_term(query: str, explicit=None) -> str | None:
+    """Resolve common catalogue designations; do not guess from prose's last word."""
+    if explicit:
+        return str(explicit).strip()[:80] or None
+    match = CATALOG_RE.search(query)
+    return match.group(0).strip() if match else None
+
+
 class ExoplanetSource(BaseSource):
     """NASA Exoplanet Archive TAP (pscomppars). No key."""
     name = "Exoplanet Archive"
@@ -30,7 +39,10 @@ class ExoplanetSource(BaseSource):
 
     def fetch(self, query: str, **kwargs) -> list[dict]:
         try:
-            term = (query.split() or [""])[-1].replace("'", "''")[:40]
+            name_term = object_term(query, kwargs.get("object_name"))
+            if not name_term:
+                return []
+            term = name_term.replace("'", "''").replace("%", "").replace("_", "")
             rows = query_tap("https://exoplanetarchive.ipac.caltech.edu/TAP",
                              f"select top 5 hostname,pl_name,pl_orbper,sy_dist,disc_year from pscomppars where pl_name like '%{term}%'",
                              timeout=self.timeout)
@@ -44,4 +56,5 @@ class ExoplanetSource(BaseSource):
                 }, {"name": "Exoplanet Archive", "source_type": "api", "authority": 3, "category": "discoveries"}))
             return out
         except Exception:
+            self.report_error(kwargs)
             return []

@@ -1,5 +1,11 @@
 # AstroSearch v2 — Complete Agent Handoff
 > Everything the building agent needs. Read this fully before writing any code.
+> Current implementation status: see [CAPABILITIES.md](CAPABILITIES.md). This handoff
+> records design requirements, not proof that every feature is implemented. In
+> particular, lunar eclipses are reference-only, visibility is partial, and semantic
+> reranking has no activation path. Current capability status supersedes conflicting claims below.
+
+
 
 ---
 

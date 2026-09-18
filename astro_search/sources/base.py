@@ -12,6 +12,17 @@ class BaseSource:
     timeout: int = 12
     fallback: str | None = None
 
+    def report_error(self, kwargs):
+        """Record a caught exception without leaking URLs, tokens or payloads."""
+        import sys
+        error = sys.exc_info()[1]
+        sink = kwargs.get("_errors")
+        if sink is not None:
+            diagnostic = {"source": self.name, "error": type(error).__name__ if error else "invalid_payload"}
+            if diagnostic not in sink:
+                sink.append(diagnostic)
+
+
     def fetch(self, query: str, **kwargs) -> list[dict]:
         raise NotImplementedError
 

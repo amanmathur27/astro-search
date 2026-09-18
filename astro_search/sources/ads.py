@@ -21,9 +21,15 @@ class ADSSource(BaseSource):
         key = os.environ.get("ASTRO_ADS_KEY")
         if not key:
             return []
+        from .arxiv import CATS
+        topic = kwargs.get("topic", "astrophysics") or "astrophysics"
+        scope = "database:astronomy"
+        if topic in CATS and topic != "astrophysics":
+            scope += f' AND arxiv_class:"{CATS[topic]}"'
+        scoped_query = f"({query}) AND {scope}"
         try:
             r = requests.get("https://api.adsabs.harvard.edu/v1/search/query",
-                             params={"q": query, "fl": "title,abstract,author,year,citation_count,doi,bibcode",
+                             params={"q": scoped_query, "fl": "title,abstract,author,year,citation_count,doi,bibcode",
                                      "rows": kwargs.get("max_results", 5), "sort": "citation_count desc"},
                              headers={"Authorization": f"Bearer {key}"}, timeout=self.timeout)
             r.raise_for_status()
@@ -39,4 +45,5 @@ class ADSSource(BaseSource):
                 }, {"name": "NASA ADS", "source_type": "api", "authority": 3, "category": "papers"}))
             return out
         except Exception:
+            self.report_error(kwargs)
             return []

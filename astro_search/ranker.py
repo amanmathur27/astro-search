@@ -1,14 +1,9 @@
-"""Lexical BM25 (pure Python, Actions-safe) + intent/authority/freshness blend.
+"""Field-aware lexical ranking, with bounded BM25 tie-breaking.
 
-final = bm25_mix*0.35 + intent_match*0.25 + authority_norm*0.20 + freshness*0.20,
-min-max scaled to [0, 1] as `_score` on each result dict (mutation is intentional:
-core sorts and serialises the same objects).
-
-Hardening notes:
-- Floored (always >= 0) IDF variant — no negative-IDF bug of the classic formula.
-- IDF corpus N = len(results) (small-set BM25, correct at 5-100 docs).
-- All numeric inputs coerced/clamped; empty/malformed inputs return sane output, never raise.
-- No numpy / torch / sklearn.
+Titles/headings/descriptions/passages remain separate. Repeated identical fields
+are deduplicated. Authority/freshness are small multiplicative preferences, not
+standalone relevance. `_score` is relative rank, never factual confidence.
+No numpy / torch / sklearn; safe for lightweight Actions jobs.
 """
 from __future__ import annotations
 import math
@@ -50,7 +45,8 @@ def rank(results: list[dict], query: str, intent: str, source_intents: dict | No
         return []
     # unique query terms, order-preserved (duplicates must not inflate BM25)
     qterms = list(dict.fromkeys(_tok(query)))
-    docs = [_tok(_text(r.get("title", "")) + " " + _text(r.get("summary", ""))) for r in results]
+    from .relevance import annotate, fields
+    docs = [_tok(' '.join(text for _, text, _ in fields(r))) for r in results]
     doc_sets = [set(d) for d in docs]
     lens = [len(d) for d in docs]
     N = len(docs)
@@ -78,9 +74,12 @@ def rank(results: list[dict], query: str, intent: str, source_intents: dict | No
             allowed = source_intents.get(r.get("source", "") or "")
             if allowed is not None:
                 intent_ok = intent in allowed
-        final = (bm_mix * 0.35 + (1.0 if intent_ok else 0.3) * 0.25
-                 + _authority_norm(r.get("authority", 2)) * 0.20 + _freshness(r.get("freshness_h")) * 0.20)
-        r["_score"] = final  # rescaled below
+        field_score, coverage = annotate(r, query, intent)
+        fresh = _freshness(r.get("freshness_h")) if intent in {"recent_news", "mission_status", "current_phenomenon"} else 0.0
+        # Credibility and freshness break ties; they cannot rescue zero relevance.
+        final = (field_score + coverage + min(bm_mix, 4.0) * 0.05) if field_score or coverage else 0.0
+        final *= 1 + _authority_norm(r.get("authority", 2)) * 0.05 + fresh * 0.03 + (0.02 if intent_ok else 0)
+        r["_score"] = final  # relative ranking, never factual confidence
         scored.append(r)
 
     scored.sort(key=lambda x: x["_score"], reverse=True)

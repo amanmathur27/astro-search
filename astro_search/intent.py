@@ -2,7 +2,18 @@
 from __future__ import annotations
 import re
 
+# Shared with the TAP adapter so parsing and routing recognize the same names.
+CATALOG_RE = re.compile(
+    r"\b(?:Kepler|K2|TOI|WASP|HAT-P|TRAPPIST)[ -]?\d+(?:\s*[b-i])?\b"
+    r"|\b(?:HD|GJ|Gliese)\s*\d+(?:\s*[b-i])?\b"
+    r"|\bProxima\s+Centauri(?:\s+[b-d])?\b", re.I)
+
 INTENTS = {
+    "alert_lookup": "preliminary astronomical rapid reports (not confirmed measurements)",
+    "circular_lookup": "GCN circulars via the modern machine-readable exports",
+    "mpec_lookup": "Minor Planet Center MPECs, elements and astrometry",
+    "cbet_lookup": "CBAT CBETs and recent-supernova lists (plaintext transport)",
+    "doi_lookup": "bibliographic metadata for an explicit DOI",
     "celestial_event_lookup": "dates/times of a specific event",
     "celestial_event_detail": "visibility/location info for an event",
     "current_phenomenon": "real-time data (aurora NOW, flare TODAY)",
@@ -148,6 +159,20 @@ def classify(query: str) -> tuple[str, list[str]]:
     for alias, target in ALIASES.items():
         if alias in q:
             q = q.replace(alias, target)
+    from .gcn import is_gcn_query
+    from .mpec import is_mpec_query
+    from .cbat import is_cbat_query
+    from .doi import is_doi_query
+    from .alerts import is_alert_query
+    # Provider-specific identifiers route before the broader ATel topic matcher so a
+    # named provider is never silently served by a different provider.
+    for name, detector in (("doi_lookup", is_doi_query), ("circular_lookup", is_gcn_query),
+                           ("mpec_lookup", is_mpec_query), ("cbet_lookup", is_cbat_query),
+                           ("alert_lookup", is_alert_query)):
+        if detector(q):
+            # The provider performs strict id/topic filtering; do not fuzzy-map
+            # transient names to unrelated planet/mission entities.
+            return name, []
     intent = structural_intent(q)
     if intent is None:
         for name, keywords in INTENT_RULES:
@@ -158,7 +183,7 @@ def classify(query: str) -> tuple[str, list[str]]:
                 if not any(n in q for n in EVENT_NOUNS) and not any(
                         k in q for k in ("when is", "when will", "date of")):
                     continue
-            if any(k in q for k in keywords):
+            if any(re.search(r"\b" + re.escape(k) + r"\b", q) for k in keywords):
                 intent = name
                 break
     if intent is None:
@@ -188,4 +213,12 @@ def classify(query: str) -> tuple[str, list[str]]:
         fixed = fuzzy_fix(tok)
         if fixed != tok and fixed not in entities:
             entities.append(fixed)
+    catalog = CATALOG_RE.search(q)
+    if catalog:
+        entities.append(catalog.group(0))
+        # Preserve explicit news, research and observing requests.
+        explicit_news = any(re.search(r"\b" + re.escape(k) + r"\b", q)
+                            for k in ("latest", "recent", "news", "discovered", "discovery", "breaking"))
+        if intent == "concept_explanation" or (intent == DEFAULT_INTENT and not explicit_news):
+            intent = "object_lookup"
     return intent, entities

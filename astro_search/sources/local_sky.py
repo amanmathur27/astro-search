@@ -9,35 +9,32 @@ from .base import BaseSource
 from ..normalizer import normalize
 
 
+def _phase_name(illum: float, waxing: bool) -> str:
+    """Approximate display label from illumination (0-100) and direction.
+
+    New/full use <2%/>98%; quarters use 48-52%. These display bands
+    describe the current appearance, not exact phase-event instants.
+    """
+    if illum < 2:
+        return "New Moon"
+    if illum > 98:
+        return "Full Moon"
+    if 48 <= illum <= 52:
+        return "First Quarter" if waxing else "Last Quarter"
+    if waxing:
+        return "Waxing Crescent" if illum < 50 else "Waxing Gibbous"
+    return "Waning Crescent" if illum < 50 else "Waning Gibbous"
+
+
 def _ephem_moon(date_utc: datetime) -> dict:
     import ephem
     m = ephem.Moon(date_utc)
-    illum = float(m.phase)  # 0-100
-    # phase angle -> 8 names
-    # ephem doesn't expose named phase directly; derive from previous/new/full cycle
-    obs = ephem.Observer()
-    obs.date = date_utc
-    try:
-        prev_new = ephem.next_new_moon(obs.date - 30) if hasattr(ephem, "next_new_moon") else None
-    except Exception:
-        prev_new = None
-    # illumination + waxing/waning via Sun-Moon elongation sign
-    sun = ephem.Sun(date_utc)
-    elong = (float(m.elong) + 360) % 360 if hasattr(m, "elong") else 0.0
-    waxing = elong < 180
-    if illum < 2:
-        name = "New Moon"
-    elif illum > 98:
-        name = "Full Moon"
-    elif illum < 48:
-        name = "First Quarter" if waxing else "Last Quarter"
-        # refine crescent vs quarter
-        name = ("Waxing Crescent" if waxing else "Waning Gibbous") if illum < 40 else name
-    else:
-        name = "Waxing Gibbous" if waxing else "Waning Crescent"
-        if 48 <= illum <= 52:
-            name = "First Quarter" if waxing else "Last Quarter"
-    out = {"phase": name, "illumination_pct": round(illum, 1), "waxing": waxing}
+    illum = float(m.phase)  # 0-100, illuminated fraction
+    # PyEphem elongation is signed radians: east/positive is waxing,
+    # west/negative is waning. No degree conversion or mean-cycle cutoff.
+    waxing = float(m.elong) >= 0
+    out = {"phase": _phase_name(illum, waxing),
+           "illumination_pct": round(illum, 1), "waxing": waxing}
     try:
         out["next_full"] = str(ephem.next_full_moon(date_utc))
         out["next_new"] = str(ephem.next_new_moon(date_utc))
@@ -52,10 +49,11 @@ def _skyfield_moon(date_utc: datetime) -> dict | None:
         from pathlib import Path
         from skyfield.api import Loader, Topos
         cache = Path(os.environ.get("ASTRO_SKYFIELD_DIR", str(Path.home() / ".skyfield")))
-        cache.mkdir(parents=True, exist_ok=True)
+        if not (cache / "de421.bsp").is_file():
+            return None
         load = Loader(str(cache))
-        ts = load.timescale()
-        eph = load("de421.bsp")  # downloads once into cache dir, reused after
+        ts = load.timescale(builtin=True)
+        eph = load("de421.bsp")
         t = ts.from_datetime(date_utc)
         sun, moon, earth = eph["sun"], eph["moon"], eph["earth"]
         elong = earth.at(t).observe(moon).apparent().separation_from(
@@ -81,12 +79,18 @@ class LocalSkySource(BaseSource):
         date_s = kwargs.get("date")
         try:
             from dateutil import parser as _p
-            base = _p.parse(date_s).replace(tzinfo=timezone.utc) if date_s else datetime.now(timezone.utc)
-        except Exception:
-            base = datetime.now(timezone.utc)
+            from ..timeparse import reference_time, timezone_for
+            base = _p.parse(date_s) if date_s else reference_time(kwargs.get("now_utc"))
+            if base.tzinfo is None:
+                base = base.replace(tzinfo=timezone_for(kwargs.get("tz", "UTC")))
+            base = base.astimezone(timezone.utc)
+        except (ValueError, TypeError):
+            self.report_error(kwargs)
+            return []
         try:
             info = _ephem_moon(base)
         except Exception as e:
+            self.report_error(kwargs)
             return []
         sky = _skyfield_moon(base)
         iso = base.isoformat().replace("+00:00", "Z")

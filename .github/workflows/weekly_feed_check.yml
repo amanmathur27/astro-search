@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.11'}
-      - run: pip install feedparser requests
+      - run: pip install .
       - run: python tools/verify_feeds.py > feed_report.txt 2>&1
       - uses: actions/upload-artifact@v4
         with: {name: feed-health-report, path: feed_report.txt, retention-days: 30}

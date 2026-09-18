@@ -82,6 +82,8 @@ class GoogleNewsSource(BaseSource):
 
     def fetch(self, query: str, **kwargs) -> list[dict]:
         from datetime import datetime, timedelta, timezone
+        from ..timeparse import reference_time
+        now = reference_time(kwargs.get("now_utc"))
         trends = bool(kwargs.get("trends", False))
         if not (query or "").strip():
             return []
@@ -90,7 +92,7 @@ class GoogleNewsSource(BaseSource):
         q = query.strip()
         if not re.search(r"\b(after|before|when):", q, re.I):
             days = recency_window_days(query, trends)
-            since = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d")
+            since = (now - timedelta(days=days)).strftime("%Y-%m-%d")
             q = f"{q} after:{since}"
         hl, gl, ceid = edition_params(kwargs.get("edition"))
         max_age_h = 168 if recency_window_days(query, trends) == 7 else 12
@@ -100,6 +102,7 @@ class GoogleNewsSource(BaseSource):
             r.raise_for_status()
             feed = feedparser.parse(r.content)
         except Exception:
+            self.report_error(kwargs)
             return []
         items = []
         for e in feed.entries[: 20 if trends else 10]:
@@ -111,10 +114,12 @@ class GoogleNewsSource(BaseSource):
                 s = e.get("source", {}) if hasattr(e, "get") else getattr(e, "source", {})
                 src = (s.get("title", "") if isinstance(s, dict) else getattr(s, "title", "")) or ""
             except Exception:
+                self.report_error(kwargs)
                 src = ""
             items.append({"title": entry, "link": link, "pub": pub, "publisher": src})
         # newest first, resolve top-3 URLs only (redirect cost control)
-        items.sort(key=lambda x: x["pub"], reverse=True)
+        from ..normalizer import to_iso_utc
+        items.sort(key=lambda x: to_iso_utc(x["pub"]), reverse=True)
         out = []
         for i, it in enumerate(items[: 8 if trends else 5]):
             resolved = False
@@ -129,7 +134,10 @@ class GoogleNewsSource(BaseSource):
                 "extra": {"publisher": it["publisher"], "via": "google_news_rss",
                           "resolved": resolved, "fetch_compatible": resolved},
             }, {"name": "Google News", "source_type": "rss", "authority": 1, "category": "news"})
-            fh = rec.get("freshness_h")
+            from ..normalizer import freshness_hours, freshness_display
+            fh = freshness_hours(rec.get("published", ""), now)
+            rec["freshness_h"] = fh
+            rec["freshness_display"] = freshness_display(fh)
             if isinstance(fh, int) and not isinstance(fh, bool) and fh <= max_age_h:
                 out.append(rec)
             elif fh is None and trends:

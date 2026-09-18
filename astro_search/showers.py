@@ -1,18 +1,22 @@
 """Meteor shower data: per-year exact overrides, else templated base.
 
-- data/meteor_showers_{year}.json — exact peak datetimes + ZHR transcribed once a year
-  from the IMO shower calendar (https://www.imo.net/members/imo_showers/calendar/).
+- astro_search/data/meteor_showers_{year}.json — exact peak datetimes + ZHR transcribed
+  once a year from the IMO shower calendar (https://www.imo.net/members/imo_showers/calendar/).
   This is the deliberate choice over live-scraping IMO: their calendar is HTML/PDF
   with no API; parsing it per-query is fragile and slow. One human-verified ingest
   per year (~10 min) beats a parser that breaks silently on redesign.
-- data/meteor_showers_base.json — recurring month/day/time + typical ZHR used when
-  no exact file exists for the requested year (peak accurate to ~±1 day).
+- astro_search/data/meteor_showers_base.json — recurring month/day/time + typical ZHR
+  used when no exact file exists for the requested year (peak accurate to ~±1 day).
+
+Both files ship inside the package (setup.py package_data) so pip-installed copies
+work without the repo checkout.
 """
 from __future__ import annotations
 import json
 from pathlib import Path
 
-_HERE = Path(__file__).resolve().parent.parent / "data"
+# Package-relative: works for editable installs AND pip-installed wheels.
+_HERE = Path(__file__).resolve().parent / "data"
 
 
 def load_showers(year: int) -> list[dict]:

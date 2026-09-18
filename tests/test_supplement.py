@@ -1,13 +1,28 @@
 import json
 from pathlib import Path
-from astro_search.sources.local_sky import LocalSkySource, _ephem_moon
+
+import astro_search
+import astro_search.showers as showers
+
+
+def test_meteor_data_ships_inside_package():
+    # Data must live inside the package, not the repo root, so pip installs work.
+    data_dir = Path(showers.__file__).resolve().parent / "data"
+    assert data_dir.is_dir() and data_dir.parent == Path(astro_search.__file__).resolve().parent
+    base = json.loads((data_dir / "meteor_showers_base.json").read_text(encoding="utf-8"))
+    assert len(base) >= 12 and all("month" in m and "name" in m for m in base)
+    assert json.loads((data_dir / "meteor_showers_2026.json").read_text(encoding="utf-8"))
+
 from astro_search.deduplicator import deduplicate
 from astro_search.normalizer import normalize
+from astro_search.sources.local_sky import LocalSkySource, _ephem_moon
 from datetime import datetime, timezone
 
 META = {"name": "T", "source_type": "computed", "authority": 2}
 
 def test_local_sky_moon():
+    import pytest
+    pytest.importorskip("ephem")
     info = _ephem_moon(datetime(2026, 9, 16, tzinfo=timezone.utc))
     assert 0 <= info["illumination_pct"] <= 100
     assert info["phase"]  # named phase
@@ -59,7 +74,7 @@ def test_entity_gate_filters_and_backstops():
     kept, back = eng._entity_gate(pool, ["nancy grace"], 8)
     assert not back and len(kept) == 1 and "Roman" in kept[0]["title"]
     kept, back = eng._entity_gate(pool, ["gaganyaan"], 8)
-    assert back and len(kept) == 3  # empty gate -> top-3 backstop, flagged
+    assert not back and kept == []  # No evidence is preferable to unrelated filler.
 
 def test_gnews_gating():
     from astro_search.sources.gnews import has_recency, recency_window_days, edition_params

@@ -3,13 +3,39 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.10', '3.13']
+        extras: ['test', 'test,local']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -e ".[${{ matrix.extras }}]"
+      - name: Verify local computation dependency
+        if: matrix.extras == 'test,local'
+        run: python -c "import ephem; print(ephem.__version__)"
+      - run: python -m pytest tests/ -v
+  installed-wheel:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.11'}
-      - uses: actions/cache@v4
-        with:
-          path: ~/.skyfield
-          key: skyfield-de421-v1
-      - run: pip install -e ".[local]" pytest
-      - run: pytest tests/ -v
+      - run: pip wheel . --no-deps --wheel-dir dist
+      - run: pip install dist/*.whl
+      - name: Verify resources outside checkout
+        working-directory: /tmp
+        run: |
+          python - <<'PY'
+          from astro_search.showers import load_showers
+          import astro_search
+          assert 'site-packages' in astro_search.__file__
+          assert len(load_showers(2026)) == 12
+          assert all(not row['exact'] for row in load_showers(2027))
+          from astro_search.core import AstroSearch
+          out = AstroSearch().search('celestial events this month', now_utc='2026-09-17T12:00:00Z')
+          assert out['answer']['method'] == 'reference_calendar'
+          assert out['count'] > 0
+          PY

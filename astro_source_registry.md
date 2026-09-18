@@ -2,6 +2,13 @@
 **Last researched: September 2026**  
 The master reference before writing any code. Every source here is verified free as of research date.
 
+> Current adapter coverage and limitations are in [CAPABILITIES.md](CAPABILITIES.md).
+> This is a source-discovery registry, not a list of implemented or currently healthy
+> integrations. USNO lunar-eclipse API support must not be inferred from the tables
+> below: current lunar-eclipse output is a NASA reference link only. Access and reuse
+> terms must be checked separately.
+
+
 ---
 
 ## Legend

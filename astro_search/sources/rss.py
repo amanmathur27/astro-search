@@ -22,6 +22,8 @@ def _clean(s: str) -> str:
 
 
 RSS_FEEDS = [
+    {"name": "The Astronomer's Telegram", "url": "https://www.astronomerstelegram.org/?rss", "authority": 2,
+     "intents": ["alert_lookup"], "entities": ["*"], "category": "news", "rapid_reports": True},
     {"name": "NASA News", "url": "https://www.nasa.gov/news-releases/feed/", "authority": 3,
      "intents": ["recent_news", "mission_status", "celestial_event_lookup"], "entities": ["*"], "category": "news"},
     {"name": "NASA Science", "url": "https://science.nasa.gov/feed/", "authority": 3,
@@ -71,6 +73,8 @@ RSS_FEEDS = [
      "intents": ["recent_news", "research_lookup"], "entities": ["deep_sky"], "category": "discoveries"},
     {"name": "SpaceDaily", "url": "https://www.spacedaily.com/spacedaily.xml", "authority": 1,
      "intents": ["recent_news"], "entities": ["*"], "category": "news"},
+    {"name": "Phys.org", "url": "https://phys.org/rss-feed/space-news/", "authority": 2,
+     "intents": ["recent_news", "mission_status", "object_lookup"], "entities": ["missions", "deep_sky", "planets"], "category": "news"},
     {"name": "The Space Review", "url": "https://www.thespacereview.com/articles.xml", "authority": 1,
      "intents": ["recent_news", "mission_status"], "entities": ["missions"], "category": "news"},
 ]
@@ -96,26 +100,58 @@ class RSSSource(BaseSource):
             resp = requests.get(self.cfg["url"], headers=HEADERS, timeout=self.timeout)
             resp.raise_for_status()
             feed = feedparser.parse(resp.content)
+            if self.cfg.get("rapid_reports") and (not feed.version or feed.bozo):
+                raise ValueError("Invalid rapid-report feed")
         except Exception:
+            self.report_error(kwargs)
             return []
-        qtok = set(query.lower().split())
+        from ..ranker import _tok
+        from ..intent import classify
+        from ..relevance import tokens
+        qtok = tokens(query)
+        generic = {"latest", "news", "astronomy", "space", "science", "today", "recent", "updates"}
+        broad_news = (kwargs.get("intent") == "recent_news" and not classify(query)[1]
+                      and not (qtok - generic))
         scored = []
-        for e in feed.entries[:30]:
-            g = (lambda k, d="": e.get(k, d) if hasattr(e, "get") else getattr(e, k, d))
+        for e in feed.entries[:100]:
+            g = (lambda k, d="": e[k] if hasattr(e, "keys") and k in e.keys() else d)
             title = _clean(g("title"))
             summary = _clean(g("summary") or g("description"))
             url = g("link")
             pub = g("published") or g("updated")
             blob = (title + " " + summary).lower()
-            hits = sum(1 for t in qtok if len(t) > 2 and t in blob)
+            hits = len(qtok & set(_tok(blob)))
+            extra, authors = {}, []
+            published_kind = "published" if g("published") else "updated_fallback"
+            if self.cfg.get("rapid_reports"):
+                from ..alerts import report_matches
+                from urllib.parse import urlsplit, parse_qs
+                parsed = urlsplit(url)
+                ident = re.search(r"\bATel\s+(\d+)\b", title, re.I)
+                if (parsed.scheme != "https" or parsed.hostname != "www.astronomerstelegram.org"
+                        or not ident or parse_qs(parsed.query).get("read") != [ident.group(1)]):
+                    self.report_error(kwargs)
+                    continue
+                if not report_matches(query, title, summary):
+                    continue
+                hits = max(hits, 1)  # explicit broad report browsing, not general RSS filler
+                authors = [_clean(g("author"))] if g("author") else []
+                published_kind = "issued" if pub else "unknown"
+                extra = {"report_id": "ATel" + ident.group(1),
+                         "publication_status": "rapid_report_not_peer_reviewed",
+                         "complete_archive": False, "timestamp_semantics": "report_issued_not_event_time"}
             scored.append((hits, {"title": title, "summary": summary, "url": url,
+                                  "extra": extra, "authors": authors,
+                                  "modified": g("updated"),
+                                  "published_kind": published_kind,
                                   "published": pub, "category": self.cfg.get("category", "news")}))
-        # keyword hit first, then recency order
-        scored.sort(key=lambda x: x[0], reverse=True)
-        top = [s for _, s in scored[:max_results]]
-        # if no hits at all, still return freshest 3 (keeps agents useful)
-        if top and all(h == 0 for h, _ in scored[:max_results]) and qtok:
-            top = [s for _, s in scored[:3]]
+        from ..normalizer import to_iso_utc
+        scored.sort(key=lambda x: (x[0], to_iso_utc(x[1]["published"])), reverse=True)
+        top = [s for hits, s in scored if hits > 0][:max_results]
+        if not top and broad_news:
+            top = [s for _, s in sorted(scored, key=lambda x: to_iso_utc(x[1]["published"]), reverse=True)[:min(3, max_results)]]
+            for row in top:
+                row["extra"] = {"zero_hit_fallback": True}
         return [normalize(r, {"name": self.name, "source_type": "rss",
                               "authority": self.authority, "category": self.cfg.get("category", "news")})
                 for r in top if r["title"] or r["url"]]

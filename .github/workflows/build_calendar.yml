@@ -21,8 +21,15 @@ jobs:
         env:
           ASTRO_NASA_KEY: ${{ secrets.ASTRO_NASA_KEY }}
           ASTRO_ADS_KEY: ${{ secrets.ASTRO_ADS_KEY }}
-      - run: python tools/build_calendar.py ${{ inputs.year }}
+      - name: Generate validated calendar
+        run: |
+          if [ -n "$CALENDAR_YEAR" ]; then
+            python tools/build_calendar.py "$CALENDAR_YEAR"
+          else
+            python tools/build_calendar.py
+          fi
         env:
+          CALENDAR_YEAR: ${{ inputs.year }}
           ASTRO_NASA_KEY: ${{ secrets.ASTRO_NASA_KEY }}
           ASTRO_ADS_KEY: ${{ secrets.ASTRO_ADS_KEY }}
       - uses: actions/upload-artifact@v4

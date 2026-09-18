@@ -14,6 +14,32 @@ def _key() -> str:
     return os.environ.get("ASTRO_NASA_KEY", "DEMO_KEY") or "DEMO_KEY"
 
 
+def _neo_objects(start, end):
+    """Read inclusive NeoWs windows without exceeding seven days per request."""
+    from datetime import date, timedelta
+    first, last = date.fromisoformat(start), date.fromisoformat(end)
+    if last < first or (last - first).days > 366:
+        raise ValueError("NeoWs window must be ordered and at most 367 days")
+    objects = {}
+    while first <= last:
+        stop = min(first + timedelta(days=6), last)
+        response = requests.get(f"{BASE}/neo/rest/v1/feed", params={
+            "start_date": first.isoformat(), "end_date": stop.isoformat(), "api_key": _key(),
+        }, timeout=TIMEOUT)
+        if not response.ok:
+            response.raise_for_status()
+        payload = response.json()
+        days = payload.get("near_earth_objects") if isinstance(payload, dict) else None
+        if not isinstance(days, dict):
+            raise ValueError("Malformed NeoWs response")
+        for day, rows in days.items():
+            if first.isoformat() <= day <= stop.isoformat() and isinstance(rows, list):
+                objects[day] = rows
+        first = stop + timedelta(days=1)
+    return objects
+
+
+
 class NASASource(BaseSource):
     name = "NASA"
     source_type = "api"
@@ -26,8 +52,10 @@ class NASASource(BaseSource):
         from datetime import datetime, timedelta, timezone
         q = query.lower()
         out: list[dict] = []
-        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        week_ago = (datetime.now(timezone.utc) - timedelta(days=7)).strftime("%Y-%m-%d")
+        from ..timeparse import reference_time
+        now = reference_time(kwargs.get("now_utc"))
+        today = kwargs.get("date") or now.strftime("%Y-%m-%d")
+        week_ago = kwargs.get("date") or (now - timedelta(days=7)).strftime("%Y-%m-%d")
         # APOD for news/discovery/object queries
         try:
             r = requests.get(f"{BASE}/planetary/apod", params={"api_key": _key(), "date": today}, timeout=TIMEOUT)
@@ -35,37 +63,44 @@ class NASASource(BaseSource):
                 d = r.json()
                 out.append(normalize({
                     "title": f"APOD: {d.get('title', today)}", "summary": str(d.get("explanation", "")),
-                    "url": d.get("hdurl") or d.get("url", "https://apod.nasa.gov/"),
+                    "url": f"https://apod.nasa.gov/apod/ap{datetime.strptime(d.get('date', today), '%Y-%m-%d'):%y%m%d}.html",
                     "published": d.get("date", today), "category": "discoveries",
-                    "extra": {"media_type": d.get("media_type")},
+                    "extra": {"media_type": d.get("media_type"), "media_url": d.get("hdurl") or d.get("url"),
+                              "fetch_compatible": True},
                 }, {"name": "NASA", "source_type": "api", "authority": 3, "category": "discoveries"}))
         except Exception:
+            self.report_error(kwargs)
             pass
         # NeoWs for asteroid queries or event lookups
-        if any(k in q for k in ["asteroid", "near-earth", "neo", "close approach", "flyby"]) or kwargs.get("category") in ("events", "all", None):
+        if any(k in q for k in ["asteroid", "near-earth", "neo", "close approach", "flyby"]):
             try:
-                r = requests.get(f"{BASE}/neo/rest/v1/feed", params={"start_date": today, "api_key": _key()}, timeout=TIMEOUT)
-                if r.ok:
-                    objs = []
-                    for day, lst in (r.json().get("near_earth_objects", {}) or {}).items():
-                        for o in lst[:5]:
-                            ca = (o.get("close_approach_data") or [{}])[0]
-                            objs.append(normalize({
-                                "title": f"Asteroid {o.get('name')} close approach {day}",
-                                "summary": f"{o.get('name')} ({'hazardous' if o.get('is_potentially_hazardous_asteroid') else 'non-hazardous'}), "
-                                           f"miss {ca.get('miss_distance', {}).get('kilometers', '?')} km, vel {ca.get('relative_velocity', {}).get('kilometers_per_hour', '?')} km/h."[:400],
-                                "url": "https://cneos.jpl.nasa.gov/", "published": day,
-                                "category": "events", "event_type": "asteroid_flyby",
-                                "extra": {"neo_id": o.get("id"), "hazardous": o.get("is_potentially_hazardous_asteroid")},
-                            }, {"name": "NASA", "source_type": "api", "authority": 3, "category": "events"}))
-                    out.extend(objs[:5])
+                end = kwargs.get("date_max") or today
+                objects = _neo_objects(today, end)
+                objs = []
+                for day, lst in sorted(objects.items()):
+                    for o in lst[:5]:
+                        ca = (o.get("close_approach_data") or [{}])[0]
+                        hazardous = o.get("is_potentially_hazardous_asteroid")
+                        hazard_label = "hazardous" if hazardous is True else "non-hazardous" if hazardous is False else "hazard classification unavailable"
+                        objs.append(normalize({
+                            "title": f"Asteroid {o.get('name')} close approach {day}",
+                            "summary": f"{o.get('name')} ({hazard_label}), "
+                                       f"miss {ca.get('miss_distance', {}).get('kilometers', '?')} km, vel {ca.get('relative_velocity', {}).get('kilometers_per_hour', '?')} km/h."[:400],
+                            "url": "https://cneos.jpl.nasa.gov/", "published": day,
+                            "category": "events", "event_type": "asteroid_flyby",
+                            "event_date": day, "date_only": True, "precision": "day",
+                            "extra": {"neo_id": o.get("id"), "hazardous": hazardous},
+                        }, {"name": "NASA", "source_type": "api", "authority": 3, "category": "events"}))
+                out.extend(objs[:kwargs.get("max_results", 5)])
             except Exception:
+                self.report_error(kwargs)
                 pass
         # DONKI flares for solar queries
         if any(k in q for k in ["flare", "cme", "solar storm", "geomagnetic", "aurora", "space weather"]):
+            donki_end = kwargs.get("date_max") or today
             for kind, path in [("flare", "/DONKI/FLR"), ("cme", "/DONKI/CME"), ("storm", "/DONKI/GST")]:
                 try:
-                    r = requests.get(f"{BASE}{path}", params={"startDate": week_ago, "api_key": _key()}, timeout=TIMEOUT)
+                    r = requests.get(f"{BASE}{path}", params={"startDate": week_ago, "endDate": donki_end, "api_key": _key()}, timeout=TIMEOUT)
                     if r.ok and isinstance(r.json(), list):
                         for ev in r.json()[:3]:
                             out.append(normalize({
@@ -73,9 +108,12 @@ class NASASource(BaseSource):
                                 "summary": str(ev.get("note", ev))[:400],
                                 "url": "https://ccmc.gsfc.nasa.gov/donki/",
                                 "published": str(ev.get("beginTime", ev.get("startTime", ""))),
+                                "event_date_utc": ev.get("beginTime") or ev.get("startTime"),
+                                "event_type": kind,
                                 "category": "space_weather", "extra": {"raw": ev},
                             }, {"name": "NASA", "source_type": "api", "authority": 3, "category": "space_weather"}))
                 except Exception:
+                    self.report_error(kwargs)
                     continue
         # Image library for object lookups
         if any(k in q for k in ["image", "photo", "picture"]) or kwargs.get("intent") == "object_lookup":
@@ -91,9 +129,10 @@ class NASASource(BaseSource):
                             "category": "discoveries", "extra": {"nasa_id": meta.get("nasa_id")},
                         }, {"name": "NASA", "source_type": "api", "authority": 3, "category": "discoveries"}))
             except Exception:
+                self.report_error(kwargs)
                 pass
-        # EONET natural events (severeStorms) for space-weather queries
-        if any(k in q for k in ["storm", "space weather", "aurora", "geomagnetic", "solar"]):
+        # EONET is terrestrial weather, not solar/geomagnetic activity.
+        if any(k in q for k in ["hurricane", "typhoon", "tropical storm", "terrestrial storm"]):
             try:
                 r = requests.get("https://eonet.gsfc.nasa.gov/api/v3/events",
                                  params={"category": "severeStorms", "status": "open", "limit": 5}, timeout=TIMEOUT)
@@ -104,9 +143,10 @@ class NASASource(BaseSource):
                             "summary": f"{ev.get('description', '')} Sources: {len(ev.get('sources', []))}."[:400],
                             "url": "https://eonet.gsfc.nasa.gov/",
                             "published": str((ev.get("geometry") or [{}])[0].get("date", "")),
-                            "category": "space_weather", "extra": {"eonet_id": ev.get("id")},
-                        }, {"name": "NASA", "source_type": "api", "authority": 3, "category": "space_weather"}))
+                            "category": "news", "extra": {"eonet_id": ev.get("id"), "domain": "earth_weather"},
+                        }, {"name": "NASA", "source_type": "api", "authority": 3, "category": "news"}))
             except Exception:
+                self.report_error(kwargs)
                 pass
         # Mars rover photos for Mars queries
         if "mars" in q and any(k in q for k in ["photo", "image", "rover", "curiosity", "perseverance"]):
@@ -123,5 +163,6 @@ class NASASource(BaseSource):
                             "extra": {"rover": "curiosity", "sol": p.get("sol")},
                         }, {"name": "NASA", "source_type": "api", "authority": 3, "category": "discoveries"}))
             except Exception:
+                self.report_error(kwargs)
                 pass
         return out

@@ -15,5 +15,7 @@ setup(
         "semantic": ["sentence-transformers>=2.0"],
         "test": ["pytest>=7.0"],
     },
-    python_requires=">=3.9",
+    package_data={"astro_search": ["data/*.json"]},
+    include_package_data=True,
+    python_requires=">=3.10",
 )
