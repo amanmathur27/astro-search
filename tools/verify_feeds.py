@@ -1,13 +1,15 @@
 """Comprehensive astronomy source and RSS feed availability auditor.
 
 Audits RSS feeds, NASA/NOAA/arXiv APIs, calculates aggregate health indicators
-(🟢 Operational, 🟡 Degraded, 🔴 Disrupted), and can update the status badge in README.md.
+(🟢 Operational, 🟡 Degraded, 🔴 Disrupted), and updates both the badge and the
+live health table in README.md.
 """
 from __future__ import annotations
 import json
 import sys
 import re
 from pathlib import Path
+from datetime import datetime, timezone
 import requests
 import feedparser
 
@@ -151,7 +153,33 @@ def audit_sources() -> dict:
     return summary
 
 
-def update_readme_badge(summary: dict, readme_path: Path = Path("README.md")):
+def generate_health_markdown(summary: dict) -> str:
+    now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    emoji = summary.get("indicator_emoji", "🟢")
+    status = summary.get("overall_status", "Operational")
+    pct = summary.get("health_percentage", 0.0)
+    ok_count = summary.get("healthy_count", 0)
+    total = summary.get("total_sources", 0)
+
+    lines = [
+        f"**Last Automated Check:** `{now_utc}` | **Overall Health:** {emoji} **{status}** ({ok_count}/{total} sources healthy, `{pct}%`)",
+        "",
+        "| Source | Type | Status | HTTP | Details | Freshness |",
+        "| :--- | :--- | :--- | :--- | :--- | :--- |"
+    ]
+
+    for item in summary.get("details", []):
+        s_emoji = "🟢 OK" if item.get("status") == "OK" else ("🟡 Review" if item.get("status") == "REVIEW" else "🔴 Fail")
+        http_code = str(item.get("http_status") or "-")
+        stype = item.get("type", "rss").upper()
+        entries = f"{item.get('entries')} entries" if item.get("type") == "rss" else "API Online"
+        age = f"{item.get('newest_age_h')}h ago" if item.get("newest_age_h") is not None else "-"
+        lines.append(f"| **{item['name']}** | `{stype}` | {s_emoji} | `{http_code}` | {entries} | {age} |")
+
+    return "\n".join(lines)
+
+
+def update_readme(summary: dict, readme_path: Path = Path("README.md")):
     if not readme_path.exists():
         return
     content = readme_path.read_text(encoding="utf-8")
@@ -159,12 +187,11 @@ def update_readme_badge(summary: dict, readme_path: Path = Path("README.md")):
     color = summary["badge_color"]
     badge_md = f"![Source Status](https://img.shields.io/badge/Source_Availability-{status}-{color}?style=flat-square)"
 
-    # Look for existing badge or add under title
-    pattern = r"!\[Source Status\]\(https://img\.shields\.io/badge/Source_Availability-[^\)]+\)"
-    if re.search(pattern, content):
-        updated = re.sub(pattern, badge_md, content)
+    # 1. Update status badge at top
+    pattern_badge = r"!\[Source Status\]\(https://img\.shields\.io/badge/Source_Availability-[^\)]+\)"
+    if re.search(pattern_badge, content):
+        content = re.sub(pattern_badge, badge_md, content)
     else:
-        # insert right below first header
         lines = content.splitlines()
         new_lines = []
         inserted = False
@@ -174,10 +201,25 @@ def update_readme_badge(summary: dict, readme_path: Path = Path("README.md")):
                 new_lines.append("")
                 new_lines.append(badge_md)
                 inserted = True
-        updated = "\n".join(new_lines)
+        content = "\n".join(new_lines)
 
-    readme_path.write_text(updated, encoding="utf-8")
-    print(f"Updated README.md badge -> {status} ({color})")
+    # 2. Update Source Availability & Circuit Health table
+    table_content = generate_health_markdown(summary)
+    block_pattern = r"<!-- START_SOURCE_HEALTH_TABLE -->.*?<!-- END_SOURCE_HEALTH_TABLE -->"
+    replacement_block = f"<!-- START_SOURCE_HEALTH_TABLE -->\n{table_content}\n<!-- END_SOURCE_HEALTH_TABLE -->"
+
+    if re.search(block_pattern, content, flags=re.DOTALL):
+        content = re.sub(block_pattern, replacement_block, content, flags=re.DOTALL)
+    else:
+        # Append as a section before License
+        section = f"\n\n## Live Source Availability & Health\n\n{replacement_block}\n"
+        if "## License" in content:
+            content = content.replace("## License", section + "\n## License")
+        else:
+            content += section
+
+    readme_path.write_text(content, encoding="utf-8")
+    print(f"Updated README.md badge -> {status} ({color}) and refreshed live source table.")
 
 
 def main():
@@ -187,7 +229,7 @@ def main():
         json.dump(summary, f, indent=2)
 
     if "--update-readme" in sys.argv:
-        update_readme_badge(summary)
+        update_readme(summary)
 
 
 if __name__ == "__main__":
