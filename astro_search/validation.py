@@ -29,7 +29,7 @@ def calendar_year(value, default):
     return value
 
 
-def search_inputs(query, category, trends, edition, topic):
+def search_inputs(query, category, trends, edition, topic, mode="standard", since_date=None):
     if not isinstance(query, str) or len(query) > 4000:
         raise ValueError("query must be a string of at most 4000 characters")
     if not isinstance(category, str) or category not in CATEGORIES:
@@ -44,3 +44,9 @@ def search_inputs(query, category, trends, edition, topic):
         from .sources.arxiv import CATS
         if not isinstance(topic, str) or topic not in CATS:
             raise ValueError("Unknown paper topic")
+    if mode not in ("standard", "evidence"):
+        raise ValueError("mode must be 'standard' or 'evidence'")
+    if since_date:
+        import re
+        if not isinstance(since_date, str) or not re.match(r"^\d{4}-\d{2}-\d{2}", since_date):
+            raise ValueError("since_date must be in YYYY-MM-DD format")

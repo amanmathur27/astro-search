@@ -150,16 +150,22 @@ class AstroSearch:
                 pass  # availability check itself failed -> try the source anyway
             cands.append(s)
 
-        cands.sort(key=lambda s: (s.name in required, getattr(s, "authority", 2)), reverse=True)
+        def _auth(s):
+            try:
+                return int(getattr(s, "authority", 2))
+            except (TypeError, ValueError):
+                return 2
+
+        cands.sort(key=lambda s: (s.name in required, _auth(s)), reverse=True)
         if papers_only:
             return cands[:5]
 
         # For news/discoveries: balanced selection across institutions (auth 3) and publications (auth 2)
         if intent in ("recent_news", "mission_status", "discoveries"):
             req_cands = [s for s in cands if s.name in required]
-            auth3 = [s for s in cands if s.name not in required and getattr(s, "authority", 2) >= 3]
-            auth2 = [s for s in cands if s.name not in required and getattr(s, "authority", 2) == 2]
-            other = [s for s in cands if s.name not in required and getattr(s, "authority", 2) < 2]
+            auth3 = [s for s in cands if s.name not in required and _auth(s) >= 3]
+            auth2 = [s for s in cands if s.name not in required and _auth(s) == 2]
+            other = [s for s in cands if s.name not in required and _auth(s) < 2]
             selected = req_cands + auth3[:3] + auth2[:3] + other[:1]
             selected = selected[:8]
         else:
@@ -230,9 +236,10 @@ class AstroSearch:
                lat: float | None = None, lon: float | None = None,
                tz: str | int = "UTC", now_utc: str | None = None,
                year: int | None = None, trends: bool = False,
-               edition: str | None = None, topic: str | None = None) -> dict:
+               edition: str | None = None, topic: str | None = None,
+               mode: str = "standard", since_date: str | None = None) -> dict:
         from .validation import observer, calendar_year, search_inputs
-        search_inputs(query, category, trends, edition, topic)
+        search_inputs(query, category, trends, edition, topic, mode=mode, since_date=since_date)
         lat, lon = observer(lat, lon, tz)
         try:
             max_results = int(max_results)  # type: ignore[arg-type]
@@ -288,7 +295,7 @@ class AstroSearch:
         # Include resolved civil dates so live caches cannot cross local midnight.
         key = ("v9-2026-feeds", query, category, max_results, bool(trends), edition or "", topic,
                lat, lon, str(tz), year, dates["date_min"], dates["date_max"],
-               now.astimezone(zone).date().isoformat())
+               now.astimezone(zone).date().isoformat(), mode, since_date or "")
         if now_utc:
             key += (now_iso,)
         cached = self.mem.get(key)
@@ -396,6 +403,13 @@ class AstroSearch:
                 out["markdown"] = ("_Note: no direct coverage of the requested subject found; "
                                    "showing closest related items. Try `astro_fetch` on the primary "
                                    "source (e.g. isro.gov.in/Press.html) or `trends: true`._\n\n" + md)
+        if since_date:
+            cutoff = since_date[:10]
+            results = [r for r in results if not r.get("published") or str(r.get("published"))[:10] >= cutoff]
+            out["results"] = results
+            out["count"] = len(results)
+            out["markdown"] = self._markdown(query, intent, results, now_iso, dates, tz)
+
         if not errors:
             self.mem.set(key, out)
         if self.disk and not errors:
@@ -403,6 +417,8 @@ class AstroSearch:
                 self.disk.set(json.dumps(key, sort_keys=True, default=str), out)
             except Exception:
                 pass
+        if mode == "evidence":
+            return self._build_evidence_package(out)
         return out
 
     def _entity_gate(self, results: list[dict], entities: list[str], max_results: int) -> tuple[list[dict], bool]:
@@ -595,3 +611,124 @@ class AstroSearch:
                 "generated_at": now_iso,
                 "data_as_of": {"static_yearly": f"{year}-01-01 (eclipses, seasons, meteor peaks: fixed for the year)",
                                "live_snapshot": now_iso + " (moon phases yearly-static; Kp/asteroids/APOD: re-query live when fresh matters)"}}
+
+    def search_as_evidence_package(self, query: str = "", **kwargs) -> dict:
+        """Convenience method returning a structured EvidencePackage for AI agent grounding."""
+        return self.search(query=query, mode="evidence", **kwargs)
+
+    def search_deltas(self, query: str = "", since_date: str = "", **kwargs) -> dict:
+        """Filter search results strictly after since_date for Content Refresh workflows."""
+        return self.search(query=query, since_date=since_date, **kwargs)
+
+    def compare_objects(self, objects: list[str]) -> dict:
+        """Generate a deterministic physical comparison table and dictionary for astronomical bodies."""
+        if not objects or not isinstance(objects, list):
+            return {"error": "objects must be a non-empty list", "objects": [], "comparison": {}, "markdown_table": ""}
+        table_rows = []
+        comparison = {}
+        unique_keys = list(dict.fromkeys([str(o).strip().lower() for o in objects if str(o).strip()]))
+        for obj_key in unique_keys:
+            data = OBJECT_DATA.get(obj_key)
+            if not data:
+                data = next((v for k, v in OBJECT_DATA.items() if obj_key in k or k in obj_key), None)
+            if data:
+                comparison[data["name"]] = data
+                table_rows.append(data)
+            else:
+                fallback = {"name": obj_key.capitalize(), "type": "Unknown / Uncataloged", "radius_km": "N/A",
+                            "mass_kg": "N/A", "surface_temp_k": "N/A", "atmosphere": "N/A", "gravity_m_s2": "N/A"}
+                comparison[obj_key.capitalize()] = fallback
+                table_rows.append(fallback)
+
+        md = "| Target | Type | Radius (km) | Surface Temp (K) | Atmosphere | Surface Gravity (m/s²) |\n"
+        md += "| :--- | :--- | :--- | :--- | :--- | :--- |\n"
+        for r in table_rows:
+            md += f"| **{r['name']}** | {r.get('type', 'N/A')} | {r.get('radius_km', 'N/A')} | {r.get('surface_temp_k', 'N/A')} | {r.get('atmosphere', 'N/A')} | {r.get('gravity_m_s2', 'N/A')} |\n"
+
+        return {"objects": [r["name"] for r in table_rows], "comparison": comparison,
+                "markdown_table": md, "source": "AstroSearch Astronomical Physics Catalog"}
+
+    def _build_evidence_package(self, out: dict) -> dict:
+        results = out.get("results") or []
+        claims = []
+        primary_citations = []
+        source_authority = {}
+        direct_quotes = []
+
+        for r in results:
+            src = r.get("source", "Unknown")
+            auth = r.get("authority", 2)
+            source_authority[src] = auth
+            url = r.get("url")
+            title = r.get("title", "")
+            if url:
+                extra = r.get("extra") if isinstance(r.get("extra"), dict) else {}
+                primary_citations.append({
+                    "title": title,
+                    "source": src,
+                    "url": url,
+                    "published": r.get("published"),
+                    "authority": auth,
+                    "content_trust": r.get("content_trust", "untrusted_external"),
+                    "doi": extra.get("doi"),
+                    "bibcode": extra.get("bibcode"),
+                })
+            excerpt = r.get("excerpt") if isinstance(r.get("excerpt"), dict) else {}
+            text = excerpt.get("text") or r.get("summary", "")
+            if text:
+                direct_quotes.append({
+                    "quote": text,
+                    "source": src,
+                    "url": url,
+                    "query_match": excerpt.get("query_match", True),
+                })
+            ev = r.get("evidence") if isinstance(r.get("evidence"), dict) else None
+            if ev and ev.get("verification"):
+                claims.append({
+                    "claim": ev.get("verification"),
+                    "status": ev.get("status", "unverified"),
+                    "citation_url": ev.get("citation_url") or url,
+                    "source": src,
+                })
+
+        ans = out.get("answer") if isinstance(out.get("answer"), dict) else None
+        if ans and ans.get("text"):
+            claims.insert(0, {
+                "claim": ans.get("text"),
+                "status": "deterministic_calculation" if ans.get("method") == "computed" else "verified_reference",
+                "citation_url": ans.get("citation"),
+                "source": "AstroSearch Ephemeris Engine",
+            })
+
+        return {
+            "query": out.get("query", ""),
+            "intent": out.get("intent", ""),
+            "timestamp_utc": (out.get("context") or {}).get("now_utc") if isinstance(out.get("context"), dict) else None,
+            "claims": claims,
+            "primary_citations": primary_citations,
+            "direct_quotes": direct_quotes,
+            "source_authority": source_authority,
+            "evidence_lock_status": "locked" if claims else "preliminary",
+            "raw_search_count": out.get("count", len(results)),
+            "markdown": out.get("markdown", ""),
+        }
+
+
+OBJECT_DATA = {
+    "mercury": {"name": "Mercury", "type": "Terrestrial Planet", "radius_km": 2439.7, "mass_kg": "3.3011e23", "orbital_period_days": 87.97, "surface_temp_k": "100 to 700", "atmosphere": "Trace (Na, He, O2)", "distance_sun_au": 0.387, "gravity_m_s2": 3.7},
+    "venus": {"name": "Venus", "type": "Terrestrial Planet", "radius_km": 6051.8, "mass_kg": "4.8675e24", "orbital_period_days": 224.7, "surface_temp_k": "737 (mean)", "atmosphere": "96.5% CO2, 3.5% N2", "distance_sun_au": 0.723, "gravity_m_s2": 8.87},
+    "earth": {"name": "Earth", "type": "Terrestrial Planet", "radius_km": 6371.0, "mass_kg": "5.9722e24", "orbital_period_days": 365.25, "surface_temp_k": "288 (mean)", "atmosphere": "78% N2, 21% O2, 1% Ar", "distance_sun_au": 1.0, "gravity_m_s2": 9.81},
+    "mars": {"name": "Mars", "type": "Terrestrial Planet", "radius_km": 3389.5, "mass_kg": "6.4171e23", "orbital_period_days": 686.98, "surface_temp_k": "210 (mean)", "atmosphere": "95.3% CO2, 2.6% N2, 1.9% Ar", "distance_sun_au": 1.524, "gravity_m_s2": 3.72},
+    "jupiter": {"name": "Jupiter", "type": "Gas Giant", "radius_km": 69911.0, "mass_kg": "1.8982e27", "orbital_period_days": 4332.59, "surface_temp_k": "165 (at 1 bar)", "atmosphere": "89.8% H2, 10.2% He", "distance_sun_au": 5.204, "gravity_m_s2": 24.79},
+    "saturn": {"name": "Saturn", "type": "Gas Giant", "radius_km": 58232.0, "mass_kg": "5.6834e26", "orbital_period_days": 10759.22, "surface_temp_k": "134 (at 1 bar)", "atmosphere": "96.3% H2, 3.25% He", "distance_sun_au": 9.582, "gravity_m_s2": 10.44},
+    "uranus": {"name": "Uranus", "type": "Ice Giant", "radius_km": 25362.0, "mass_kg": "8.6810e25", "orbital_period_days": 30688.5, "surface_temp_k": "76 (at 1 bar)", "atmosphere": "82.5% H2, 15.2% He, 2.3% CH4", "distance_sun_au": 19.22, "gravity_m_s2": 8.69},
+    "neptune": {"name": "Neptune", "type": "Ice Giant", "radius_km": 24622.0, "mass_kg": "1.02413e26", "orbital_period_days": 60182.0, "surface_temp_k": "72 (at 1 bar)", "atmosphere": "80% H2, 19% He, 1.5% CH4", "distance_sun_au": 30.05, "gravity_m_s2": 11.15},
+    "moon": {"name": "Moon", "type": "Planetary Satellite (Earth)", "radius_km": 1737.4, "mass_kg": "7.342e22", "orbital_period_days": 27.32, "surface_temp_k": "100 to 390", "atmosphere": "Trace (He, Ne, H2)", "distance_sun_au": 1.0, "gravity_m_s2": 1.62},
+    "europa": {"name": "Europa", "type": "Ocean Moon (Jupiter)", "radius_km": 1560.8, "mass_kg": "4.8e22", "orbital_period_days": 3.55, "surface_temp_k": "50 to 125", "atmosphere": "Tenuous O2", "distance_sun_au": 5.2, "gravity_m_s2": 1.315},
+    "enceladus": {"name": "Enceladus", "type": "Ocean Moon (Saturn)", "radius_km": 252.1, "mass_kg": "1.08e20", "orbital_period_days": 1.37, "surface_temp_k": "75 (mean)", "atmosphere": "91% H2O vapor, 4% N2", "distance_sun_au": 9.58, "gravity_m_s2": 0.113},
+    "titan": {"name": "Titan", "type": "Icy Moon (Saturn)", "radius_km": 2574.7, "mass_kg": "1.3452e23", "orbital_period_days": 15.95, "surface_temp_k": "93.7", "atmosphere": "95% N2, 5% CH4 (1.45 bar)", "distance_sun_au": 9.58, "gravity_m_s2": 1.352},
+    "ganymede": {"name": "Ganymede", "type": "Icy Moon (Jupiter)", "radius_km": 2634.1, "mass_kg": "1.4819e23", "orbital_period_days": 7.15, "surface_temp_k": "70 to 152", "atmosphere": "Tenuous O2", "distance_sun_au": 5.2, "gravity_m_s2": 1.428},
+    "pluto": {"name": "Pluto", "type": "Dwarf Planet", "radius_km": 1188.3, "mass_kg": "1.303e22", "orbital_period_days": 90560.0, "surface_temp_k": "44", "atmosphere": "N2, CH4, CO (1 Pa)", "distance_sun_au": 39.48, "gravity_m_s2": 0.62},
+    "sun": {"name": "Sun", "type": "G-type Main-Sequence Star", "radius_km": 696340.0, "mass_kg": "1.9885e30", "orbital_period_days": None, "surface_temp_k": "5778 (photosphere)", "atmosphere": "73.46% H, 24.85% He", "distance_sun_au": 0.0, "gravity_m_s2": 274.0},
+}
+

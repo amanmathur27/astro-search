@@ -11,12 +11,20 @@ TOOL_DECLARATIONS = [
                         "query": {"type": "string", "description": "Natural query, e.g. next lunar eclipse, Perseids 2026 peak, aurora tonight, Kp now"},
                         "category": {"type": "string", "enum": ["news", "discoveries", "events", "papers", "space_weather", "all"]},
                         "max_results": {"type": "integer", "description": "Default 8, max 20"},
+                        "mode": {"type": "string", "enum": ["standard", "evidence"], "description": "Default standard. 'evidence' returns structured verification claims and citations for AI grounding."},
+                        "since_date": {"type": "string", "description": "Filter results published on or after YYYY-MM-DD for delta updates."},
                         "trends": {"type": "boolean", "description": "Gap-analysis mode: include a 7-day Google News article sample, not measured topic volume. Default false."},
                         "edition": {"type": "string", "description": "News edition for breaking coverage, e.g. US, IN, UK or IN:en. Default US."},
                         "lat": {"type": "number"}, "lon": {"type": "number"},
                         "timezone": {"type": "string", "description": "IANA tz, default UTC"},
                         "now_utc": {"type": "string", "description": "ISO now UTC; omit for server time"}},
                     "required": ["query"]}},
+    {"name": "astro_compare",
+     "description": "Physical comparison matrix of astronomical bodies (planets, moons, stars) containing radius, mass, temperature, gravity, and atmosphere.",
+     "parameters": {"type": "object",
+                    "properties": {
+                        "objects": {"type": "array", "items": {"type": "string"}, "description": "List of object names e.g. ['Europa', 'Titan']"}},
+                    "required": ["objects"]}},
     {"name": "astro_fetch",
      "description": "Fetch full text of a URL from astro_search results. Cleaned plain text.",
      "parameters": {"type": "object", "properties": {"url": {"type": "string"}}, "required": ["url"]}},
@@ -53,12 +61,25 @@ def tool_handler(tool_name: str, tool_args: dict) -> str:
             raise ValueError("tool_args must be an object")
         eng = _engine_get()
         if tool_name == "astro_search":
-            out = eng.search(query=tool_args.get("query", ""), category=tool_args.get("category", "all"),
-                             max_results=tool_args.get("max_results", 8),
-                             lat=tool_args.get("lat"), lon=tool_args.get("lon"),
-                             tz=tool_args.get("timezone", "UTC"), now_utc=tool_args.get("now_utc"),
-                             trends=tool_args.get("trends", False),
-                             edition=tool_args.get("edition"))
+            search_kwargs = {
+                "query": tool_args.get("query", ""),
+                "category": tool_args.get("category", "all"),
+                "max_results": tool_args.get("max_results", 8),
+                "lat": tool_args.get("lat"),
+                "lon": tool_args.get("lon"),
+                "tz": tool_args.get("timezone", "UTC"),
+                "now_utc": tool_args.get("now_utc"),
+                "trends": tool_args.get("trends", False),
+                "edition": tool_args.get("edition"),
+            }
+            if "mode" in tool_args:
+                search_kwargs["mode"] = tool_args["mode"]
+            if "since_date" in tool_args:
+                search_kwargs["since_date"] = tool_args["since_date"]
+            out = eng.search(**search_kwargs)
+        elif tool_name == "astro_compare":
+            out = eng.compare_objects(tool_args.get("objects", []))
+            return json.dumps({"json": out, "markdown": out.get("markdown_table", "")}, ensure_ascii=False, indent=2)
         elif tool_name == "astro_fetch":
             from .sources.fetch import fetch_article
             out = fetch_article(tool_args.get("url", ""))

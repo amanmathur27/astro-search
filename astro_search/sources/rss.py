@@ -79,6 +79,9 @@ RSS_FEEDS = [
 ]
 
 
+_FEED_CACHE = {}
+
+
 class RSSSource(BaseSource):
     def __init__(self, cfg: dict):
         self.cfg = cfg
@@ -95,11 +98,32 @@ class RSSSource(BaseSource):
         except (TypeError, ValueError):
             max_results = 8
         max_results = max(1, min(max_results, 20))
+        url = self.cfg["url"]
+        headers = dict(HEADERS)
+        cached_entry = _FEED_CACHE.get(url)
+        if cached_entry:
+            if cached_entry.get("etag"):
+                headers["If-None-Match"] = cached_entry["etag"]
+            if cached_entry.get("last_modified"):
+                headers["If-Modified-Since"] = cached_entry["last_modified"]
         try:
-            resp = requests.get(self.cfg["url"], headers=HEADERS, timeout=self.timeout)
-            resp.raise_for_status()
-            feed = feedparser.parse(resp.content)
-            if self.cfg.get("rapid_reports") and (not feed.version or feed.bozo):
+            resp = requests.get(url, headers=headers, timeout=self.timeout)
+            resp_status = getattr(resp, "status_code", 200)
+            resp_headers = getattr(resp, "headers", {}) or {}
+            if resp_status == 304 and cached_entry and cached_entry.get("feed") is not None:
+                feed = cached_entry["feed"]
+            else:
+                if hasattr(resp, "raise_for_status"):
+                    resp.raise_for_status()
+                feed = feedparser.parse(getattr(resp, "content", b""))
+                _FEED_CACHE[url] = {
+                    "etag": resp_headers.get("etag") if hasattr(resp_headers, "get") else None,
+                    "last_modified": resp_headers.get("last-modified") if hasattr(resp_headers, "get") else None,
+                    "feed": feed
+                }
+                while len(_FEED_CACHE) > 100:
+                    _FEED_CACHE.pop(next(iter(_FEED_CACHE)))
+            if self.cfg.get("rapid_reports") and (not getattr(feed, "version", "") or getattr(feed, "bozo", 0)):
                 raise ValueError("Invalid rapid-report feed")
         except Exception:
             self.report_error(kwargs)

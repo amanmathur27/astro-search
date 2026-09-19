@@ -2,10 +2,54 @@
 import re
 
 STOP = set('a an the is are was were of to from and or in on for with what when how tell me about latest recent news updates please'.split())
+ASTRO_GENERIC_STOP = set('space astronomy astrophysics universe science telescope observatory article articles website page post posted'.split())
+
+POLYSEMY_GUARDS = {
+    "eclipse": {
+        "negatives": ["ide", "java", "plugin", "compiler", "mitsubishi", "twilight", "vampire", "soundtrack"],
+        "positives": ["solar", "lunar", "sun", "moon", "totality", "annular", "umbra", "penumbra", "celestial", "sky", "path"],
+    },
+    "cluster": {
+        "negatives": ["kubernetes", "k8s", "server", "headache", "headaches", "symptom", "medical", "covid", "outbreak"],
+        "positives": ["star", "globular", "open", "galaxy", "galaxies", "virgo", "pleiades", "hyades", "stellar"],
+    },
+    "transit": {
+        "negatives": ["bus", "train", "subway", "metro", "fare", "commute", "station", "customs"],
+        "positives": ["planet", "exoplanet", "venus", "mercury", "star", "light", "curve", "kepler", "tess", "photometry"],
+    },
+    "curiosity": {
+        "negatives": ["psychology", "mindset", "habit", "curiosity killed", "childhood", "philosophical"],
+        "positives": ["rover", "mars", "nasa", "gale", "crater", "red planet", "jpl", "msl"],
+    },
+    "spirit": {
+        "negatives": ["ghost", "holy spirit", "alcohol", "liquor", "vodka", "whiskey", "airline", "airways", "team spirit"],
+        "positives": ["rover", "mars", "opportunity", "gusev", "crater", "nasa", "jpl"],
+    },
+    "flare": {
+        "negatives": ["pants", "jeans", "fashion", "dress", "arthritis", "inflammation"],
+        "positives": ["solar", "sun", "sunspot", "cme", "geomagnetic", "x-class", "m-class", "star", "stellar", "magnetic"],
+    },
+    "rings": {
+        "negatives": ["jewelry", "diamond", "gold", "wedding", "engagement", "lord of the rings", "tolkien"],
+        "positives": ["saturn", "uranus", "neptune", "jupiter", "planetary", "cassini", "ring system", "debris"],
+    },
+}
 
 
 def tokens(text):
     return set(re.findall(r'\w+', str(text or '').lower())) - STOP
+
+
+def check_polysemy_collision(query_toks: set[str], doc_text: str) -> float:
+    """Return penalty multiplier (0.05 to 1.0) if non-astronomical polysemy collision detected."""
+    doc_lower = str(doc_text or "").lower()
+    for word, guard in POLYSEMY_GUARDS.items():
+        if word in query_toks:
+            has_negative = any(re.search(r"\b" + re.escape(neg) + r"\b", doc_lower) for neg in guard["negatives"])
+            has_positive = any(re.search(r"\b" + re.escape(pos) + r"\b", doc_lower) for pos in guard["positives"])
+            if has_negative and not has_positive:
+                return 0.05  # Severe collision penalty
+    return 1.0
 
 
 def fields(row):
@@ -54,6 +98,14 @@ def annotate(row, query, intent):
     if pattern and not property_fields:
         best *= 0.4
         coverage *= 0.4
+
+    # Polysemy Collision Guard
+    combined_doc_text = " ".join(t for _, t, _ in data)
+    poly_multiplier = check_polysemy_collision(q, combined_doc_text)
+    if poly_multiplier < 1.0:
+        best *= poly_multiplier
+        coverage *= poly_multiplier
+
     row['relevance'] = {'subject_match': bool(subject_fields) if aliases else None,
                         'property_match': bool(property_fields) if pattern else None,
                         'subject_property_cooccurrence': any(any(phrase(a, text) for a in aliases) and re.search(pattern, text, re.I) for _, text, _ in data) if aliases and pattern else None,

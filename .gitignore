@@ -8,6 +8,7 @@ build/
 dist/
 .astro_cache.db
 feed_report.txt
+feed_report.json
 *.bsp
 local_demo/
 _pytest_out.txt
