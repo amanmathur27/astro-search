@@ -98,8 +98,10 @@ class AstroSearch:
         return self._sources
 
     def _select(self, intent: str, entities: list[str], category: str,
-                allow_gnews: bool = False) -> list:
+                allow_gnews: bool = False, query: str = "") -> list:
         from .intent import KNOWN_ENTITIES
+        from .sources.gnews import detected_publisher_domain
+        q = (query or "").lower()
         # map entity values -> group keys (e.g. "aurora" -> "solar")
         val_to_group: dict[str, str] = {}
         for g, vals in KNOWN_ENTITIES.items():
@@ -118,6 +120,16 @@ class AstroSearch:
             required.add("Open Notify ISS")
         if qgroups & {"eclipses", "moon_phases"}:
             required.add("USNO")
+
+        # Explicit publisher / source mentions in query
+        if detected_publisher_domain(q):
+            required.add("Google News")
+            allow_gnews = True
+        for s in self.sources:
+            s_name = getattr(s, "name", "").lower()
+            if s_name and (s_name in q or (s_name == "eso" and "eso" in q.split())):
+                required.add(s.name)
+
         cands = []
         for s in self.sources:
             if papers_only and s.name not in {"arXiv", "NASA ADS"}:
@@ -137,19 +149,31 @@ class AstroSearch:
             except Exception:
                 pass  # availability check itself failed -> try the source anyway
             cands.append(s)
+
         cands.sort(key=lambda s: (s.name in required, getattr(s, "authority", 2)), reverse=True)
-        selected = cands[:5]
         if papers_only:
-            return selected
+            return cands[:5]
+
+        # For news/discoveries: balanced selection across institutions (auth 3) and publications (auth 2)
+        if intent in ("recent_news", "mission_status", "discoveries"):
+            req_cands = [s for s in cands if s.name in required]
+            auth3 = [s for s in cands if s.name not in required and getattr(s, "authority", 2) >= 3]
+            auth2 = [s for s in cands if s.name not in required and getattr(s, "authority", 2) == 2]
+            other = [s for s in cands if s.name not in required and getattr(s, "authority", 2) < 2]
+            selected = req_cands + auth3[:3] + auth2[:3] + other[:1]
+            selected = selected[:8]
+        else:
+            selected = cands[:5]
+
         # gated Google News: allowed paths always carry it despite authority 1
         if allow_gnews and not any(getattr(s, "name", "") == "Google News" for s in selected):
-            for cand in cands[5:]:
+            for cand in cands:
                 if getattr(cand, "name", "") == "Google News":
                     selected.append(cand)
                     break
         # fallback guarantee: if a selected source has a named fallback not yet selected, append it
         names = {getattr(s, "name", "") for s in selected}
-        for s in selected:
+        for s in list(selected):
             fb = FALLBACK_CHAINS.get(getattr(s, "name", ""))
             if fb and fb not in names:
                 for cand in self.sources:
@@ -262,7 +286,7 @@ class AstroSearch:
         if intent == "research_lookup":
             category = "papers"
         # Include resolved civil dates so live caches cannot cross local midnight.
-        key = ("v8-alerts", query, category, max_results, bool(trends), edition or "", topic,
+        key = ("v9-2026-feeds", query, category, max_results, bool(trends), edition or "", topic,
                lat, lon, str(tz), year, dates["date_min"], dates["date_max"],
                now.astimezone(zone).date().isoformat())
         if now_utc:
@@ -285,7 +309,7 @@ class AstroSearch:
                 "isro", "gslv", "pslv", "lvm3", "sslv", "gaganyaan", "chandrayaan",
                 "india", "indian", "nsil", "skyroot", "agnikul")):
             edition = "IN"  # Indian outlets carry ISRO coverage western press skips
-        sources = self._select(intent, entities, category, allow_gnews=gnews_ok)
+        sources = self._select(intent, entities, category, allow_gnews=gnews_ok, query=query)
         kw = {"max_results": max_results, "intent": intent, "category": category,
               "lat": lat, "lon": lon, "tz": tz, "year": year,
               "date": dates.get("date_min"), "date_max": dates.get("date_max"), "now_utc": now_iso,

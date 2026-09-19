@@ -26,7 +26,8 @@ class MPCSource(BaseSource):
     timeout = 20
 
     def _get(self, url: str, **kw) -> requests.Response:
-        response = requests.get(url, headers=HEADERS, timeout=self.timeout, **kw)
+        merged = {**HEADERS, **kw.pop("headers", {})}
+        response = requests.get(url, headers=merged, timeout=self.timeout, **kw)
         response.raise_for_status()
         return response
 
@@ -54,9 +55,13 @@ class MPCSource(BaseSource):
             payload = self._get(OBS_API, headers={**HEADERS, "Content-Type": "application/json"},
                                 data=json.dumps({"desigs": [request["designation"]],
                                                  "output_format": ["OBS80"]})).json()
-            if not isinstance(payload, list) or any(not isinstance(item, dict) for item in payload):
+            # The API returns [<data>, <status_code>]; only the first element carries records.
+            if (not isinstance(payload, list) or not payload
+                    or not isinstance(payload[0], dict)):
                 raise ValueError("unexpected astrometry payload shape")
-            parsed = parse_observations(payload)
+            if isinstance(payload[0], dict) and "OBS80" not in payload[0]:
+                raise ValueError("astrometry payload missing OBS80 records")
+            parsed = parse_observations(payload[0].get("OBS80") or "")
             if not parsed["parsed"]:
                 raise ValueError("no conforming MPC-80 observations parsed")
             return [self._observation_row(request["designation"], parsed)]

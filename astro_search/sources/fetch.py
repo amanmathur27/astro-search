@@ -27,8 +27,41 @@ def validate_public_url(url):
     return url
 
 
+def resolve_google_news_url(url: str, timeout: float = 5.0) -> str:
+    """Resolve a Google News RSS redirect URL to the destination publisher URL."""
+    if "news.google.com" not in url:
+        return url
+    try:
+        import json
+        resp = requests.get(url, headers=HEADERS, timeout=timeout)
+        m = re.search(r'data-p="([^"]+)"', resp.text)
+        if not m:
+            return url
+        data_p = m.group(1).replace("&quot;", '"')
+        obj = json.loads(data_p.replace('%.@.', '["garturlreq",'))
+        payload = {
+            'f.req': json.dumps([[
+                ['Fbv4je', json.dumps(obj[:-6] + obj[-2:]), 'null', 'generic']
+            ]])
+        }
+        h2 = {
+            'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            'user-agent': HEADERS["User-Agent"]
+        }
+        r2 = requests.post("https://news.google.com/_/DotsSplashUi/data/batchexecute", headers=h2, data=payload, timeout=timeout)
+        array_string = json.loads(r2.text.replace(")]}'", ""))[0][2]
+        real_url = json.loads(array_string)[1]
+        return real_url or url
+    except Exception:
+        return url
+
+
 def _download(url, deadline=None):
     current = url
+    if "news.google.com" in current:
+        resolved = resolve_google_news_url(current, timeout=5 if deadline is None else max(0.01, min(5, deadline - time.monotonic())))
+        if resolved and resolved != current:
+            current = resolved
     # Disable automatic redirects: inspect each target before contacting it.
     for _ in range(6):
         import time

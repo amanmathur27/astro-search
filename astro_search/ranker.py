@@ -79,6 +79,19 @@ def rank(results: list[dict], query: str, intent: str, source_intents: dict | No
         # Credibility and freshness break ties; they cannot rescue zero relevance.
         final = (field_score + coverage + min(bm_mix, 4.0) * 0.05) if field_score or coverage else 0.0
         final *= 1 + _authority_norm(r.get("authority", 2)) * 0.05 + fresh * 0.03 + (0.02 if intent_ok else 0)
+
+        # Publisher match boost when query explicitly targets a publisher or domain
+        from .sources.gnews import detected_publisher_domain
+        domain = detected_publisher_domain(query)
+        if domain:
+            row_url = str(r.get("url") or "").lower()
+            row_pub = str(r.get("extra", {}).get("publisher") or r.get("source") or "").lower()
+            row_title = str(r.get("title") or "").lower()
+            domain_core = domain.split(".")[0]
+            if (domain in row_url or domain in row_pub or domain_core in row_pub
+                    or (r.get("source") == "Google News" and (domain in row_title or domain_core in row_title))):
+                final *= 3.0
+
         r["_score"] = final  # relative ranking, never factual confidence
         scored.append(r)
 

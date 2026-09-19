@@ -178,7 +178,14 @@ class NOAASource(BaseSource):
             kp = None
         bz = None
         try:
-            mag = _latest_observation(_json("/json/solar-wind/mag-7-day.json"), now)
+            mag = {}
+            for path in ("/json/rtsw/rtsw_mag_1m.json", "/json/solar-wind/mag-7-day.json"):
+                try:
+                    mag = _latest_observation(_json(path), now)
+                    if mag:
+                        break
+                except Exception:
+                    continue
             if _fresh_sample(mag, now, 1)[0]:
                 bz = _number(mag.get("bz_gsm"))
                 # Conservative application sanity bound, not a calibrated instrument limit.

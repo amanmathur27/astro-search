@@ -185,7 +185,8 @@ class USNOSource(BaseSource):
         if lat is not None and lon is not None and any(k in q for k in ["sidereal", "lst", "transit"]):
             try:
                 now_t = now.strftime("%H:%M:%S")
-                data = _get("/siderealtime", {"date": today, "time": now_t, "coords": f"{lat},{lon}"})
+                data = _get("/siderealtime", {"date": today, "time": now_t, "coords": f"{lat},{lon}",
+                                              "reps": 1, "intv_mag": 1, "intv_unit": "hours"})
                 out.append(normalize({
                     "title": "Local sidereal time (USNO)",
                     "summary": str(data)[:400], "url": "https://aa.usno.navy.mil/",

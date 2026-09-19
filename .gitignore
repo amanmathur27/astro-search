@@ -10,3 +10,10 @@ dist/
 feed_report.txt
 *.bsp
 local_demo/
+_pytest_out.txt
+_sn.html
+
+# Ignore all markdown documentation except README.md
+*.md
+!README.md
+

@@ -34,8 +34,8 @@ INTENT_RULES = [
                             "live", "forecast", "is there aurora", "solar wind", "kp index"]),
     ("celestial_event_detail", ["visible from", "can i see", "visibility",
                                 "what time", "where to watch", "best place"]),
-    ("research_lookup", ["paper", "study", "research", "arxiv", "published",
-                         "journal", "findings", "peer reviewed", "abstract"]),
+    ("research_lookup", ["paper", "papers", "study", "studies", "research", "arxiv", "preprint",
+                         "journal", "peer reviewed", "abstract", "doi"]),
     ("periodic_event", ["calendar", "all meteor showers", "this year events",
                         "celestial calendar", "schedule"]),
     ("celestial_event_lookup", ["next", "upcoming", "when is", "when will",
@@ -44,7 +44,8 @@ INTENT_RULES = [
                                 "solstice", "equinox", "supermoon", "alignment",
                                 "moon phase", "phase of the moon", "phase of moon"]),
     ("recent_news", ["latest", "recent", "new discovery", "just announced",
-                     "breaking", "discovered", "found", "detected", "today", "news"]),
+                     "breaking", "discovered", "found", "detected", "today", "news",
+                     "article", "articles", "posted", "publication"]),
     # object_lookup BEFORE concept_explanation to fix what-is collision
     ("object_lookup", ["how far", "distance to", "size of", "mass of",
                        "type of star", "magnitude", "coordinates of", "redshift"]),
@@ -86,6 +87,7 @@ STRUCTURAL = [
     (re.compile(r"\bwhere\s+(can|could|will|would|to)\b.{0,20}\b(see|watch|observe|view|spot)\b"), "celestial_event_detail"),
     (re.compile(r"\bwhat time\b"), "celestial_event_detail"),
     (re.compile(r"\b(is there|will there be|any)\b.{0,15}\b(aurora|northern lights)\b"), "current_phenomenon"),
+    (re.compile(r"\b(?:articles?|news|stories|posts?)\b.{0,25}\b(?:published|posted|on|in)\b"), "recent_news"),
     (re.compile(r"\b(papers?|arxiv|preprint)\b.{0,20}\b(on|about)\b"), "research_lookup"),
     # NOTE: no leading "what is/explain" pattern here on purpose — "what is the next
     # mission to Mars" must stay mission_status via keyword rules, not concept.

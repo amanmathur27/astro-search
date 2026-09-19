@@ -165,15 +165,31 @@ def parse_elements(text) -> dict | None:
             "uncertainty_note": "MPEC element blocks publish no formal uncertainties."}
 
 
+def _observation_lines(payload) -> list[str]:
+    """Collect candidate MPC-80 lines from every shape the get-obs API produces.
+
+    Accepted inputs: a bare OBS80 text, the data object (``{"OBS80": ...}``),
+    or the raw two-element body ``[<data object>, <status>]``. Non-dict list
+    items (the status element) are ignored.
+    """
+    if isinstance(payload, str):
+        return payload.splitlines()
+    objects = []
+    if isinstance(payload, dict):
+        objects = [payload]
+    elif isinstance(payload, list):
+        objects = [item for item in payload if isinstance(item, dict)]
+    lines: list[str] = []
+    for item in objects:
+        for value in item.values():
+            if isinstance(value, str):
+                lines.extend(value.splitlines())
+    return lines
+
+
 def parse_observations(payload, limit: int = 40) -> dict:
     """Parse MPC-80 astrometry defensively; non-conforming lines are skipped."""
-    lines: list[str] = []
-    if isinstance(payload, list):
-        for item in payload:
-            if isinstance(item, dict):
-                for value in item.values():
-                    if isinstance(value, str):
-                        lines.extend(value.splitlines())
+    lines = _observation_lines(payload)
     observations, skipped = [], 0
     for line in lines:
         if len(line) < 56:
@@ -208,7 +224,7 @@ def parse_observations(payload, limit: int = 40) -> dict:
         band = line[70] if len(line) >= 71 and line[70].isalpha() else None
         observations.append({
             "raw": line[:80].rstrip(),
-            "date_utc": f"{date.group(1)}-{date.group(2)}-{date.group(3)}",
+            "date_utc": f"{date.group(1)}-{date.group(2)}-{int(float(date.group(3))):02d}",
             "date_fraction": round(float(date.group(3)) - int(float(date.group(3))), 6),
             "ra_hms": f"{ra.group(1)}h{ra.group(2)}m{ra.group(3)}s",
             "dec_dms": f"{dec.group(1)}{dec.group(2)}d{dec.group(3)}m{dec.group(4)}s",

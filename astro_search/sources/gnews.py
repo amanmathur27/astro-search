@@ -22,6 +22,25 @@ RECENCY_RES = [
     re.compile(r"\bhours ago\b"), re.compile(r"\bthis week\b"), re.compile(r"\bpast week\b"),
 ]
 
+PUBLISHER_DOMAINS = {
+    "space.com": "space.com",
+    "sky & telescope": "skyandtelescope.org",
+    "sky and telescope": "skyandtelescope.org",
+    "skyandtelescope": "skyandtelescope.org",
+    "spaceflight now": "spaceflightnow.com",
+    "spaceflightnow": "spaceflightnow.com",
+    "planetary society": "planetary.org",
+    "spaceweather": "spaceweather.com",
+    "american meteor society": "amsmeteors.org",
+    "phys.org": "phys.org",
+    "physorg": "phys.org",
+    "universetoday": "universetoday.com",
+    "universe today": "universetoday.com",
+    "earthsky": "earthsky.org",
+    "sciencedaily": "sciencedaily.com",
+    "spacenews": "spacenews.com",
+}
+
 EDITIONS = {
     "US": ("en-US", "US", "US:en"),
     "IN": ("en-IN", "IN", "IN:en"),
@@ -29,8 +48,18 @@ EDITIONS = {
 }
 
 
+def detected_publisher_domain(query: str) -> str | None:
+    q = (query or "").lower()
+    for name, domain in PUBLISHER_DOMAINS.items():
+        if name in q:
+            return domain
+    return None
+
+
 def has_recency(query: str) -> bool:
     q = (query or "").lower()
+    if detected_publisher_domain(q) is not None:
+        return True
     return any(rx.search(q) for rx in RECENCY_RES)
 
 
@@ -88,14 +117,18 @@ class GoogleNewsSource(BaseSource):
         if not (query or "").strip():
             return []
         # GNews ranks by relevance, not recency: force a date window or months-old
-        # hits flood in and the freshness cutoff drops everything.
         q = query.strip()
+        domain = detected_publisher_domain(query) or kwargs.get("publisher_domain")
+        if domain and f"site:{domain}" not in q.lower():
+            clean_q = re.sub(r"\b(?:posted in|from|on|in|at|by|published in|articles in)?\s*" + re.escape(domain) + r"\b", "", q, flags=re.I).strip()
+            clean_q = re.sub(r"\s+", " ", clean_q).strip()
+            q = f"{clean_q} site:{domain}" if clean_q else f"site:{domain}"
         if not re.search(r"\b(after|before|when):", q, re.I):
-            days = recency_window_days(query, trends)
+            days = recency_window_days(query, trends) if not domain else max(recency_window_days(query, trends), 3)
             since = (now - timedelta(days=days)).strftime("%Y-%m-%d")
             q = f"{q} after:{since}"
         hl, gl, ceid = edition_params(kwargs.get("edition"))
-        max_age_h = 168 if recency_window_days(query, trends) == 7 else 12
+        max_age_h = 168 if recency_window_days(query, trends) == 7 else (72 if domain else 24)
         try:
             r = requests.get(BASE, params={"q": q, "hl": hl, "gl": gl, "ceid": ceid},
                              headers=HEADERS, timeout=self.timeout)
