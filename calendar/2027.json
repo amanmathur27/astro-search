@@ -5,16 +5,191 @@
   "year": 2027,
   "live_snapshots": [
     {
-      "title": "APOD: A Treasure Chest in the Carina Nebula",
-      "summary": "This treasure chest is full of stars. The featured image was obtained with NASA's James Webb Space Telescope and shows a dust pilar in the Carina Nebula inside our Galaxy, roughly 7500 light-years away. It is formed by interstellar gas and dust, and shaped by powerful stellar winds and radiation form neighboring stars like the nearby Eta Carinae stellar system which is more luminous than 5",
-      "url": "https://apod.nasa.gov/apod/ap260917.html",
+      "title": "Aurora / geomagnetic now: Kp 0.7 — Quiet conditions by Kp and Bz; local aurora visibility is not guaranteed.",
+      "summary": "Current estimated Kp 0.7 (1-min SWPC). IMF Bz 2.2 nT. Quiet conditions by Kp and Bz; local aurora visibility is not guaranteed.",
+      "url": "https://www.swpc.noaa.gov/products-and-data",
+      "source": "NOAA SWPC",
+      "source_type": "api",
+      "authority": 3,
+      "category": "space_weather",
+      "published": "2026-09-20T10:58:00Z",
+      "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Aurora / geomagnetic now: Kp 0.7 — Quiet conditions by Kp and Bz; local aurora visibility is not guaranteed.",
+        "feed_description": "Current estimated Kp 0.7 (1-min SWPC). IMF Bz 2.2 nT. Quiet conditions by Kp and Bz; local aurora visibility is not guaranteed.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
+      "freshness_display": "just now",
+      "entities": [],
+      "location": null,
+      "event_type": "aurora",
+      "date_only": false,
+      "precision": "unspecified",
+      "event_date": null,
+      "event_date_utc": null,
+      "event_end_utc": null,
+      "visibility": null,
+      "visibility_url": null,
+      "authors": [],
+      "extra": {
+        "kp": 0.67,
+        "bz": 2.21,
+        "alert": "Quiet conditions by Kp and Bz; local aurora visibility is not guaranteed.",
+        "kp_sample": {
+          "time_tag": "2026-09-20T10:58:00",
+          "kp_index": 1,
+          "estimated_kp": 0.67,
+          "kp": "1M"
+        },
+        "kp_available": true,
+        "bz_available": true,
+        "stale": false,
+        "observation_age_h": 0.0897876675,
+        "retrieved_at": "2026-09-20T11:03:23.235603Z"
+      }
+    },
+    {
+      "title": "NOAA 3-day space weather forecast",
+      "summary": ":Product: 3-Day Forecast :Issued: 2026 Sep 20 0030 UTC # Prepared by the U.S. Dept. of Commerce, NOAA, Space Weather Prediction Center # A. NOAA Geomagnetic Activity Observation and Forecast The greatest observed 3 hr Kp over the past 24 hours was 3 (below NOAA Scale levels). The greatest expected 3 hr Kp for Sep 20-Sep 22 2026 is 2.00 (below NOAA Scale levels). NOAA Kp index breakdown Sep 20-Se",
+      "url": "https://www.swpc.noaa.gov/",
+      "source": "NOAA SWPC",
+      "source_type": "api",
+      "authority": 3,
+      "category": "space_weather",
+      "published": "2026-09-20T00:30:00Z",
+      "freshness_h": 10,
+      "metadata": {
+        "feed_title": "NOAA 3-day space weather forecast",
+        "feed_description": ":Product: 3-Day Forecast :Issued: 2026 Sep 20 0030 UTC # Prepared by the U.S. Dept. of Commerce, NOAA, Space Weather Prediction Center # A. NOAA Geomagnetic Activity Observation and Forecast The greatest observed 3 hr Kp over the past 24 hours was 3 (below NOAA Scale levels). The greatest expected 3 hr Kp for Sep 20-Sep 22 2026 is 2.00 (below NOAA Scale levels). NOAA Kp index breakdown Sep 20-Se",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
+      "freshness_display": "10h ago",
+      "entities": [],
+      "location": null,
+      "event_type": null,
+      "date_only": false,
+      "precision": "unspecified",
+      "event_date": null,
+      "event_date_utc": null,
+      "event_end_utc": null,
+      "visibility": null,
+      "visibility_url": null,
+      "authors": [],
+      "extra": {
+        "forecast": ":Product: 3-Day Forecast\n:Issued: 2026 Sep 20 0030 UTC\n# Prepared by the U.S. Dept. of Commerce, NOAA, Space Weather Prediction Center\n#\nA. NOAA Geomagnetic Activity Observation and Forecast\n\nThe greatest observed 3 hr Kp over the past 24 hours was 3 (below NOAA\nScale levels).\nThe greatest expected 3 hr Kp for Sep 20-Sep 22 2026 is 2.00 (below NOAA\nScale levels).\n\nNOAA Kp index breakdown Sep 20-Sep 22 2026\n\n             Sep 20       Sep 21       Sep 22\n00-03UT       1.67         1.67         1.67     \n03-06UT       2.00         2.00         1.33     \n06-09UT       1.67         1.67         1.33     \n09-12UT       1.33         1.33         1.33     \n12-15UT       0.67         0.67         1.33     \n15-18UT       1.33         1.33         1.33     \n18-21UT       1.33         1.33         1.6",
+        "issued_at": "2026-09-20T00:30:00Z",
+        "validity_status": "recent_issue_not_verified_forecast_horizon",
+        "retrieved_at": "2026-09-20T11:03:23.235603Z"
+      }
+    },
+    {
+      "title": "Solar X-ray flux now: 3.0e-07 W/m² (class B)",
+      "summary": "GOES 0.1–0.8 nm X-ray flux 3.0e-07 W/m² (B-class flux level); not a flare-event detection.",
+      "url": "https://www.swpc.noaa.gov/products/goes-x-ray-flux",
+      "source": "NOAA SWPC",
+      "source_type": "api",
+      "authority": 3,
+      "category": "space_weather",
+      "published": "2026-09-20T10:59:00Z",
+      "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Solar X-ray flux now: 3.0e-07 W/m² (class B)",
+        "feed_description": "GOES 0.1–0.8 nm X-ray flux 3.0e-07 W/m² (B-class flux level); not a flare-event detection.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
+      "freshness_display": "just now",
+      "entities": [],
+      "location": null,
+      "event_type": null,
+      "date_only": false,
+      "precision": "unspecified",
+      "event_date": null,
+      "event_date_utc": null,
+      "event_end_utc": null,
+      "visibility": null,
+      "visibility_url": null,
+      "authors": [],
+      "extra": {
+        "xray_flux": 3.0057719868636923e-07,
+        "flare_class": "B",
+        "energy": "0.1-0.8nm",
+        "retrieved_at": "2026-09-20T11:03:23.235603Z"
+      }
+    },
+    {
+      "title": "Geomagnetic storm scale now: G0 (Kp 2)",
+      "summary": "No storm per NOAA planetary K-index.",
+      "url": "https://www.swpc.noaa.gov/noaa-scales-explanation",
+      "source": "NOAA SWPC",
+      "source_type": "api",
+      "authority": 3,
+      "category": "space_weather",
+      "published": "2026-09-20T06:00:00Z",
+      "freshness_h": 5,
+      "metadata": {
+        "feed_title": "Geomagnetic storm scale now: G0 (Kp 2)",
+        "feed_description": "No storm per NOAA planetary K-index.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
+      "freshness_display": "5h ago",
+      "entities": [],
+      "location": null,
+      "event_type": null,
+      "date_only": false,
+      "precision": "unspecified",
+      "event_date": null,
+      "event_date_utc": null,
+      "event_end_utc": null,
+      "visibility": null,
+      "visibility_url": null,
+      "authors": [],
+      "extra": {
+        "g_scale": 0,
+        "kp": 2.0,
+        "retrieved_at": "2026-09-20T11:03:23.235603Z"
+      }
+    },
+    {
+      "title": "APOD: Analemma over the Callanish Stones",
+      "summary": "If you went outside at the same time every day and took a picture that included the Sun, how would the Sun's position change? A visual answer to that question is an analemma, a composite image taken from the same spot at the same time over the course of a year. The featured analemma was composed from images taken every few days at noon near the village of Callanish in the Outer Hebrides in",
+      "url": "https://apod.nasa.gov/apod/ap260920.html",
       "source": "NASA",
       "source_type": "api",
       "authority": 3,
       "category": "discoveries",
-      "published": "2026-09-17T00:00:00Z",
-      "freshness_h": 6,
-      "freshness_display": "6h ago",
+      "published": "2026-09-20T00:00:00Z",
+      "freshness_h": 11,
+      "metadata": {
+        "feed_title": "APOD: Analemma over the Callanish Stones",
+        "feed_description": "If you went outside at the same time every day and took a picture that included the Sun, how would the Sun's position change? A visual answer to that question is an analemma, a composite image taken from the same spot at the same time over the course of a year. The featured analemma was composed from images taken every few days at noon near the village of Callanish in the Outer Hebrides in Scotland, UK. In the foreground are the Callanish Stones, a stone circle built around 2700 BC during humanity's Bronze Age. It is not known if the placement of the Callanish Stones has or had astronomical significance. The ultimate causes for the figure-8 shape of this and all analemmas are the tilt of the Earth axis and the ellipticity of the Earth's orbit around the Sun. At the solstices, the Sun will appear at the top or bottom of an analemma. The featured image was taken near the December solstice and so the Sun appears near the bottom. Equinoxes, however, correspond to analemma middle points -- not the intersection point. In two days there will be an equinox (\"equal night\"), when day and night are equal over all of planet Earth. Many cultures celebrate a change of season at an equinox. APOD's main NASA site is moving: From apod.nasa.gov to science.nasa.gov/apod",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
+      "freshness_display": "11h ago",
       "entities": [],
       "location": null,
       "event_type": null,
@@ -28,9 +203,9 @@
       "authors": [],
       "extra": {
         "media_type": "image",
-        "media_url": "https://apod.nasa.gov/apod/image/2609/JWST_Treasure_Chest.jpg",
+        "media_url": "https://apod.nasa.gov/apod/image/2609/CallanishAnalemma_Petricca_1280.jpg",
         "fetch_compatible": true,
-        "retrieved_at": "2026-09-17T06:46:15.293955Z"
+        "retrieved_at": "2026-09-20T11:03:23.235603Z"
       }
     },
     {
@@ -42,8 +217,18 @@
       "authority": 3,
       "category": "events",
       "published": "2026-09-15T11:26:13Z",
-      "freshness_h": 43,
-      "freshness_display": "1d ago",
+      "freshness_h": 119,
+      "metadata": {
+        "feed_title": "Fireball 2026-09-15 11:26:13 — 2.2 kt",
+        "feed_description": "{'date': '2026-09-15 11:26:13', 'energy': '2.2', 'impact-e': '0.079', 'lat': '37.6', 'lat-dir': 'S', 'lon': '161.6', 'lon-dir': 'W', 'alt': '37.0', 'vel': None}",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
+      "freshness_display": "4d ago",
       "entities": [],
       "location": null,
       "event_type": "fireball",
@@ -67,53 +252,58 @@
           "alt": "37.0",
           "vel": null
         },
-        "retrieved_at": "2026-09-17T06:46:15.293955Z"
+        "retrieved_at": "2026-09-20T11:03:23.235603Z"
       }
     },
     {
-      "title": "Moon: Waxing Crescent — 2026-09-17 (local compute)",
-      "summary": "Local computation for 2026-09-17: Waxing Crescent, illumination 35.3%. Next full 2026/9/26 16:48:58, next new 2026/10/10 15:50:01. Global visibility (moon phase is geocentric).",
+      "title": "Moon: Waxing Gibbous — 2026-09-20 (local compute)",
+      "summary": "Local computation for 2026-09-20: Waxing Gibbous, illumination 65.0%. Next full 2026/9/26 16:48:58, next new 2026/10/10 15:50:01. Global visibility (moon phase is geocentric).",
       "url": "https://aa.usno.navy.mil/",
       "source": "Local Sky",
       "source_type": "computed",
       "authority": 2,
       "category": "events",
-      "published": "2026-09-17T06:46:15.293955Z",
+      "published": "2026-09-20T11:03:23.235603Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Moon: Waxing Gibbous — 2026-09-20 (local compute)",
+        "feed_description": "Local computation for 2026-09-20: Waxing Gibbous, illumination 65.0%. Next full 2026/9/26 16:48:58, next new 2026/10/10 15:50:01. Global visibility (moon phase is geocentric).",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
       "event_type": "moon_phase",
       "date_only": false,
       "precision": "unspecified",
-      "event_date": "2026-09-17T06:46:15.293955Z",
-      "event_date_utc": "2026-09-17T06:46:15.293955Z",
+      "event_date": "2026-09-20T11:03:23.235603Z",
+      "event_date_utc": "2026-09-20T11:03:23.235603Z",
       "event_end_utc": null,
       "visibility": "Global",
       "visibility_url": null,
       "authors": [],
       "extra": {
         "local_verify": {
-          "phase": "Waxing Crescent",
-          "illumination_pct": 35.3,
+          "phase": "Waxing Gibbous",
+          "illumination_pct": 65.0,
           "waxing": true,
           "next_full": "2026/9/26 16:48:58",
           "next_new": "2026/10/10 15:50:01"
         },
         "skyfield": {
-          "elongation_deg": 72.75
+          "elongation_deg": 107.37
         },
         "computed": true,
-        "retrieved_at": "2026-09-17T06:46:15.293955Z"
+        "retrieved_at": "2026-09-20T11:03:23.235603Z"
       }
     }
   ],
-  "errors": [
-    {
-      "source": "NOAA SWPC",
-      "error": "source_backoff"
-    }
-  ],
+  "errors": [],
   "references": [
     {
       "title": "Lunar eclipses 2027 — NASA eclipse catalog",
@@ -125,6 +315,16 @@
       "category": "events",
       "published": "",
       "freshness_h": null,
+      "metadata": {
+        "feed_title": "Lunar eclipses 2027 — NASA eclipse catalog",
+        "feed_description": "USNO serves solar eclipses only. Full lunar list with visibility maps: NASA eclipse site.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "unknown",
       "freshness_display": null,
       "entities": [],
       "location": null,
@@ -161,6 +361,16 @@
       "category": "events",
       "published": "2027-01-03T02:33:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Perihelion 2027",
+        "feed_description": "Perihelion occurs 2027-01-03T02:33:00Z UTC (global instant).",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -192,6 +402,16 @@
       "category": "events",
       "published": "2027-01-03T15:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Quadrantids peak 2027-01-03T15:00:00Z",
+        "feed_description": "Peak 2027-01-03T15:00:00Z UTC. ZHR 110. Best: Northern. Radiant Bootes. Moon: check USNO phase that night.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -229,6 +449,16 @@
       "category": "events",
       "published": "2027-01-07T20:24:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "New Moon — 1/7/2027",
+        "feed_description": "New Moon occurs 2027-01-07T20:24:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -260,6 +490,16 @@
       "category": "events",
       "published": "2027-01-15T20:34:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "First Quarter — 1/15/2027",
+        "feed_description": "First Quarter occurs 2027-01-15T20:34:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -291,6 +531,16 @@
       "category": "events",
       "published": "2027-01-22T12:17:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Full Moon — 1/22/2027",
+        "feed_description": "Full Moon occurs 2027-01-22T12:17:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -322,6 +572,16 @@
       "category": "events",
       "published": "2027-01-29T10:55:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Last Quarter — 1/29/2027",
+        "feed_description": "Last Quarter occurs 2027-01-29T10:55:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -353,6 +613,16 @@
       "category": "events",
       "published": "2027-02-06T00:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Annular Solar Eclipse of 6 February 2027 (2027)",
+        "feed_description": "Annular Solar Eclipse of 6 February 2027 occurs 2027-02-06. Local circumstances: query with lat/lon for magnitude/obscuration.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -389,6 +659,16 @@
       "category": "events",
       "published": "2027-02-06T15:56:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "New Moon — 2/6/2027",
+        "feed_description": "New Moon occurs 2027-02-06T15:56:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -420,6 +700,16 @@
       "category": "events",
       "published": "2027-02-14T07:58:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "First Quarter — 2/14/2027",
+        "feed_description": "First Quarter occurs 2027-02-14T07:58:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -451,6 +741,16 @@
       "category": "events",
       "published": "2027-02-20T23:23:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Full Moon — 2/20/2027",
+        "feed_description": "Full Moon occurs 2027-02-20T23:23:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -482,6 +782,16 @@
       "category": "events",
       "published": "2027-02-28T05:16:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Last Quarter — 2/28/2027",
+        "feed_description": "Last Quarter occurs 2027-02-28T05:16:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -513,6 +823,16 @@
       "category": "events",
       "published": "2027-03-08T09:29:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "New Moon — 3/8/2027",
+        "feed_description": "New Moon occurs 2027-03-08T09:29:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -544,6 +864,16 @@
       "category": "events",
       "published": "2027-03-15T16:25:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "First Quarter — 3/15/2027",
+        "feed_description": "First Quarter occurs 2027-03-15T16:25:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -575,6 +905,16 @@
       "category": "events",
       "published": "2027-03-20T20:25:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Equinox 2027",
+        "feed_description": "Equinox occurs 2027-03-20T20:25:00Z UTC (global instant).",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -606,6 +946,16 @@
       "category": "events",
       "published": "2027-03-22T10:44:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Full Moon — 3/22/2027",
+        "feed_description": "Full Moon occurs 2027-03-22T10:44:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -637,6 +987,16 @@
       "category": "events",
       "published": "2027-03-30T00:54:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Last Quarter — 3/30/2027",
+        "feed_description": "Last Quarter occurs 2027-03-30T00:54:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -668,6 +1028,16 @@
       "category": "events",
       "published": "2027-04-06T23:51:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "New Moon — 4/6/2027",
+        "feed_description": "New Moon occurs 2027-04-06T23:51:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -699,6 +1069,16 @@
       "category": "events",
       "published": "2027-04-13T22:56:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "First Quarter — 4/13/2027",
+        "feed_description": "First Quarter occurs 2027-04-13T22:56:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -730,6 +1110,16 @@
       "category": "events",
       "published": "2027-04-20T22:27:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Full Moon — 4/20/2027",
+        "feed_description": "Full Moon occurs 2027-04-20T22:27:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -761,6 +1151,16 @@
       "category": "events",
       "published": "2027-04-22T18:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Lyrids peak 2027-04-22T18:00:00Z",
+        "feed_description": "Peak 2027-04-22T18:00:00Z UTC. ZHR 18. Best: Northern. Radiant Lyra. Moon: check USNO phase that night.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -798,6 +1198,16 @@
       "category": "events",
       "published": "2027-04-28T20:18:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Last Quarter — 4/28/2027",
+        "feed_description": "Last Quarter occurs 2027-04-28T20:18:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -829,6 +1239,16 @@
       "category": "events",
       "published": "2027-05-06T04:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Eta Aquariids peak 2027-05-06T04:00:00Z",
+        "feed_description": "Peak 2027-05-06T04:00:00Z UTC. ZHR 50. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -866,6 +1286,16 @@
       "category": "events",
       "published": "2027-05-06T10:58:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "New Moon — 5/6/2027",
+        "feed_description": "New Moon occurs 2027-05-06T10:58:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -897,6 +1327,16 @@
       "category": "events",
       "published": "2027-05-13T04:44:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "First Quarter — 5/13/2027",
+        "feed_description": "First Quarter occurs 2027-05-13T04:44:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -928,6 +1368,16 @@
       "category": "events",
       "published": "2027-05-20T10:59:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Full Moon — 5/20/2027",
+        "feed_description": "Full Moon occurs 2027-05-20T10:59:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -959,6 +1409,16 @@
       "category": "events",
       "published": "2027-05-28T13:58:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Last Quarter — 5/28/2027",
+        "feed_description": "Last Quarter occurs 2027-05-28T13:58:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -990,6 +1450,16 @@
       "category": "events",
       "published": "2027-06-04T19:40:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "New Moon — 6/4/2027",
+        "feed_description": "New Moon occurs 2027-06-04T19:40:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1021,6 +1491,16 @@
       "category": "events",
       "published": "2027-06-11T10:56:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "First Quarter — 6/11/2027",
+        "feed_description": "First Quarter occurs 2027-06-11T10:56:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1052,6 +1532,16 @@
       "category": "events",
       "published": "2027-06-19T00:44:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Full Moon — 6/19/2027",
+        "feed_description": "Full Moon occurs 2027-06-19T00:44:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1083,6 +1573,16 @@
       "category": "events",
       "published": "2027-06-21T14:11:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Solstice 2027",
+        "feed_description": "Solstice occurs 2027-06-21T14:11:00Z UTC (global instant).",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1114,6 +1614,16 @@
       "category": "events",
       "published": "2027-06-27T04:54:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Last Quarter — 6/27/2027",
+        "feed_description": "Last Quarter occurs 2027-06-27T04:54:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1145,6 +1655,16 @@
       "category": "events",
       "published": "2027-07-04T03:02:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "New Moon — 7/4/2027",
+        "feed_description": "New Moon occurs 2027-07-04T03:02:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1176,6 +1696,16 @@
       "category": "events",
       "published": "2027-07-05T05:06:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Aphelion 2027",
+        "feed_description": "Aphelion occurs 2027-07-05T05:06:00Z UTC (global instant).",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1207,6 +1737,16 @@
       "category": "events",
       "published": "2027-07-10T18:39:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "First Quarter — 7/10/2027",
+        "feed_description": "First Quarter occurs 2027-07-10T18:39:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1238,6 +1778,16 @@
       "category": "events",
       "published": "2027-07-18T15:45:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Full Moon — 7/18/2027",
+        "feed_description": "Full Moon occurs 2027-07-18T15:45:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1269,6 +1819,16 @@
       "category": "events",
       "published": "2027-07-26T16:55:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Last Quarter — 7/26/2027",
+        "feed_description": "Last Quarter occurs 2027-07-26T16:55:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1300,6 +1860,16 @@
       "category": "events",
       "published": "2027-07-30T03:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Southern Delta Aquariids peak 2027-07-30T03:00:00Z",
+        "feed_description": "Peak 2027-07-30T03:00:00Z UTC. ZHR 25. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1337,6 +1907,16 @@
       "category": "events",
       "published": "2027-08-02T00:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Total Solar Eclipse of 2 August 2027 (2027)",
+        "feed_description": "Total Solar Eclipse of 2 August 2027 occurs 2027-08-02. Local circumstances: query with lat/lon for magnitude/obscuration.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1373,6 +1953,16 @@
       "category": "events",
       "published": "2027-08-02T10:05:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "New Moon — 8/2/2027",
+        "feed_description": "New Moon occurs 2027-08-02T10:05:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1404,6 +1994,16 @@
       "category": "events",
       "published": "2027-08-09T04:54:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "First Quarter — 8/9/2027",
+        "feed_description": "First Quarter occurs 2027-08-09T04:54:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1435,6 +2035,16 @@
       "category": "events",
       "published": "2027-08-13T03:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Perseids peak 2027-08-13T03:00:00Z",
+        "feed_description": "Peak 2027-08-13T03:00:00Z UTC. ZHR 100. Best: Northern. Radiant Perseus. Moon: check USNO phase that night.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1472,6 +2082,16 @@
       "category": "events",
       "published": "2027-08-17T07:29:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Full Moon — 8/17/2027",
+        "feed_description": "Full Moon occurs 2027-08-17T07:29:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1503,6 +2123,16 @@
       "category": "events",
       "published": "2027-08-25T02:27:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Last Quarter — 8/25/2027",
+        "feed_description": "Last Quarter occurs 2027-08-25T02:27:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1534,6 +2164,16 @@
       "category": "events",
       "published": "2027-08-31T17:41:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "New Moon — 8/31/2027",
+        "feed_description": "New Moon occurs 2027-08-31T17:41:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1565,6 +2205,16 @@
       "category": "events",
       "published": "2027-09-07T18:31:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "First Quarter — 9/7/2027",
+        "feed_description": "First Quarter occurs 2027-09-07T18:31:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1596,6 +2246,16 @@
       "category": "events",
       "published": "2027-09-15T23:03:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Full Moon — 9/15/2027",
+        "feed_description": "Full Moon occurs 2027-09-15T23:03:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1627,6 +2287,16 @@
       "category": "events",
       "published": "2027-09-23T06:02:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Equinox 2027",
+        "feed_description": "Equinox occurs 2027-09-23T06:02:00Z UTC (global instant).",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1658,6 +2328,16 @@
       "category": "events",
       "published": "2027-09-23T10:20:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Last Quarter — 9/23/2027",
+        "feed_description": "Last Quarter occurs 2027-09-23T10:20:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1689,6 +2369,16 @@
       "category": "events",
       "published": "2027-09-30T02:36:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "New Moon — 9/30/2027",
+        "feed_description": "New Moon occurs 2027-09-30T02:36:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1720,6 +2410,16 @@
       "category": "events",
       "published": "2027-10-07T11:47:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "First Quarter — 10/7/2027",
+        "feed_description": "First Quarter occurs 2027-10-07T11:47:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1751,6 +2451,16 @@
       "category": "events",
       "published": "2027-10-08T15:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Draconids peak 2027-10-08T15:00:00Z",
+        "feed_description": "Peak 2027-10-08T15:00:00Z UTC. ZHR 10. Best: Northern. Radiant Draco. Moon: check USNO phase that night.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1788,6 +2498,16 @@
       "category": "events",
       "published": "2027-10-15T13:47:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Full Moon — 10/15/2027",
+        "feed_description": "Full Moon occurs 2027-10-15T13:47:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1819,6 +2539,16 @@
       "category": "events",
       "published": "2027-10-21T05:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Orionids peak 2027-10-21T05:00:00Z",
+        "feed_description": "Peak 2027-10-21T05:00:00Z UTC. ZHR 20. Best: Both. Radiant Orion. Moon: check USNO phase that night.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1856,6 +2586,16 @@
       "category": "events",
       "published": "2027-10-22T17:29:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Last Quarter — 10/22/2027",
+        "feed_description": "Last Quarter occurs 2027-10-22T17:29:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1887,6 +2627,16 @@
       "category": "events",
       "published": "2027-10-29T13:36:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "New Moon — 10/29/2027",
+        "feed_description": "New Moon occurs 2027-10-29T13:36:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1918,6 +2668,16 @@
       "category": "events",
       "published": "2027-11-05T04:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Southern Taurids peak 2027-11-05T04:00:00Z",
+        "feed_description": "Peak 2027-11-05T04:00:00Z UTC. ZHR 10. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1955,6 +2715,16 @@
       "category": "events",
       "published": "2027-11-06T08:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "First Quarter — 11/6/2027",
+        "feed_description": "First Quarter occurs 2027-11-06T08:00:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -1986,6 +2756,16 @@
       "category": "events",
       "published": "2027-11-12T04:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Northern Taurids peak 2027-11-12T04:00:00Z",
+        "feed_description": "Peak 2027-11-12T04:00:00Z UTC. ZHR 5. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -2023,6 +2803,16 @@
       "category": "events",
       "published": "2027-11-14T03:26:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Full Moon — 11/14/2027",
+        "feed_description": "Full Moon occurs 2027-11-14T03:26:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -2054,6 +2844,16 @@
       "category": "events",
       "published": "2027-11-17T22:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Leonids peak 2027-11-17T22:00:00Z",
+        "feed_description": "Peak 2027-11-17T22:00:00Z UTC. ZHR 15. Best: Northern. Radiant Leon. Moon: check USNO phase that night.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -2091,6 +2891,16 @@
       "category": "events",
       "published": "2027-11-21T00:48:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Last Quarter — 11/21/2027",
+        "feed_description": "Last Quarter occurs 2027-11-21T00:48:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -2122,6 +2932,16 @@
       "category": "events",
       "published": "2027-11-28T03:24:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "New Moon — 11/28/2027",
+        "feed_description": "New Moon occurs 2027-11-28T03:24:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -2153,6 +2973,16 @@
       "category": "events",
       "published": "2027-12-06T05:22:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "First Quarter — 12/6/2027",
+        "feed_description": "First Quarter occurs 2027-12-06T05:22:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -2184,6 +3014,16 @@
       "category": "events",
       "published": "2027-12-13T16:09:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Full Moon — 12/13/2027",
+        "feed_description": "Full Moon occurs 2027-12-13T16:09:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -2215,6 +3055,16 @@
       "category": "events",
       "published": "2027-12-14T02:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Geminids peak 2027-12-14T02:00:00Z",
+        "feed_description": "Peak 2027-12-14T02:00:00Z UTC. ZHR 150. Best: Northern. Radiant Gemini. Moon: check USNO phase that night.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -2252,6 +3102,16 @@
       "category": "events",
       "published": "2027-12-20T09:11:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Last Quarter — 12/20/2027",
+        "feed_description": "Last Quarter occurs 2027-12-20T09:11:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -2283,6 +3143,16 @@
       "category": "events",
       "published": "2027-12-22T02:42:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Solstice 2027",
+        "feed_description": "Solstice occurs 2027-12-22T02:42:00Z UTC (global instant).",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -2314,6 +3184,16 @@
       "category": "events",
       "published": "2027-12-22T10:00:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "Ursids peak 2027-12-22T10:00:00Z",
+        "feed_description": "Peak 2027-12-22T10:00:00Z UTC. ZHR 10. Best: Northern. Radiant Ursa Minor. Moon: check USNO phase that night.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -2351,6 +3231,16 @@
       "category": "events",
       "published": "2027-12-27T20:12:00Z",
       "freshness_h": 0,
+      "metadata": {
+        "feed_title": "New Moon — 12/27/2027",
+        "feed_description": "New Moon occurs 2027-12-27T20:12:00Z UTC.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
       "freshness_display": "just now",
       "entities": [],
       "location": null,
@@ -2373,16 +3263,16 @@
       }
     }
   ],
-  "markdown": "_Context: Thursday, 2026-09-17 2026-09-17T06:46:15.293955Z (intent: periodic_event)._\n\n- **[Perihelion 2027](https://aa.usno.navy.mil/)** — USNO, 2027-01-03\n  Perihelion occurs 2027-01-03T02:33:00Z UTC (global instant).\n  Event (UTC): 2027-01-03T02:33:00Z | Visible: Global\n- **[Quadrantids peak 2027-01-03T15:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2027-01-03\n  Peak 2027-01-03T15:00:00Z UTC. ZHR 110. Best: Northern. Radiant Bootes. Moon: check USNO phase that night.\n  Event (UTC): 2027-01-03T15:00:00Z | Visible: Northern (approx peak ±1d)\n- **[New Moon — 1/7/2027](https://aa.usno.navy.mil/)** — USNO, 2027-01-07\n  New Moon occurs 2027-01-07T20:24:00Z UTC.\n  Event (UTC): 2027-01-07T20:24:00Z\n- **[First Quarter — 1/15/2027](https://aa.usno.navy.mil/)** — USNO, 2027-01-15\n  First Quarter occurs 2027-01-15T20:34:00Z UTC.\n  Event (UTC): 2027-01-15T20:34:00Z\n- **[Full Moon — 1/22/2027](https://aa.usno.navy.mil/)** — USNO, 2027-01-22\n  Full Moon occurs 2027-01-22T12:17:00Z UTC.\n  Event (UTC): 2027-01-22T12:17:00Z\n- **[Last Quarter — 1/29/2027](https://aa.usno.navy.mil/)** — USNO, 2027-01-29\n  Last Quarter occurs 2027-01-29T10:55:00Z UTC.\n  Event (UTC): 2027-01-29T10:55:00Z\n- **[Annular Solar Eclipse of 6 February 2027 (2027)](https://eclipse.gsfc.nasa.gov/)** — USNO, 2027-02-06\n  Annular Solar Eclipse of 6 February 2027 occurs 2027-02-06. Local circumstances: query with lat/lon for magnitude/obscuration.\n  Event date: 2027-02-06 (time not supplied)\n- **[New Moon — 2/6/2027](https://aa.usno.navy.mil/)** — USNO, 2027-02-06\n  New Moon occurs 2027-02-06T15:56:00Z UTC.\n  Event (UTC): 2027-02-06T15:56:00Z\n- **[First Quarter — 2/14/2027](https://aa.usno.navy.mil/)** — USNO, 2027-02-14\n  First Quarter occurs 2027-02-14T07:58:00Z UTC.\n  Event (UTC): 2027-02-14T07:58:00Z\n- **[Full Moon — 2/20/2027](https://aa.usno.navy.mil/)** — USNO, 2027-02-20\n  Full Moon occurs 2027-02-20T23:23:00Z UTC.\n  Event (UTC): 2027-02-20T23:23:00Z\n- **[Last Quarter — 2/28/2027](https://aa.usno.navy.mil/)** — USNO, 2027-02-28\n  Last Quarter occurs 2027-02-28T05:16:00Z UTC.\n  Event (UTC): 2027-02-28T05:16:00Z\n- **[New Moon — 3/8/2027](https://aa.usno.navy.mil/)** — USNO, 2027-03-08\n  New Moon occurs 2027-03-08T09:29:00Z UTC.\n  Event (UTC): 2027-03-08T09:29:00Z\n- **[First Quarter — 3/15/2027](https://aa.usno.navy.mil/)** — USNO, 2027-03-15\n  First Quarter occurs 2027-03-15T16:25:00Z UTC.\n  Event (UTC): 2027-03-15T16:25:00Z\n- **[Equinox 2027](https://aa.usno.navy.mil/)** — USNO, 2027-03-20\n  Equinox occurs 2027-03-20T20:25:00Z UTC (global instant).\n  Event (UTC): 2027-03-20T20:25:00Z | Visible: Global\n- **[Full Moon — 3/22/2027](https://aa.usno.navy.mil/)** — USNO, 2027-03-22\n  Full Moon occurs 2027-03-22T10:44:00Z UTC.\n  Event (UTC): 2027-03-22T10:44:00Z\n- **[Last Quarter — 3/30/2027](https://aa.usno.navy.mil/)** — USNO, 2027-03-30\n  Last Quarter occurs 2027-03-30T00:54:00Z UTC.\n  Event (UTC): 2027-03-30T00:54:00Z\n- **[New Moon — 4/6/2027](https://aa.usno.navy.mil/)** — USNO, 2027-04-06\n  New Moon occurs 2027-04-06T23:51:00Z UTC.\n  Event (UTC): 2027-04-06T23:51:00Z\n- **[First Quarter — 4/13/2027](https://aa.usno.navy.mil/)** — USNO, 2027-04-13\n  First Quarter occurs 2027-04-13T22:56:00Z UTC.\n  Event (UTC): 2027-04-13T22:56:00Z\n- **[Full Moon — 4/20/2027](https://aa.usno.navy.mil/)** — USNO, 2027-04-20\n  Full Moon occurs 2027-04-20T22:27:00Z UTC.\n  Event (UTC): 2027-04-20T22:27:00Z\n- **[Lyrids peak 2027-04-22T18:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2027-04-22\n  Peak 2027-04-22T18:00:00Z UTC. ZHR 18. Best: Northern. Radiant Lyra. Moon: check USNO phase that night.\n  Event (UTC): 2027-04-22T18:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Last Quarter — 4/28/2027](https://aa.usno.navy.mil/)** — USNO, 2027-04-28\n  Last Quarter occurs 2027-04-28T20:18:00Z UTC.\n  Event (UTC): 2027-04-28T20:18:00Z\n- **[Eta Aquariids peak 2027-05-06T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2027-05-06\n  Peak 2027-05-06T04:00:00Z UTC. ZHR 50. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.\n  Event (UTC): 2027-05-06T04:00:00Z | Visible: Southern (approx peak ±1d)\n- **[New Moon — 5/6/2027](https://aa.usno.navy.mil/)** — USNO, 2027-05-06\n  New Moon occurs 2027-05-06T10:58:00Z UTC.\n  Event (UTC): 2027-05-06T10:58:00Z\n- **[First Quarter — 5/13/2027](https://aa.usno.navy.mil/)** — USNO, 2027-05-13\n  First Quarter occurs 2027-05-13T04:44:00Z UTC.\n  Event (UTC): 2027-05-13T04:44:00Z\n- **[Full Moon — 5/20/2027](https://aa.usno.navy.mil/)** — USNO, 2027-05-20\n  Full Moon occurs 2027-05-20T10:59:00Z UTC.\n  Event (UTC): 2027-05-20T10:59:00Z\n- **[Last Quarter — 5/28/2027](https://aa.usno.navy.mil/)** — USNO, 2027-05-28\n  Last Quarter occurs 2027-05-28T13:58:00Z UTC.\n  Event (UTC): 2027-05-28T13:58:00Z\n- **[New Moon — 6/4/2027](https://aa.usno.navy.mil/)** — USNO, 2027-06-04\n  New Moon occurs 2027-06-04T19:40:00Z UTC.\n  Event (UTC): 2027-06-04T19:40:00Z\n- **[First Quarter — 6/11/2027](https://aa.usno.navy.mil/)** — USNO, 2027-06-11\n  First Quarter occurs 2027-06-11T10:56:00Z UTC.\n  Event (UTC): 2027-06-11T10:56:00Z\n- **[Full Moon — 6/19/2027](https://aa.usno.navy.mil/)** — USNO, 2027-06-19\n  Full Moon occurs 2027-06-19T00:44:00Z UTC.\n  Event (UTC): 2027-06-19T00:44:00Z\n- **[Solstice 2027](https://aa.usno.navy.mil/)** — USNO, 2027-06-21\n  Solstice occurs 2027-06-21T14:11:00Z UTC (global instant).\n  Event (UTC): 2027-06-21T14:11:00Z | Visible: Global\n- **[Last Quarter — 6/27/2027](https://aa.usno.navy.mil/)** — USNO, 2027-06-27\n  Last Quarter occurs 2027-06-27T04:54:00Z UTC.\n  Event (UTC): 2027-06-27T04:54:00Z\n- **[New Moon — 7/4/2027](https://aa.usno.navy.mil/)** — USNO, 2027-07-04\n  New Moon occurs 2027-07-04T03:02:00Z UTC.\n  Event (UTC): 2027-07-04T03:02:00Z\n- **[Aphelion 2027](https://aa.usno.navy.mil/)** — USNO, 2027-07-05\n  Aphelion occurs 2027-07-05T05:06:00Z UTC (global instant).\n  Event (UTC): 2027-07-05T05:06:00Z | Visible: Global\n- **[First Quarter — 7/10/2027](https://aa.usno.navy.mil/)** — USNO, 2027-07-10\n  First Quarter occurs 2027-07-10T18:39:00Z UTC.\n  Event (UTC): 2027-07-10T18:39:00Z\n- **[Full Moon — 7/18/2027](https://aa.usno.navy.mil/)** — USNO, 2027-07-18\n  Full Moon occurs 2027-07-18T15:45:00Z UTC.\n  Event (UTC): 2027-07-18T15:45:00Z\n- **[Last Quarter — 7/26/2027](https://aa.usno.navy.mil/)** — USNO, 2027-07-26\n  Last Quarter occurs 2027-07-26T16:55:00Z UTC.\n  Event (UTC): 2027-07-26T16:55:00Z\n- **[Southern Delta Aquariids peak 2027-07-30T03:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2027-07-30\n  Peak 2027-07-30T03:00:00Z UTC. ZHR 25. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.\n  Event (UTC): 2027-07-30T03:00:00Z | Visible: Southern (approx peak ±1d)\n- **[Total Solar Eclipse of 2 August 2027 (2027)](https://eclipse.gsfc.nasa.gov/)** — USNO, 2027-08-02\n  Total Solar Eclipse of 2 August 2027 occurs 2027-08-02. Local circumstances: query with lat/lon for magnitude/obscuration.\n  Event date: 2027-08-02 (time not supplied)\n- **[New Moon — 8/2/2027](https://aa.usno.navy.mil/)** — USNO, 2027-08-02\n  New Moon occurs 2027-08-02T10:05:00Z UTC.\n  Event (UTC): 2027-08-02T10:05:00Z\n- **[First Quarter — 8/9/2027](https://aa.usno.navy.mil/)** — USNO, 2027-08-09\n  First Quarter occurs 2027-08-09T04:54:00Z UTC.\n  Event (UTC): 2027-08-09T04:54:00Z\n- **[Perseids peak 2027-08-13T03:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2027-08-13\n  Peak 2027-08-13T03:00:00Z UTC. ZHR 100. Best: Northern. Radiant Perseus. Moon: check USNO phase that night.\n  Event (UTC): 2027-08-13T03:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Full Moon — 8/17/2027](https://aa.usno.navy.mil/)** — USNO, 2027-08-17\n  Full Moon occurs 2027-08-17T07:29:00Z UTC.\n  Event (UTC): 2027-08-17T07:29:00Z\n- **[Last Quarter — 8/25/2027](https://aa.usno.navy.mil/)** — USNO, 2027-08-25\n  Last Quarter occurs 2027-08-25T02:27:00Z UTC.\n  Event (UTC): 2027-08-25T02:27:00Z\n- **[New Moon — 8/31/2027](https://aa.usno.navy.mil/)** — USNO, 2027-08-31\n  New Moon occurs 2027-08-31T17:41:00Z UTC.\n  Event (UTC): 2027-08-31T17:41:00Z\n- **[First Quarter — 9/7/2027](https://aa.usno.navy.mil/)** — USNO, 2027-09-07\n  First Quarter occurs 2027-09-07T18:31:00Z UTC.\n  Event (UTC): 2027-09-07T18:31:00Z\n- **[Full Moon — 9/15/2027](https://aa.usno.navy.mil/)** — USNO, 2027-09-15\n  Full Moon occurs 2027-09-15T23:03:00Z UTC.\n  Event (UTC): 2027-09-15T23:03:00Z\n- **[Equinox 2027](https://aa.usno.navy.mil/)** — USNO, 2027-09-23\n  Equinox occurs 2027-09-23T06:02:00Z UTC (global instant).\n  Event (UTC): 2027-09-23T06:02:00Z | Visible: Global\n- **[Last Quarter — 9/23/2027](https://aa.usno.navy.mil/)** — USNO, 2027-09-23\n  Last Quarter occurs 2027-09-23T10:20:00Z UTC.\n  Event (UTC): 2027-09-23T10:20:00Z\n- **[New Moon — 9/30/2027](https://aa.usno.navy.mil/)** — USNO, 2027-09-30\n  New Moon occurs 2027-09-30T02:36:00Z UTC.\n  Event (UTC): 2027-09-30T02:36:00Z\n- **[First Quarter — 10/7/2027](https://aa.usno.navy.mil/)** — USNO, 2027-10-07\n  First Quarter occurs 2027-10-07T11:47:00Z UTC.\n  Event (UTC): 2027-10-07T11:47:00Z\n- **[Draconids peak 2027-10-08T15:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2027-10-08\n  Peak 2027-10-08T15:00:00Z UTC. ZHR 10. Best: Northern. Radiant Draco. Moon: check USNO phase that night.\n  Event (UTC): 2027-10-08T15:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Full Moon — 10/15/2027](https://aa.usno.navy.mil/)** — USNO, 2027-10-15\n  Full Moon occurs 2027-10-15T13:47:00Z UTC.\n  Event (UTC): 2027-10-15T13:47:00Z\n- **[Orionids peak 2027-10-21T05:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2027-10-21\n  Peak 2027-10-21T05:00:00Z UTC. ZHR 20. Best: Both. Radiant Orion. Moon: check USNO phase that night.\n  Event (UTC): 2027-10-21T05:00:00Z | Visible: Both (approx peak ±1d)\n- **[Last Quarter — 10/22/2027](https://aa.usno.navy.mil/)** — USNO, 2027-10-22\n  Last Quarter occurs 2027-10-22T17:29:00Z UTC.\n  Event (UTC): 2027-10-22T17:29:00Z\n- **[New Moon — 10/29/2027](https://aa.usno.navy.mil/)** — USNO, 2027-10-29\n  New Moon occurs 2027-10-29T13:36:00Z UTC.\n  Event (UTC): 2027-10-29T13:36:00Z\n- **[Southern Taurids peak 2027-11-05T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2027-11-05\n  Peak 2027-11-05T04:00:00Z UTC. ZHR 10. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.\n  Event (UTC): 2027-11-05T04:00:00Z | Visible: Northern (approx peak ±1d)\n- **[First Quarter — 11/6/2027](https://aa.usno.navy.mil/)** — USNO, 2027-11-06\n  First Quarter occurs 2027-11-06T08:00:00Z UTC.\n  Event (UTC): 2027-11-06T08:00:00Z\n- **[Northern Taurids peak 2027-11-12T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2027-11-12\n  Peak 2027-11-12T04:00:00Z UTC. ZHR 5. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.\n  Event (UTC): 2027-11-12T04:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Full Moon — 11/14/2027](https://aa.usno.navy.mil/)** — USNO, 2027-11-14\n  Full Moon occurs 2027-11-14T03:26:00Z UTC.\n  Event (UTC): 2027-11-14T03:26:00Z\n- **[Leonids peak 2027-11-17T22:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2027-11-17\n  Peak 2027-11-17T22:00:00Z UTC. ZHR 15. Best: Northern. Radiant Leon. Moon: check USNO phase that night.\n  Event (UTC): 2027-11-17T22:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Last Quarter — 11/21/2027](https://aa.usno.navy.mil/)** — USNO, 2027-11-21\n  Last Quarter occurs 2027-11-21T00:48:00Z UTC.\n  Event (UTC): 2027-11-21T00:48:00Z\n- **[New Moon — 11/28/2027](https://aa.usno.navy.mil/)** — USNO, 2027-11-28\n  New Moon occurs 2027-11-28T03:24:00Z UTC.\n  Event (UTC): 2027-11-28T03:24:00Z\n- **[First Quarter — 12/6/2027](https://aa.usno.navy.mil/)** — USNO, 2027-12-06\n  First Quarter occurs 2027-12-06T05:22:00Z UTC.\n  Event (UTC): 2027-12-06T05:22:00Z\n- **[Full Moon — 12/13/2027](https://aa.usno.navy.mil/)** — USNO, 2027-12-13\n  Full Moon occurs 2027-12-13T16:09:00Z UTC.\n  Event (UTC): 2027-12-13T16:09:00Z\n- **[Geminids peak 2027-12-14T02:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2027-12-14\n  Peak 2027-12-14T02:00:00Z UTC. ZHR 150. Best: Northern. Radiant Gemini. Moon: check USNO phase that night.\n  Event (UTC): 2027-12-14T02:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Last Quarter — 12/20/2027](https://aa.usno.navy.mil/)** — USNO, 2027-12-20\n  Last Quarter occurs 2027-12-20T09:11:00Z UTC.\n  Event (UTC): 2027-12-20T09:11:00Z\n- **[Solstice 2027](https://aa.usno.navy.mil/)** — USNO, 2027-12-22\n  Solstice occurs 2027-12-22T02:42:00Z UTC (global instant).\n  Event (UTC): 2027-12-22T02:42:00Z | Visible: Global\n- **[Ursids peak 2027-12-22T10:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, 2027-12-22\n  Peak 2027-12-22T10:00:00Z UTC. ZHR 10. Best: Northern. Radiant Ursa Minor. Moon: check USNO phase that night.\n  Event (UTC): 2027-12-22T10:00:00Z | Visible: Northern (approx peak ±1d)\n- **[New Moon — 12/27/2027](https://aa.usno.navy.mil/)** — USNO, 2027-12-27\n  New Moon occurs 2027-12-27T20:12:00Z UTC.\n  Event (UTC): 2027-12-27T20:12:00Z",
+  "markdown": "_Context: Sunday, 2026-09-20 2026-09-20T11:03:23.235603Z (intent: periodic_event)._\n\n- **[Perihelion 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-03\n  Perihelion occurs 2027-01-03T02:33:00Z UTC (global instant).\n  Event (UTC): 2027-01-03T02:33:00Z | Visible: Global\n- **[Quadrantids peak 2027-01-03T15:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-01-03\n  Peak 2027-01-03T15:00:00Z UTC. ZHR 110. Best: Northern. Radiant Bootes. Moon: check USNO phase that night.\n  Event (UTC): 2027-01-03T15:00:00Z | Visible: Northern (approx peak ±1d)\n- **[New Moon — 1/7/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-07\n  New Moon occurs 2027-01-07T20:24:00Z UTC.\n  Event (UTC): 2027-01-07T20:24:00Z\n- **[First Quarter — 1/15/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-15\n  First Quarter occurs 2027-01-15T20:34:00Z UTC.\n  Event (UTC): 2027-01-15T20:34:00Z\n- **[Full Moon — 1/22/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-22\n  Full Moon occurs 2027-01-22T12:17:00Z UTC.\n  Event (UTC): 2027-01-22T12:17:00Z\n- **[Last Quarter — 1/29/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-29\n  Last Quarter occurs 2027-01-29T10:55:00Z UTC.\n  Event (UTC): 2027-01-29T10:55:00Z\n- **[Annular Solar Eclipse of 6 February 2027 (2027)](https://eclipse.gsfc.nasa.gov/)** — USNO, published 2027-02-06\n  Annular Solar Eclipse of 6 February 2027 occurs 2027-02-06. Local circumstances: query with lat/lon for magnitude/obscuration.\n  Event date: 2027-02-06 (time not supplied)\n- **[New Moon — 2/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-02-06\n  New Moon occurs 2027-02-06T15:56:00Z UTC.\n  Event (UTC): 2027-02-06T15:56:00Z\n- **[First Quarter — 2/14/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-02-14\n  First Quarter occurs 2027-02-14T07:58:00Z UTC.\n  Event (UTC): 2027-02-14T07:58:00Z\n- **[Full Moon — 2/20/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-02-20\n  Full Moon occurs 2027-02-20T23:23:00Z UTC.\n  Event (UTC): 2027-02-20T23:23:00Z\n- **[Last Quarter — 2/28/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-02-28\n  Last Quarter occurs 2027-02-28T05:16:00Z UTC.\n  Event (UTC): 2027-02-28T05:16:00Z\n- **[New Moon — 3/8/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-08\n  New Moon occurs 2027-03-08T09:29:00Z UTC.\n  Event (UTC): 2027-03-08T09:29:00Z\n- **[First Quarter — 3/15/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-15\n  First Quarter occurs 2027-03-15T16:25:00Z UTC.\n  Event (UTC): 2027-03-15T16:25:00Z\n- **[Equinox 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-20\n  Equinox occurs 2027-03-20T20:25:00Z UTC (global instant).\n  Event (UTC): 2027-03-20T20:25:00Z | Visible: Global\n- **[Full Moon — 3/22/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-22\n  Full Moon occurs 2027-03-22T10:44:00Z UTC.\n  Event (UTC): 2027-03-22T10:44:00Z\n- **[Last Quarter — 3/30/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-30\n  Last Quarter occurs 2027-03-30T00:54:00Z UTC.\n  Event (UTC): 2027-03-30T00:54:00Z\n- **[New Moon — 4/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-04-06\n  New Moon occurs 2027-04-06T23:51:00Z UTC.\n  Event (UTC): 2027-04-06T23:51:00Z\n- **[First Quarter — 4/13/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-04-13\n  First Quarter occurs 2027-04-13T22:56:00Z UTC.\n  Event (UTC): 2027-04-13T22:56:00Z\n- **[Full Moon — 4/20/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-04-20\n  Full Moon occurs 2027-04-20T22:27:00Z UTC.\n  Event (UTC): 2027-04-20T22:27:00Z\n- **[Lyrids peak 2027-04-22T18:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-04-22\n  Peak 2027-04-22T18:00:00Z UTC. ZHR 18. Best: Northern. Radiant Lyra. Moon: check USNO phase that night.\n  Event (UTC): 2027-04-22T18:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Last Quarter — 4/28/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-04-28\n  Last Quarter occurs 2027-04-28T20:18:00Z UTC.\n  Event (UTC): 2027-04-28T20:18:00Z\n- **[Eta Aquariids peak 2027-05-06T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-05-06\n  Peak 2027-05-06T04:00:00Z UTC. ZHR 50. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.\n  Event (UTC): 2027-05-06T04:00:00Z | Visible: Southern (approx peak ±1d)\n- **[New Moon — 5/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-05-06\n  New Moon occurs 2027-05-06T10:58:00Z UTC.\n  Event (UTC): 2027-05-06T10:58:00Z\n- **[First Quarter — 5/13/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-05-13\n  First Quarter occurs 2027-05-13T04:44:00Z UTC.\n  Event (UTC): 2027-05-13T04:44:00Z\n- **[Full Moon — 5/20/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-05-20\n  Full Moon occurs 2027-05-20T10:59:00Z UTC.\n  Event (UTC): 2027-05-20T10:59:00Z\n- **[Last Quarter — 5/28/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-05-28\n  Last Quarter occurs 2027-05-28T13:58:00Z UTC.\n  Event (UTC): 2027-05-28T13:58:00Z\n- **[New Moon — 6/4/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-04\n  New Moon occurs 2027-06-04T19:40:00Z UTC.\n  Event (UTC): 2027-06-04T19:40:00Z\n- **[First Quarter — 6/11/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-11\n  First Quarter occurs 2027-06-11T10:56:00Z UTC.\n  Event (UTC): 2027-06-11T10:56:00Z\n- **[Full Moon — 6/19/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-19\n  Full Moon occurs 2027-06-19T00:44:00Z UTC.\n  Event (UTC): 2027-06-19T00:44:00Z\n- **[Solstice 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-21\n  Solstice occurs 2027-06-21T14:11:00Z UTC (global instant).\n  Event (UTC): 2027-06-21T14:11:00Z | Visible: Global\n- **[Last Quarter — 6/27/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-27\n  Last Quarter occurs 2027-06-27T04:54:00Z UTC.\n  Event (UTC): 2027-06-27T04:54:00Z\n- **[New Moon — 7/4/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-04\n  New Moon occurs 2027-07-04T03:02:00Z UTC.\n  Event (UTC): 2027-07-04T03:02:00Z\n- **[Aphelion 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-05\n  Aphelion occurs 2027-07-05T05:06:00Z UTC (global instant).\n  Event (UTC): 2027-07-05T05:06:00Z | Visible: Global\n- **[First Quarter — 7/10/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-10\n  First Quarter occurs 2027-07-10T18:39:00Z UTC.\n  Event (UTC): 2027-07-10T18:39:00Z\n- **[Full Moon — 7/18/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-18\n  Full Moon occurs 2027-07-18T15:45:00Z UTC.\n  Event (UTC): 2027-07-18T15:45:00Z\n- **[Last Quarter — 7/26/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-26\n  Last Quarter occurs 2027-07-26T16:55:00Z UTC.\n  Event (UTC): 2027-07-26T16:55:00Z\n- **[Southern Delta Aquariids peak 2027-07-30T03:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-07-30\n  Peak 2027-07-30T03:00:00Z UTC. ZHR 25. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.\n  Event (UTC): 2027-07-30T03:00:00Z | Visible: Southern (approx peak ±1d)\n- **[Total Solar Eclipse of 2 August 2027 (2027)](https://eclipse.gsfc.nasa.gov/)** — USNO, published 2027-08-02\n  Total Solar Eclipse of 2 August 2027 occurs 2027-08-02. Local circumstances: query with lat/lon for magnitude/obscuration.\n  Event date: 2027-08-02 (time not supplied)\n- **[New Moon — 8/2/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-02\n  New Moon occurs 2027-08-02T10:05:00Z UTC.\n  Event (UTC): 2027-08-02T10:05:00Z\n- **[First Quarter — 8/9/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-09\n  First Quarter occurs 2027-08-09T04:54:00Z UTC.\n  Event (UTC): 2027-08-09T04:54:00Z\n- **[Perseids peak 2027-08-13T03:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-08-13\n  Peak 2027-08-13T03:00:00Z UTC. ZHR 100. Best: Northern. Radiant Perseus. Moon: check USNO phase that night.\n  Event (UTC): 2027-08-13T03:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Full Moon — 8/17/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-17\n  Full Moon occurs 2027-08-17T07:29:00Z UTC.\n  Event (UTC): 2027-08-17T07:29:00Z\n- **[Last Quarter — 8/25/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-25\n  Last Quarter occurs 2027-08-25T02:27:00Z UTC.\n  Event (UTC): 2027-08-25T02:27:00Z\n- **[New Moon — 8/31/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-31\n  New Moon occurs 2027-08-31T17:41:00Z UTC.\n  Event (UTC): 2027-08-31T17:41:00Z\n- **[First Quarter — 9/7/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-07\n  First Quarter occurs 2027-09-07T18:31:00Z UTC.\n  Event (UTC): 2027-09-07T18:31:00Z\n- **[Full Moon — 9/15/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-15\n  Full Moon occurs 2027-09-15T23:03:00Z UTC.\n  Event (UTC): 2027-09-15T23:03:00Z\n- **[Equinox 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-23\n  Equinox occurs 2027-09-23T06:02:00Z UTC (global instant).\n  Event (UTC): 2027-09-23T06:02:00Z | Visible: Global\n- **[Last Quarter — 9/23/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-23\n  Last Quarter occurs 2027-09-23T10:20:00Z UTC.\n  Event (UTC): 2027-09-23T10:20:00Z\n- **[New Moon — 9/30/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-30\n  New Moon occurs 2027-09-30T02:36:00Z UTC.\n  Event (UTC): 2027-09-30T02:36:00Z\n- **[First Quarter — 10/7/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-10-07\n  First Quarter occurs 2027-10-07T11:47:00Z UTC.\n  Event (UTC): 2027-10-07T11:47:00Z\n- **[Draconids peak 2027-10-08T15:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-10-08\n  Peak 2027-10-08T15:00:00Z UTC. ZHR 10. Best: Northern. Radiant Draco. Moon: check USNO phase that night.\n  Event (UTC): 2027-10-08T15:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Full Moon — 10/15/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-10-15\n  Full Moon occurs 2027-10-15T13:47:00Z UTC.\n  Event (UTC): 2027-10-15T13:47:00Z\n- **[Orionids peak 2027-10-21T05:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-10-21\n  Peak 2027-10-21T05:00:00Z UTC. ZHR 20. Best: Both. Radiant Orion. Moon: check USNO phase that night.\n  Event (UTC): 2027-10-21T05:00:00Z | Visible: Both (approx peak ±1d)\n- **[Last Quarter — 10/22/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-10-22\n  Last Quarter occurs 2027-10-22T17:29:00Z UTC.\n  Event (UTC): 2027-10-22T17:29:00Z\n- **[New Moon — 10/29/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-10-29\n  New Moon occurs 2027-10-29T13:36:00Z UTC.\n  Event (UTC): 2027-10-29T13:36:00Z\n- **[Southern Taurids peak 2027-11-05T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-11-05\n  Peak 2027-11-05T04:00:00Z UTC. ZHR 10. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.\n  Event (UTC): 2027-11-05T04:00:00Z | Visible: Northern (approx peak ±1d)\n- **[First Quarter — 11/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-11-06\n  First Quarter occurs 2027-11-06T08:00:00Z UTC.\n  Event (UTC): 2027-11-06T08:00:00Z\n- **[Northern Taurids peak 2027-11-12T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-11-12\n  Peak 2027-11-12T04:00:00Z UTC. ZHR 5. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.\n  Event (UTC): 2027-11-12T04:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Full Moon — 11/14/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-11-14\n  Full Moon occurs 2027-11-14T03:26:00Z UTC.\n  Event (UTC): 2027-11-14T03:26:00Z\n- **[Leonids peak 2027-11-17T22:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-11-17\n  Peak 2027-11-17T22:00:00Z UTC. ZHR 15. Best: Northern. Radiant Leon. Moon: check USNO phase that night.\n  Event (UTC): 2027-11-17T22:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Last Quarter — 11/21/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-11-21\n  Last Quarter occurs 2027-11-21T00:48:00Z UTC.\n  Event (UTC): 2027-11-21T00:48:00Z\n- **[New Moon — 11/28/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-11-28\n  New Moon occurs 2027-11-28T03:24:00Z UTC.\n  Event (UTC): 2027-11-28T03:24:00Z\n- **[First Quarter — 12/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-06\n  First Quarter occurs 2027-12-06T05:22:00Z UTC.\n  Event (UTC): 2027-12-06T05:22:00Z\n- **[Full Moon — 12/13/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-13\n  Full Moon occurs 2027-12-13T16:09:00Z UTC.\n  Event (UTC): 2027-12-13T16:09:00Z\n- **[Geminids peak 2027-12-14T02:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-12-14\n  Peak 2027-12-14T02:00:00Z UTC. ZHR 150. Best: Northern. Radiant Gemini. Moon: check USNO phase that night.\n  Event (UTC): 2027-12-14T02:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Last Quarter — 12/20/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-20\n  Last Quarter occurs 2027-12-20T09:11:00Z UTC.\n  Event (UTC): 2027-12-20T09:11:00Z\n- **[Solstice 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-22\n  Solstice occurs 2027-12-22T02:42:00Z UTC (global instant).\n  Event (UTC): 2027-12-22T02:42:00Z | Visible: Global\n- **[Ursids peak 2027-12-22T10:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-12-22\n  Peak 2027-12-22T10:00:00Z UTC. ZHR 10. Best: Northern. Radiant Ursa Minor. Moon: check USNO phase that night.\n  Event (UTC): 2027-12-22T10:00:00Z | Visible: Northern (approx peak ±1d)\n- **[New Moon — 12/27/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-27\n  New Moon occurs 2027-12-27T20:12:00Z UTC.\n  Event (UTC): 2027-12-27T20:12:00Z",
   "cached": false,
   "context": {
-    "now_utc": "2026-09-17T06:46:15.293955Z",
-    "today": "Thursday, 2026-09-17",
+    "now_utc": "2026-09-20T11:03:23.235603Z",
+    "today": "Sunday, 2026-09-20",
     "tz": "UTC"
   },
-  "generated_at": "2026-09-17T06:46:15.293955Z",
+  "generated_at": "2026-09-20T11:03:23.235603Z",
   "data_as_of": {
     "static_yearly": "2027-01-01 (eclipses, seasons, meteor peaks: fixed for the year)",
-    "live_snapshot": "2026-09-17T06:46:15.293955Z (moon phases yearly-static; Kp/asteroids/APOD: re-query live when fresh matters)"
+    "live_snapshot": "2026-09-20T11:03:23.235603Z (moon phases yearly-static; Kp/asteroids/APOD: re-query live when fresh matters)"
   }
 }
