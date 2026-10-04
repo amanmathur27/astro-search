@@ -5,18 +5,18 @@
   "year": 2027,
   "live_snapshots": [
     {
-      "title": "Aurora / geomagnetic now: Kp 1.0 — Quiet conditions by Kp and Bz; local aurora visibility is not guaranteed.",
-      "summary": "Current estimated Kp 1.0 (1-min SWPC). IMF Bz -0.9 nT. Quiet conditions by Kp and Bz; local aurora visibility is not guaranteed.",
+      "title": "Aurora / geomagnetic now: Kp 0.0 — Quiet conditions by Kp and Bz; local aurora visibility is not guaranteed.",
+      "summary": "Current estimated Kp 0.0 (1-min SWPC). IMF Bz -1.3 nT. Quiet conditions by Kp and Bz; local aurora visibility is not guaranteed.",
       "url": "https://www.swpc.noaa.gov/products-and-data",
       "source": "NOAA SWPC",
       "source_type": "api",
       "authority": 3,
       "category": "space_weather",
-      "published": "2026-09-27T11:40:00Z",
+      "published": "2026-10-04T12:00:00Z",
       "freshness_h": 0,
       "metadata": {
-        "feed_title": "Aurora / geomagnetic now: Kp 1.0 — Quiet conditions by Kp and Bz; local aurora visibility is not guaranteed.",
-        "feed_description": "Current estimated Kp 1.0 (1-min SWPC). IMF Bz -0.9 nT. Quiet conditions by Kp and Bz; local aurora visibility is not guaranteed.",
+        "feed_title": "Aurora / geomagnetic now: Kp 0.0 — Quiet conditions by Kp and Bz; local aurora visibility is not guaranteed.",
+        "feed_description": "Current estimated Kp 0.0 (1-min SWPC). IMF Bz -1.3 nT. Quiet conditions by Kp and Bz; local aurora visibility is not guaranteed.",
         "field_sources": {
           "feed_title": "source_title",
           "feed_description": "source_summary"
@@ -37,115 +37,35 @@
       "visibility_url": null,
       "authors": [],
       "extra": {
-        "kp": 1.0,
-        "bz": -0.89,
+        "kp": 0.0,
+        "bz": -1.3,
         "alert": "Quiet conditions by Kp and Bz; local aurora visibility is not guaranteed.",
         "kp_sample": {
-          "time_tag": "2026-09-27T11:40:00",
-          "kp_index": 1,
-          "estimated_kp": 1.0,
-          "kp": "1Z"
+          "time_tag": "2026-10-04T12:00:00",
+          "kp_index": 0,
+          "estimated_kp": 0.0,
+          "kp": "0Z"
         },
         "kp_available": true,
         "bz_available": true,
         "stale": false,
-        "observation_age_h": 0.13254022972222224,
-        "retrieved_at": "2026-09-27T11:47:57.144827Z"
+        "observation_age_h": 0.12113954472222221,
+        "retrieved_at": "2026-10-04T12:07:16.102361Z"
       }
     },
     {
-      "title": "Space Weather Message Code: ALTEF3 Serial Number: 3746 Issue Time: 2026 Sep 27 0502 UTC CONTINUED ALERT: Electron 2MeV Integral Flux exceeded 1,000pfu Continuation of Serial Number: 3745 Begin Time:",
-      "summary": "Space Weather Message Code: ALTEF3 Serial Number: 3746 Issue Time: 2026 Sep 27 0502 UTC CONTINUED ALERT: Electron 2MeV Integral Flux exceeded 1,000pfu Continuation of Serial Number: 3745 Begin Time: 2026 Sep 26 1535 UTC Yesterday Maximum 2MeV Flux: 1260 pfu Max time: 2026 Sep 26 1645 UTC",
+      "title": "Space Weather Message Code: ALTK05 Serial Number: 2050 Issue Time: 2026 Oct 04 1123 UTC ALERT: Geomagnetic K-index of 5 Threshold Reached: 2026 Oct 04 1122 UTC Synoptic Period: 0900-1200 Active",
+      "summary": "Space Weather Message Code: ALTK05 Serial Number: 2050 Issue Time: 2026 Oct 04 1123 UTC ALERT: Geomagnetic K-index of 5 Threshold Reached: 2026 Oct 04 1122 UTC Synoptic Period: 0900-1200 Active Warning: YES Noaa Scale: G1 - Minor Comment: NOAA Scale: G1 - Minor NOAA Space Weather Scale descriptions can be found at www.swpc.noaa.gov/noaa-scales-explanation Potential Impacts: Area o",
       "url": "https://www.swpc.noaa.gov/products/alerts",
       "source": "NOAA SWPC",
       "source_type": "api",
       "authority": 3,
       "category": "space_weather",
-      "published": "2026-09-27T05:02:04.940000Z",
-      "freshness_h": 6,
-      "metadata": {
-        "feed_title": "Space Weather Message Code: ALTEF3 Serial Number: 3746 Issue Time: 2026 Sep 27 0502 UTC CONTINUED ALERT: Electron 2MeV Integral Flux exceeded 1,000pfu Continuation of Serial Number: 3745 Begin Time:",
-        "feed_description": "Space Weather Message Code: ALTEF3 Serial Number: 3746 Issue Time: 2026 Sep 27 0502 UTC CONTINUED ALERT: Electron 2MeV Integral Flux exceeded 1,000pfu Continuation of Serial Number: 3745 Begin Time: 2026 Sep 26 1535 UTC Yesterday Maximum 2MeV Flux: 1260 pfu Max time: 2026 Sep 26 1645 UTC",
-        "field_sources": {
-          "feed_title": "source_title",
-          "feed_description": "source_summary"
-        }
-      },
-      "modified": "",
-      "published_kind": "published",
-      "freshness_display": "6h ago",
-      "entities": [],
-      "location": null,
-      "event_type": null,
-      "date_only": false,
-      "precision": "unspecified",
-      "event_date": null,
-      "event_date_utc": null,
-      "event_end_utc": null,
-      "visibility": null,
-      "visibility_url": null,
-      "authors": [],
-      "extra": {
-        "raw": {
-          "product_id": "EF3A",
-          "issue_datetime": "2026-09-27 05:02:04.940",
-          "message": "Space Weather Message Code: ALTEF3\r\nSerial Number: 3746\r\nIssue Time: 2026 Sep 27 0502 UTC\r\n\r\nCONTINUED ALERT: Electron 2MeV Integral Flux exceeded 1,000pfu\nContinuation of Serial Number: 3745\nBegin Time: 2026 Sep 26 1535 UTC\n\nYesterday Maximum 2MeV Flux: 1260 pfu\nMax time: 2026 Sep 26 1645 UTC"
-        },
-        "retrieved_at": "2026-09-27T11:47:57.144827Z"
-      }
-    },
-    {
-      "title": "NOAA 3-day space weather forecast",
-      "summary": ":Product: 3-Day Forecast :Issued: 2026 Sep 27 0030 UTC # Prepared by the U.S. Dept. of Commerce, NOAA, Space Weather Prediction Center # A. NOAA Geomagnetic Activity Observation and Forecast The greatest observed 3 hr Kp over the past 24 hours was 4 (below NOAA Scale levels). The greatest expected 3 hr Kp for Sep 27-Sep 29 2026 is 3.00 (below NOAA Scale levels). NOAA Kp index breakdown Sep 27-Se",
-      "url": "https://www.swpc.noaa.gov/",
-      "source": "NOAA SWPC",
-      "source_type": "api",
-      "authority": 3,
-      "category": "space_weather",
-      "published": "2026-09-27T00:30:00Z",
-      "freshness_h": 11,
-      "metadata": {
-        "feed_title": "NOAA 3-day space weather forecast",
-        "feed_description": ":Product: 3-Day Forecast :Issued: 2026 Sep 27 0030 UTC # Prepared by the U.S. Dept. of Commerce, NOAA, Space Weather Prediction Center # A. NOAA Geomagnetic Activity Observation and Forecast The greatest observed 3 hr Kp over the past 24 hours was 4 (below NOAA Scale levels). The greatest expected 3 hr Kp for Sep 27-Sep 29 2026 is 3.00 (below NOAA Scale levels). NOAA Kp index breakdown Sep 27-Se",
-        "field_sources": {
-          "feed_title": "source_title",
-          "feed_description": "source_summary"
-        }
-      },
-      "modified": "",
-      "published_kind": "published",
-      "freshness_display": "11h ago",
-      "entities": [],
-      "location": null,
-      "event_type": null,
-      "date_only": false,
-      "precision": "unspecified",
-      "event_date": null,
-      "event_date_utc": null,
-      "event_end_utc": null,
-      "visibility": null,
-      "visibility_url": null,
-      "authors": [],
-      "extra": {
-        "forecast": ":Product: 3-Day Forecast\n:Issued: 2026 Sep 27 0030 UTC\n# Prepared by the U.S. Dept. of Commerce, NOAA, Space Weather Prediction Center\n#\nA. NOAA Geomagnetic Activity Observation and Forecast\n\nThe greatest observed 3 hr Kp over the past 24 hours was 4 (below NOAA\nScale levels).\nThe greatest expected 3 hr Kp for Sep 27-Sep 29 2026 is 3.00 (below NOAA\nScale levels).\n\nNOAA Kp index breakdown Sep 27-Sep 29 2026\n\n             Sep 27       Sep 28       Sep 29\n00-03UT       2.67         1.67         1.67     \n03-06UT       3.00         2.00         1.33     \n06-09UT       2.67         1.67         1.33     \n09-12UT       2.67         1.67         1.00     \n12-15UT       2.00         1.67         1.00     \n15-18UT       1.67         0.67         1.33     \n18-21UT       1.67         0.67         1.6",
-        "issued_at": "2026-09-27T00:30:00Z",
-        "validity_status": "recent_issue_not_verified_forecast_horizon",
-        "retrieved_at": "2026-09-27T11:47:57.144827Z"
-      }
-    },
-    {
-      "title": "Solar X-ray flux now: 6.6e-07 W/m² (class B)",
-      "summary": "GOES 0.1–0.8 nm X-ray flux 6.6e-07 W/m² (B-class flux level); not a flare-event detection.",
-      "url": "https://www.swpc.noaa.gov/products/goes-x-ray-flux",
-      "source": "NOAA SWPC",
-      "source_type": "api",
-      "authority": 3,
-      "category": "space_weather",
-      "published": "2026-09-27T11:44:00Z",
+      "published": "2026-10-04T11:23:41.163000Z",
       "freshness_h": 0,
       "metadata": {
-        "feed_title": "Solar X-ray flux now: 6.6e-07 W/m² (class B)",
-        "feed_description": "GOES 0.1–0.8 nm X-ray flux 6.6e-07 W/m² (B-class flux level); not a flare-event detection.",
+        "feed_title": "Space Weather Message Code: ALTK05 Serial Number: 2050 Issue Time: 2026 Oct 04 1123 UTC ALERT: Geomagnetic K-index of 5 Threshold Reached: 2026 Oct 04 1122 UTC Synoptic Period: 0900-1200 Active",
+        "feed_description": "Space Weather Message Code: ALTK05 Serial Number: 2050 Issue Time: 2026 Oct 04 1123 UTC ALERT: Geomagnetic K-index of 5 Threshold Reached: 2026 Oct 04 1122 UTC Synoptic Period: 0900-1200 Active Warning: YES Noaa Scale: G1 - Minor Comment: NOAA Scale: G1 - Minor NOAA Space Weather Scale descriptions can be found at www.swpc.noaa.gov/noaa-scales-explanation Potential Impacts: Area o",
         "field_sources": {
           "feed_title": "source_title",
           "feed_description": "source_summary"
@@ -166,25 +86,27 @@
       "visibility_url": null,
       "authors": [],
       "extra": {
-        "xray_flux": 6.63718196847185e-07,
-        "flare_class": "B",
-        "energy": "0.1-0.8nm",
-        "retrieved_at": "2026-09-27T11:47:57.144827Z"
+        "raw": {
+          "product_id": "K05A",
+          "issue_datetime": "2026-10-04 11:23:41.163",
+          "message": "Space Weather Message Code: ALTK05\r\nSerial Number: 2050\r\nIssue Time: 2026 Oct 04 1123 UTC\r\n\r\nALERT: Geomagnetic K-index of 5 \nThreshold Reached: 2026 Oct 04 1122 UTC\nSynoptic Period: 0900-1200\nActive Warning: YES\nNoaa Scale: G1 - Minor\nComment: \r\n\r\nNOAA Scale: G1 - Minor\r\n\r\nNOAA Space Weather Scale descriptions can be found at\r\nwww.swpc.noaa.gov/noaa-scales-explanation\r\n\r\nPotential Impacts: Area of impact primarily poleward of 60 degrees Geomagnetic Latitude.\r\nInduced Currents - Weak power grid fluctuations can occur.\r\nSpacecraft - Minor impact on satellite operations possible.\r\nAurora - Aurora may be visible at high latitudes, i.e., northern tier of the U.S. such as northern Michigan and Maine."
+        },
+        "retrieved_at": "2026-10-04T12:07:16.102361Z"
       }
     },
     {
-      "title": "Geomagnetic storm scale now: G0 (Kp 2)",
-      "summary": "No storm per NOAA planetary K-index.",
-      "url": "https://www.swpc.noaa.gov/noaa-scales-explanation",
+      "title": "NOAA 3-day space weather forecast",
+      "summary": ":Product: 3-Day Forecast :Issued: 2026 Oct 04 0520 UTC # Prepared by the U.S. Dept. of Commerce, NOAA, Space Weather Prediction Center # A. NOAA Geomagnetic Activity Observation and Forecast The greatest observed 3 hr Kp over the past 24 hours was 3 (below NOAA Scale levels). The greatest expected 3 hr Kp for Oct 04-Oct 06 2026 is 4.67 (NOAA Scale G1). NOAA Kp index breakdown Oct 04-Oct 06 2026",
+      "url": "https://www.swpc.noaa.gov/",
       "source": "NOAA SWPC",
       "source_type": "api",
       "authority": 3,
       "category": "space_weather",
-      "published": "2026-09-27T06:00:00Z",
-      "freshness_h": 5,
+      "published": "2026-10-04T05:20:00Z",
+      "freshness_h": 6,
       "metadata": {
-        "feed_title": "Geomagnetic storm scale now: G0 (Kp 2)",
-        "feed_description": "No storm per NOAA planetary K-index.",
+        "feed_title": "NOAA 3-day space weather forecast",
+        "feed_description": ":Product: 3-Day Forecast :Issued: 2026 Oct 04 0520 UTC # Prepared by the U.S. Dept. of Commerce, NOAA, Space Weather Prediction Center # A. NOAA Geomagnetic Activity Observation and Forecast The greatest observed 3 hr Kp over the past 24 hours was 3 (below NOAA Scale levels). The greatest expected 3 hr Kp for Oct 04-Oct 06 2026 is 4.67 (NOAA Scale G1). NOAA Kp index breakdown Oct 04-Oct 06 2026",
         "field_sources": {
           "feed_title": "source_title",
           "feed_description": "source_summary"
@@ -192,7 +114,7 @@
       },
       "modified": "",
       "published_kind": "published",
-      "freshness_display": "5h ago",
+      "freshness_display": "6h ago",
       "entities": [],
       "location": null,
       "event_type": null,
@@ -205,24 +127,25 @@
       "visibility_url": null,
       "authors": [],
       "extra": {
-        "g_scale": 0,
-        "kp": 2.0,
-        "retrieved_at": "2026-09-27T11:47:57.144827Z"
+        "forecast": ":Product: 3-Day Forecast\n:Issued: 2026 Oct 04 0520 UTC\n# Prepared by the U.S. Dept. of Commerce, NOAA, Space Weather Prediction Center\n#\nA. NOAA Geomagnetic Activity Observation and Forecast\n\nThe greatest observed 3 hr Kp over the past 24 hours was 3 (below NOAA\nScale levels).\nThe greatest expected 3 hr Kp for Oct 04-Oct 06 2026 is 4.67 (NOAA Scale\nG1).\n\nNOAA Kp index breakdown Oct 04-Oct 06 2026\n\n             Oct 04       Oct 05       Oct 06\n00-03UT       3.00         3.67         3.33     \n03-06UT       3.00         3.67         3.67     \n06-09UT       3.00         3.33         3.00     \n09-12UT       4.00         3.00         3.00     \n12-15UT       4.67 (G1)    2.67         2.33     \n15-18UT       4.00         3.00         2.00     \n18-21UT       3.33         2.33         2.00     \n21-",
+        "issued_at": "2026-10-04T05:20:00Z",
+        "validity_status": "recent_issue_not_verified_forecast_horizon",
+        "retrieved_at": "2026-10-04T12:07:16.102361Z"
       }
     },
     {
-      "title": "APOD: Andromeda before Photoshop",
-      "summary": "What does the Andromeda galaxy really look like? The featured image shows how our Milky Way Galaxy's closest major galactic neighbor really appears in a long exposure through Earth's busy skies and with a digital camera that introduces normal imperfections. The picture is a stack of 223 images, each a 300 second exposure, taken from a garden observatory in Portugal during 2019. Obvious image",
-      "url": "https://apod.nasa.gov/apod/ap260927.html",
-      "source": "NASA",
+      "title": "Solar X-ray flux now: 1.9e-07 W/m² (class B)",
+      "summary": "GOES 0.1–0.8 nm X-ray flux 1.9e-07 W/m² (B-class flux level); not a flare-event detection.",
+      "url": "https://www.swpc.noaa.gov/products/goes-x-ray-flux",
+      "source": "NOAA SWPC",
       "source_type": "api",
       "authority": 3,
-      "category": "discoveries",
-      "published": "2026-09-27T00:00:00Z",
-      "freshness_h": 11,
+      "category": "space_weather",
+      "published": "2026-10-04T12:02:00Z",
+      "freshness_h": 0,
       "metadata": {
-        "feed_title": "APOD: Andromeda before Photoshop",
-        "feed_description": "What does the Andromeda galaxy really look like? The featured image shows how our Milky Way Galaxy's closest major galactic neighbor really appears in a long exposure through Earth's busy skies and with a digital camera that introduces normal imperfections. The picture is a stack of 223 images, each a 300 second exposure, taken from a garden observatory in Portugal during 2019. Obvious image deficiencies include bright parallel airplane trails, long and continuous satellite trails, short cosmic ray streaks, and bad pixels. These imperfections were actually not removed with Photoshop specifically, but rather greatly reduced with a series of computer software packages that included Astro Pixel Processor, DeepSkyStacker, and PixInsight. All of this work was done not to deceive you with a digital fantasy that has little to do with the real likeness of the Andromeda galaxy (M31), but to minimize Earthly artifacts that have nothing to do with the distant galaxy and so better recreate what M31 really does look like. APOD's email for image submissions has changed. Please see: APOD Submissions APOD's main NASA site is moving: From apod.nasa.gov to science.nasa.gov/apod",
+        "feed_title": "Solar X-ray flux now: 1.9e-07 W/m² (class B)",
+        "feed_description": "GOES 0.1–0.8 nm X-ray flux 1.9e-07 W/m² (B-class flux level); not a flare-event detection.",
         "field_sources": {
           "feed_title": "source_title",
           "feed_description": "source_summary"
@@ -230,7 +153,84 @@
       },
       "modified": "",
       "published_kind": "published",
-      "freshness_display": "11h ago",
+      "freshness_display": "just now",
+      "entities": [],
+      "location": null,
+      "event_type": null,
+      "date_only": false,
+      "precision": "unspecified",
+      "event_date": null,
+      "event_date_utc": null,
+      "event_end_utc": null,
+      "visibility": null,
+      "visibility_url": null,
+      "authors": [],
+      "extra": {
+        "xray_flux": 1.9109550919438334e-07,
+        "flare_class": "B",
+        "energy": "0.1-0.8nm",
+        "retrieved_at": "2026-10-04T12:07:16.102361Z"
+      }
+    },
+    {
+      "title": "Geomagnetic storm scale now: G1 (Kp 5)",
+      "summary": "G1 storm conditions per NOAA planetary K-index.",
+      "url": "https://www.swpc.noaa.gov/noaa-scales-explanation",
+      "source": "NOAA SWPC",
+      "source_type": "api",
+      "authority": 3,
+      "category": "space_weather",
+      "published": "2026-10-04T09:00:00Z",
+      "freshness_h": 3,
+      "metadata": {
+        "feed_title": "Geomagnetic storm scale now: G1 (Kp 5)",
+        "feed_description": "G1 storm conditions per NOAA planetary K-index.",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
+      "freshness_display": "3h ago",
+      "entities": [],
+      "location": null,
+      "event_type": null,
+      "date_only": false,
+      "precision": "unspecified",
+      "event_date": null,
+      "event_date_utc": null,
+      "event_end_utc": null,
+      "visibility": null,
+      "visibility_url": null,
+      "authors": [],
+      "extra": {
+        "g_scale": 1,
+        "kp": 5.0,
+        "retrieved_at": "2026-10-04T12:07:16.102361Z"
+      }
+    },
+    {
+      "title": "APOD: NASA Science",
+      "summary": "Yes, but can your rainbow do this? After the remnants of Hurricane Florence passed over the Jersey Shore, New Jersey, USA in 2018, the Sun came out in one direction but something quite unusual appeared in the opposite direction: a hall of rainbows. Over the course of the next half hour, to the delight of the photographer and his daughter, vibrant supernumerary rainbows faded in and out, with at",
+      "url": "https://apod.nasa.gov/apod/ap261004.html",
+      "source": "NASA",
+      "source_type": "api",
+      "authority": 3,
+      "category": "discoveries",
+      "published": "2026-10-04T00:00:00Z",
+      "freshness_h": 12,
+      "metadata": {
+        "feed_title": "APOD: NASA Science",
+        "feed_description": "Yes, but can your rainbow do this? After the remnants of Hurricane Florence passed over the Jersey Shore, New Jersey, USA in 2018, the Sun came out in one direction but something quite unusual appeared in the opposite direction: a hall of rainbows. Over the course of the next half hour, to the delight of the photographer and his daughter, vibrant supernumerary rainbows faded in and out, with at least five captured in this featured single shot. Supernumerary rainbows only form when falling water droplets are all nearly the same size and typically less than a millimeter across. Then, sunlight will not only reflect from inside the raindrops, but interfere, a wave phenomenon similar to ripples on a pond when a stone is thrown in. In fact, supernumerary rainbows can only be explained with waves, and their noted existence in the early 1800s was considered early evidence of light's wave nature.Your Sky Surprise: What picture did APOD feature on your birthday? (post 1995)Tomorrow's picture: open space",
+        "field_sources": {
+          "feed_title": "source_title",
+          "feed_description": "source_summary"
+        }
+      },
+      "modified": "",
+      "published_kind": "published",
+      "freshness_display": "12h ago",
       "entities": [],
       "location": null,
       "event_type": null,
@@ -244,9 +244,9 @@
       "authors": [],
       "extra": {
         "media_type": "image",
-        "media_url": "https://apod.nasa.gov/apod/image/2609/M31Before_Scherer_4298.jpg",
+        "media_url": "https://science.nasa.gov/wp-content/themes/nasa-child/assets/images/nasa-logo@2x.png",
         "fetch_compatible": true,
-        "retrieved_at": "2026-09-27T11:47:57.144827Z"
+        "retrieved_at": "2026-10-04T12:07:16.102361Z"
       }
     },
     {
@@ -258,7 +258,7 @@
       "authority": 3,
       "category": "events",
       "published": "2026-09-15T11:26:13Z",
-      "freshness_h": 288,
+      "freshness_h": 456,
       "metadata": {
         "feed_title": "Fireball 2026-09-15 11:26:13 — 2.2 kt",
         "feed_description": "{'date': '2026-09-15 11:26:13', 'energy': '2.2', 'impact-e': '0.079', 'lat': '37.6', 'lat-dir': 'S', 'lon': '161.6', 'lon-dir': 'W', 'alt': '37.0', 'vel': None}",
@@ -269,7 +269,7 @@
       },
       "modified": "",
       "published_kind": "published",
-      "freshness_display": "12d ago",
+      "freshness_display": "19d ago",
       "entities": [],
       "location": null,
       "event_type": "fireball",
@@ -293,22 +293,22 @@
           "alt": "37.0",
           "vel": null
         },
-        "retrieved_at": "2026-09-27T11:47:57.144827Z"
+        "retrieved_at": "2026-10-04T12:07:16.102361Z"
       }
     },
     {
-      "title": "Moon: Full Moon — 2026-09-27 (local compute)",
-      "summary": "Local computation for 2026-09-27: Full Moon, illumination 99.1%. Next full 2026/10/26 04:11:45, next new 2026/10/10 15:50:01. Global visibility (moon phase is geocentric).",
+      "title": "Moon: Waning Crescent — 2026-10-04 (local compute)",
+      "summary": "Local computation for 2026-10-04: Waning Crescent, illumination 39.4%. Next full 2026/10/26 04:11:45, next new 2026/10/10 15:50:01. Global visibility (moon phase is geocentric).",
       "url": "https://aa.usno.navy.mil/",
       "source": "Local Sky",
       "source_type": "computed",
       "authority": 2,
       "category": "events",
-      "published": "2026-09-27T11:47:57.144827Z",
+      "published": "2026-10-04T12:07:16.102361Z",
       "freshness_h": 0,
       "metadata": {
-        "feed_title": "Moon: Full Moon — 2026-09-27 (local compute)",
-        "feed_description": "Local computation for 2026-09-27: Full Moon, illumination 99.1%. Next full 2026/10/26 04:11:45, next new 2026/10/10 15:50:01. Global visibility (moon phase is geocentric).",
+        "feed_title": "Moon: Waning Crescent — 2026-10-04 (local compute)",
+        "feed_description": "Local computation for 2026-10-04: Waning Crescent, illumination 39.4%. Next full 2026/10/26 04:11:45, next new 2026/10/10 15:50:01. Global visibility (moon phase is geocentric).",
         "field_sources": {
           "feed_title": "source_title",
           "feed_description": "source_summary"
@@ -322,23 +322,23 @@
       "event_type": "moon_phase",
       "date_only": false,
       "precision": "unspecified",
-      "event_date": "2026-09-27T11:47:57.144827Z",
-      "event_date_utc": "2026-09-27T11:47:57.144827Z",
+      "event_date": "2026-10-04T12:07:16.102361Z",
+      "event_date_utc": "2026-10-04T12:07:16.102361Z",
       "event_end_utc": null,
       "visibility": "Global",
       "visibility_url": null,
       "authors": [],
       "extra": {
         "local_verify": {
-          "phase": "Full Moon",
-          "illumination_pct": 99.1,
+          "phase": "Waning Crescent",
+          "illumination_pct": 39.4,
           "waxing": false,
           "next_full": "2026/10/26 04:11:45",
           "next_new": "2026/10/10 15:50:01"
         },
         "skyfield": null,
         "computed": true,
-        "retrieved_at": "2026-09-27T11:47:57.144827Z"
+        "retrieved_at": "2026-10-04T12:07:16.102361Z"
       }
     }
   ],
@@ -3302,16 +3302,16 @@
       }
     }
   ],
-  "markdown": "_Context: Sunday, 2026-09-27 2026-09-27T11:47:57.144827Z (intent: periodic_event)._\n\n- **[Perihelion 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-03\n  Perihelion occurs 2027-01-03T02:33:00Z UTC (global instant).\n  Event (UTC): 2027-01-03T02:33:00Z | Visible: Global\n- **[Quadrantids peak 2027-01-03T15:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-01-03\n  Peak 2027-01-03T15:00:00Z UTC. ZHR 110. Best: Northern. Radiant Bootes. Moon: check USNO phase that night.\n  Event (UTC): 2027-01-03T15:00:00Z | Visible: Northern (approx peak ±1d)\n- **[New Moon — 1/7/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-07\n  New Moon occurs 2027-01-07T20:24:00Z UTC.\n  Event (UTC): 2027-01-07T20:24:00Z\n- **[First Quarter — 1/15/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-15\n  First Quarter occurs 2027-01-15T20:34:00Z UTC.\n  Event (UTC): 2027-01-15T20:34:00Z\n- **[Full Moon — 1/22/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-22\n  Full Moon occurs 2027-01-22T12:17:00Z UTC.\n  Event (UTC): 2027-01-22T12:17:00Z\n- **[Last Quarter — 1/29/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-29\n  Last Quarter occurs 2027-01-29T10:55:00Z UTC.\n  Event (UTC): 2027-01-29T10:55:00Z\n- **[Annular Solar Eclipse of 6 February 2027 (2027)](https://eclipse.gsfc.nasa.gov/)** — USNO, published 2027-02-06\n  Annular Solar Eclipse of 6 February 2027 occurs 2027-02-06. Local circumstances: query with lat/lon for magnitude/obscuration.\n  Event date: 2027-02-06 (time not supplied)\n- **[New Moon — 2/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-02-06\n  New Moon occurs 2027-02-06T15:56:00Z UTC.\n  Event (UTC): 2027-02-06T15:56:00Z\n- **[First Quarter — 2/14/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-02-14\n  First Quarter occurs 2027-02-14T07:58:00Z UTC.\n  Event (UTC): 2027-02-14T07:58:00Z\n- **[Full Moon — 2/20/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-02-20\n  Full Moon occurs 2027-02-20T23:23:00Z UTC.\n  Event (UTC): 2027-02-20T23:23:00Z\n- **[Last Quarter — 2/28/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-02-28\n  Last Quarter occurs 2027-02-28T05:16:00Z UTC.\n  Event (UTC): 2027-02-28T05:16:00Z\n- **[New Moon — 3/8/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-08\n  New Moon occurs 2027-03-08T09:29:00Z UTC.\n  Event (UTC): 2027-03-08T09:29:00Z\n- **[First Quarter — 3/15/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-15\n  First Quarter occurs 2027-03-15T16:25:00Z UTC.\n  Event (UTC): 2027-03-15T16:25:00Z\n- **[Equinox 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-20\n  Equinox occurs 2027-03-20T20:25:00Z UTC (global instant).\n  Event (UTC): 2027-03-20T20:25:00Z | Visible: Global\n- **[Full Moon — 3/22/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-22\n  Full Moon occurs 2027-03-22T10:44:00Z UTC.\n  Event (UTC): 2027-03-22T10:44:00Z\n- **[Last Quarter — 3/30/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-30\n  Last Quarter occurs 2027-03-30T00:54:00Z UTC.\n  Event (UTC): 2027-03-30T00:54:00Z\n- **[New Moon — 4/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-04-06\n  New Moon occurs 2027-04-06T23:51:00Z UTC.\n  Event (UTC): 2027-04-06T23:51:00Z\n- **[First Quarter — 4/13/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-04-13\n  First Quarter occurs 2027-04-13T22:56:00Z UTC.\n  Event (UTC): 2027-04-13T22:56:00Z\n- **[Full Moon — 4/20/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-04-20\n  Full Moon occurs 2027-04-20T22:27:00Z UTC.\n  Event (UTC): 2027-04-20T22:27:00Z\n- **[Lyrids peak 2027-04-22T18:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-04-22\n  Peak 2027-04-22T18:00:00Z UTC. ZHR 18. Best: Northern. Radiant Lyra. Moon: check USNO phase that night.\n  Event (UTC): 2027-04-22T18:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Last Quarter — 4/28/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-04-28\n  Last Quarter occurs 2027-04-28T20:18:00Z UTC.\n  Event (UTC): 2027-04-28T20:18:00Z\n- **[Eta Aquariids peak 2027-05-06T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-05-06\n  Peak 2027-05-06T04:00:00Z UTC. ZHR 50. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.\n  Event (UTC): 2027-05-06T04:00:00Z | Visible: Southern (approx peak ±1d)\n- **[New Moon — 5/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-05-06\n  New Moon occurs 2027-05-06T10:58:00Z UTC.\n  Event (UTC): 2027-05-06T10:58:00Z\n- **[First Quarter — 5/13/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-05-13\n  First Quarter occurs 2027-05-13T04:44:00Z UTC.\n  Event (UTC): 2027-05-13T04:44:00Z\n- **[Full Moon — 5/20/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-05-20\n  Full Moon occurs 2027-05-20T10:59:00Z UTC.\n  Event (UTC): 2027-05-20T10:59:00Z\n- **[Last Quarter — 5/28/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-05-28\n  Last Quarter occurs 2027-05-28T13:58:00Z UTC.\n  Event (UTC): 2027-05-28T13:58:00Z\n- **[New Moon — 6/4/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-04\n  New Moon occurs 2027-06-04T19:40:00Z UTC.\n  Event (UTC): 2027-06-04T19:40:00Z\n- **[First Quarter — 6/11/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-11\n  First Quarter occurs 2027-06-11T10:56:00Z UTC.\n  Event (UTC): 2027-06-11T10:56:00Z\n- **[Full Moon — 6/19/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-19\n  Full Moon occurs 2027-06-19T00:44:00Z UTC.\n  Event (UTC): 2027-06-19T00:44:00Z\n- **[Solstice 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-21\n  Solstice occurs 2027-06-21T14:11:00Z UTC (global instant).\n  Event (UTC): 2027-06-21T14:11:00Z | Visible: Global\n- **[Last Quarter — 6/27/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-27\n  Last Quarter occurs 2027-06-27T04:54:00Z UTC.\n  Event (UTC): 2027-06-27T04:54:00Z\n- **[New Moon — 7/4/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-04\n  New Moon occurs 2027-07-04T03:02:00Z UTC.\n  Event (UTC): 2027-07-04T03:02:00Z\n- **[Aphelion 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-05\n  Aphelion occurs 2027-07-05T05:06:00Z UTC (global instant).\n  Event (UTC): 2027-07-05T05:06:00Z | Visible: Global\n- **[First Quarter — 7/10/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-10\n  First Quarter occurs 2027-07-10T18:39:00Z UTC.\n  Event (UTC): 2027-07-10T18:39:00Z\n- **[Full Moon — 7/18/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-18\n  Full Moon occurs 2027-07-18T15:45:00Z UTC.\n  Event (UTC): 2027-07-18T15:45:00Z\n- **[Last Quarter — 7/26/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-26\n  Last Quarter occurs 2027-07-26T16:55:00Z UTC.\n  Event (UTC): 2027-07-26T16:55:00Z\n- **[Southern Delta Aquariids peak 2027-07-30T03:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-07-30\n  Peak 2027-07-30T03:00:00Z UTC. ZHR 25. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.\n  Event (UTC): 2027-07-30T03:00:00Z | Visible: Southern (approx peak ±1d)\n- **[Total Solar Eclipse of 2 August 2027 (2027)](https://eclipse.gsfc.nasa.gov/)** — USNO, published 2027-08-02\n  Total Solar Eclipse of 2 August 2027 occurs 2027-08-02. Local circumstances: query with lat/lon for magnitude/obscuration.\n  Event date: 2027-08-02 (time not supplied)\n- **[New Moon — 8/2/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-02\n  New Moon occurs 2027-08-02T10:05:00Z UTC.\n  Event (UTC): 2027-08-02T10:05:00Z\n- **[First Quarter — 8/9/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-09\n  First Quarter occurs 2027-08-09T04:54:00Z UTC.\n  Event (UTC): 2027-08-09T04:54:00Z\n- **[Perseids peak 2027-08-13T03:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-08-13\n  Peak 2027-08-13T03:00:00Z UTC. ZHR 100. Best: Northern. Radiant Perseus. Moon: check USNO phase that night.\n  Event (UTC): 2027-08-13T03:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Full Moon — 8/17/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-17\n  Full Moon occurs 2027-08-17T07:29:00Z UTC.\n  Event (UTC): 2027-08-17T07:29:00Z\n- **[Last Quarter — 8/25/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-25\n  Last Quarter occurs 2027-08-25T02:27:00Z UTC.\n  Event (UTC): 2027-08-25T02:27:00Z\n- **[New Moon — 8/31/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-31\n  New Moon occurs 2027-08-31T17:41:00Z UTC.\n  Event (UTC): 2027-08-31T17:41:00Z\n- **[First Quarter — 9/7/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-07\n  First Quarter occurs 2027-09-07T18:31:00Z UTC.\n  Event (UTC): 2027-09-07T18:31:00Z\n- **[Full Moon — 9/15/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-15\n  Full Moon occurs 2027-09-15T23:03:00Z UTC.\n  Event (UTC): 2027-09-15T23:03:00Z\n- **[Equinox 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-23\n  Equinox occurs 2027-09-23T06:02:00Z UTC (global instant).\n  Event (UTC): 2027-09-23T06:02:00Z | Visible: Global\n- **[Last Quarter — 9/23/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-23\n  Last Quarter occurs 2027-09-23T10:20:00Z UTC.\n  Event (UTC): 2027-09-23T10:20:00Z\n- **[New Moon — 9/30/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-30\n  New Moon occurs 2027-09-30T02:36:00Z UTC.\n  Event (UTC): 2027-09-30T02:36:00Z\n- **[First Quarter — 10/7/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-10-07\n  First Quarter occurs 2027-10-07T11:47:00Z UTC.\n  Event (UTC): 2027-10-07T11:47:00Z\n- **[Draconids peak 2027-10-08T15:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-10-08\n  Peak 2027-10-08T15:00:00Z UTC. ZHR 10. Best: Northern. Radiant Draco. Moon: check USNO phase that night.\n  Event (UTC): 2027-10-08T15:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Full Moon — 10/15/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-10-15\n  Full Moon occurs 2027-10-15T13:47:00Z UTC.\n  Event (UTC): 2027-10-15T13:47:00Z\n- **[Orionids peak 2027-10-21T05:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-10-21\n  Peak 2027-10-21T05:00:00Z UTC. ZHR 20. Best: Both. Radiant Orion. Moon: check USNO phase that night.\n  Event (UTC): 2027-10-21T05:00:00Z | Visible: Both (approx peak ±1d)\n- **[Last Quarter — 10/22/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-10-22\n  Last Quarter occurs 2027-10-22T17:29:00Z UTC.\n  Event (UTC): 2027-10-22T17:29:00Z\n- **[New Moon — 10/29/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-10-29\n  New Moon occurs 2027-10-29T13:36:00Z UTC.\n  Event (UTC): 2027-10-29T13:36:00Z\n- **[Southern Taurids peak 2027-11-05T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-11-05\n  Peak 2027-11-05T04:00:00Z UTC. ZHR 10. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.\n  Event (UTC): 2027-11-05T04:00:00Z | Visible: Northern (approx peak ±1d)\n- **[First Quarter — 11/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-11-06\n  First Quarter occurs 2027-11-06T08:00:00Z UTC.\n  Event (UTC): 2027-11-06T08:00:00Z\n- **[Northern Taurids peak 2027-11-12T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-11-12\n  Peak 2027-11-12T04:00:00Z UTC. ZHR 5. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.\n  Event (UTC): 2027-11-12T04:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Full Moon — 11/14/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-11-14\n  Full Moon occurs 2027-11-14T03:26:00Z UTC.\n  Event (UTC): 2027-11-14T03:26:00Z\n- **[Leonids peak 2027-11-17T22:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-11-17\n  Peak 2027-11-17T22:00:00Z UTC. ZHR 15. Best: Northern. Radiant Leon. Moon: check USNO phase that night.\n  Event (UTC): 2027-11-17T22:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Last Quarter — 11/21/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-11-21\n  Last Quarter occurs 2027-11-21T00:48:00Z UTC.\n  Event (UTC): 2027-11-21T00:48:00Z\n- **[New Moon — 11/28/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-11-28\n  New Moon occurs 2027-11-28T03:24:00Z UTC.\n  Event (UTC): 2027-11-28T03:24:00Z\n- **[First Quarter — 12/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-06\n  First Quarter occurs 2027-12-06T05:22:00Z UTC.\n  Event (UTC): 2027-12-06T05:22:00Z\n- **[Full Moon — 12/13/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-13\n  Full Moon occurs 2027-12-13T16:09:00Z UTC.\n  Event (UTC): 2027-12-13T16:09:00Z\n- **[Geminids peak 2027-12-14T02:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-12-14\n  Peak 2027-12-14T02:00:00Z UTC. ZHR 150. Best: Northern. Radiant Gemini. Moon: check USNO phase that night.\n  Event (UTC): 2027-12-14T02:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Last Quarter — 12/20/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-20\n  Last Quarter occurs 2027-12-20T09:11:00Z UTC.\n  Event (UTC): 2027-12-20T09:11:00Z\n- **[Solstice 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-22\n  Solstice occurs 2027-12-22T02:42:00Z UTC (global instant).\n  Event (UTC): 2027-12-22T02:42:00Z | Visible: Global\n- **[Ursids peak 2027-12-22T10:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-12-22\n  Peak 2027-12-22T10:00:00Z UTC. ZHR 10. Best: Northern. Radiant Ursa Minor. Moon: check USNO phase that night.\n  Event (UTC): 2027-12-22T10:00:00Z | Visible: Northern (approx peak ±1d)\n- **[New Moon — 12/27/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-27\n  New Moon occurs 2027-12-27T20:12:00Z UTC.\n  Event (UTC): 2027-12-27T20:12:00Z",
+  "markdown": "_Context: Sunday, 2026-10-04 2026-10-04T12:07:16.102361Z (intent: periodic_event)._\n\n- **[Perihelion 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-03\n  Perihelion occurs 2027-01-03T02:33:00Z UTC (global instant).\n  Event (UTC): 2027-01-03T02:33:00Z | Visible: Global\n- **[Quadrantids peak 2027-01-03T15:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-01-03\n  Peak 2027-01-03T15:00:00Z UTC. ZHR 110. Best: Northern. Radiant Bootes. Moon: check USNO phase that night.\n  Event (UTC): 2027-01-03T15:00:00Z | Visible: Northern (approx peak ±1d)\n- **[New Moon — 1/7/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-07\n  New Moon occurs 2027-01-07T20:24:00Z UTC.\n  Event (UTC): 2027-01-07T20:24:00Z\n- **[First Quarter — 1/15/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-15\n  First Quarter occurs 2027-01-15T20:34:00Z UTC.\n  Event (UTC): 2027-01-15T20:34:00Z\n- **[Full Moon — 1/22/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-22\n  Full Moon occurs 2027-01-22T12:17:00Z UTC.\n  Event (UTC): 2027-01-22T12:17:00Z\n- **[Last Quarter — 1/29/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-01-29\n  Last Quarter occurs 2027-01-29T10:55:00Z UTC.\n  Event (UTC): 2027-01-29T10:55:00Z\n- **[Annular Solar Eclipse of 6 February 2027 (2027)](https://eclipse.gsfc.nasa.gov/)** — USNO, published 2027-02-06\n  Annular Solar Eclipse of 6 February 2027 occurs 2027-02-06. Local circumstances: query with lat/lon for magnitude/obscuration.\n  Event date: 2027-02-06 (time not supplied)\n- **[New Moon — 2/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-02-06\n  New Moon occurs 2027-02-06T15:56:00Z UTC.\n  Event (UTC): 2027-02-06T15:56:00Z\n- **[First Quarter — 2/14/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-02-14\n  First Quarter occurs 2027-02-14T07:58:00Z UTC.\n  Event (UTC): 2027-02-14T07:58:00Z\n- **[Full Moon — 2/20/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-02-20\n  Full Moon occurs 2027-02-20T23:23:00Z UTC.\n  Event (UTC): 2027-02-20T23:23:00Z\n- **[Last Quarter — 2/28/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-02-28\n  Last Quarter occurs 2027-02-28T05:16:00Z UTC.\n  Event (UTC): 2027-02-28T05:16:00Z\n- **[New Moon — 3/8/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-08\n  New Moon occurs 2027-03-08T09:29:00Z UTC.\n  Event (UTC): 2027-03-08T09:29:00Z\n- **[First Quarter — 3/15/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-15\n  First Quarter occurs 2027-03-15T16:25:00Z UTC.\n  Event (UTC): 2027-03-15T16:25:00Z\n- **[Equinox 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-20\n  Equinox occurs 2027-03-20T20:25:00Z UTC (global instant).\n  Event (UTC): 2027-03-20T20:25:00Z | Visible: Global\n- **[Full Moon — 3/22/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-22\n  Full Moon occurs 2027-03-22T10:44:00Z UTC.\n  Event (UTC): 2027-03-22T10:44:00Z\n- **[Last Quarter — 3/30/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-03-30\n  Last Quarter occurs 2027-03-30T00:54:00Z UTC.\n  Event (UTC): 2027-03-30T00:54:00Z\n- **[New Moon — 4/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-04-06\n  New Moon occurs 2027-04-06T23:51:00Z UTC.\n  Event (UTC): 2027-04-06T23:51:00Z\n- **[First Quarter — 4/13/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-04-13\n  First Quarter occurs 2027-04-13T22:56:00Z UTC.\n  Event (UTC): 2027-04-13T22:56:00Z\n- **[Full Moon — 4/20/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-04-20\n  Full Moon occurs 2027-04-20T22:27:00Z UTC.\n  Event (UTC): 2027-04-20T22:27:00Z\n- **[Lyrids peak 2027-04-22T18:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-04-22\n  Peak 2027-04-22T18:00:00Z UTC. ZHR 18. Best: Northern. Radiant Lyra. Moon: check USNO phase that night.\n  Event (UTC): 2027-04-22T18:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Last Quarter — 4/28/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-04-28\n  Last Quarter occurs 2027-04-28T20:18:00Z UTC.\n  Event (UTC): 2027-04-28T20:18:00Z\n- **[Eta Aquariids peak 2027-05-06T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-05-06\n  Peak 2027-05-06T04:00:00Z UTC. ZHR 50. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.\n  Event (UTC): 2027-05-06T04:00:00Z | Visible: Southern (approx peak ±1d)\n- **[New Moon — 5/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-05-06\n  New Moon occurs 2027-05-06T10:58:00Z UTC.\n  Event (UTC): 2027-05-06T10:58:00Z\n- **[First Quarter — 5/13/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-05-13\n  First Quarter occurs 2027-05-13T04:44:00Z UTC.\n  Event (UTC): 2027-05-13T04:44:00Z\n- **[Full Moon — 5/20/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-05-20\n  Full Moon occurs 2027-05-20T10:59:00Z UTC.\n  Event (UTC): 2027-05-20T10:59:00Z\n- **[Last Quarter — 5/28/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-05-28\n  Last Quarter occurs 2027-05-28T13:58:00Z UTC.\n  Event (UTC): 2027-05-28T13:58:00Z\n- **[New Moon — 6/4/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-04\n  New Moon occurs 2027-06-04T19:40:00Z UTC.\n  Event (UTC): 2027-06-04T19:40:00Z\n- **[First Quarter — 6/11/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-11\n  First Quarter occurs 2027-06-11T10:56:00Z UTC.\n  Event (UTC): 2027-06-11T10:56:00Z\n- **[Full Moon — 6/19/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-19\n  Full Moon occurs 2027-06-19T00:44:00Z UTC.\n  Event (UTC): 2027-06-19T00:44:00Z\n- **[Solstice 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-21\n  Solstice occurs 2027-06-21T14:11:00Z UTC (global instant).\n  Event (UTC): 2027-06-21T14:11:00Z | Visible: Global\n- **[Last Quarter — 6/27/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-06-27\n  Last Quarter occurs 2027-06-27T04:54:00Z UTC.\n  Event (UTC): 2027-06-27T04:54:00Z\n- **[New Moon — 7/4/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-04\n  New Moon occurs 2027-07-04T03:02:00Z UTC.\n  Event (UTC): 2027-07-04T03:02:00Z\n- **[Aphelion 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-05\n  Aphelion occurs 2027-07-05T05:06:00Z UTC (global instant).\n  Event (UTC): 2027-07-05T05:06:00Z | Visible: Global\n- **[First Quarter — 7/10/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-10\n  First Quarter occurs 2027-07-10T18:39:00Z UTC.\n  Event (UTC): 2027-07-10T18:39:00Z\n- **[Full Moon — 7/18/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-18\n  Full Moon occurs 2027-07-18T15:45:00Z UTC.\n  Event (UTC): 2027-07-18T15:45:00Z\n- **[Last Quarter — 7/26/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-07-26\n  Last Quarter occurs 2027-07-26T16:55:00Z UTC.\n  Event (UTC): 2027-07-26T16:55:00Z\n- **[Southern Delta Aquariids peak 2027-07-30T03:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-07-30\n  Peak 2027-07-30T03:00:00Z UTC. ZHR 25. Best: Southern. Radiant Aquarius. Moon: check USNO phase that night.\n  Event (UTC): 2027-07-30T03:00:00Z | Visible: Southern (approx peak ±1d)\n- **[Total Solar Eclipse of 2 August 2027 (2027)](https://eclipse.gsfc.nasa.gov/)** — USNO, published 2027-08-02\n  Total Solar Eclipse of 2 August 2027 occurs 2027-08-02. Local circumstances: query with lat/lon for magnitude/obscuration.\n  Event date: 2027-08-02 (time not supplied)\n- **[New Moon — 8/2/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-02\n  New Moon occurs 2027-08-02T10:05:00Z UTC.\n  Event (UTC): 2027-08-02T10:05:00Z\n- **[First Quarter — 8/9/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-09\n  First Quarter occurs 2027-08-09T04:54:00Z UTC.\n  Event (UTC): 2027-08-09T04:54:00Z\n- **[Perseids peak 2027-08-13T03:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-08-13\n  Peak 2027-08-13T03:00:00Z UTC. ZHR 100. Best: Northern. Radiant Perseus. Moon: check USNO phase that night.\n  Event (UTC): 2027-08-13T03:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Full Moon — 8/17/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-17\n  Full Moon occurs 2027-08-17T07:29:00Z UTC.\n  Event (UTC): 2027-08-17T07:29:00Z\n- **[Last Quarter — 8/25/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-25\n  Last Quarter occurs 2027-08-25T02:27:00Z UTC.\n  Event (UTC): 2027-08-25T02:27:00Z\n- **[New Moon — 8/31/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-08-31\n  New Moon occurs 2027-08-31T17:41:00Z UTC.\n  Event (UTC): 2027-08-31T17:41:00Z\n- **[First Quarter — 9/7/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-07\n  First Quarter occurs 2027-09-07T18:31:00Z UTC.\n  Event (UTC): 2027-09-07T18:31:00Z\n- **[Full Moon — 9/15/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-15\n  Full Moon occurs 2027-09-15T23:03:00Z UTC.\n  Event (UTC): 2027-09-15T23:03:00Z\n- **[Equinox 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-23\n  Equinox occurs 2027-09-23T06:02:00Z UTC (global instant).\n  Event (UTC): 2027-09-23T06:02:00Z | Visible: Global\n- **[Last Quarter — 9/23/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-23\n  Last Quarter occurs 2027-09-23T10:20:00Z UTC.\n  Event (UTC): 2027-09-23T10:20:00Z\n- **[New Moon — 9/30/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-09-30\n  New Moon occurs 2027-09-30T02:36:00Z UTC.\n  Event (UTC): 2027-09-30T02:36:00Z\n- **[First Quarter — 10/7/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-10-07\n  First Quarter occurs 2027-10-07T11:47:00Z UTC.\n  Event (UTC): 2027-10-07T11:47:00Z\n- **[Draconids peak 2027-10-08T15:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-10-08\n  Peak 2027-10-08T15:00:00Z UTC. ZHR 10. Best: Northern. Radiant Draco. Moon: check USNO phase that night.\n  Event (UTC): 2027-10-08T15:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Full Moon — 10/15/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-10-15\n  Full Moon occurs 2027-10-15T13:47:00Z UTC.\n  Event (UTC): 2027-10-15T13:47:00Z\n- **[Orionids peak 2027-10-21T05:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-10-21\n  Peak 2027-10-21T05:00:00Z UTC. ZHR 20. Best: Both. Radiant Orion. Moon: check USNO phase that night.\n  Event (UTC): 2027-10-21T05:00:00Z | Visible: Both (approx peak ±1d)\n- **[Last Quarter — 10/22/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-10-22\n  Last Quarter occurs 2027-10-22T17:29:00Z UTC.\n  Event (UTC): 2027-10-22T17:29:00Z\n- **[New Moon — 10/29/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-10-29\n  New Moon occurs 2027-10-29T13:36:00Z UTC.\n  Event (UTC): 2027-10-29T13:36:00Z\n- **[Southern Taurids peak 2027-11-05T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-11-05\n  Peak 2027-11-05T04:00:00Z UTC. ZHR 10. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.\n  Event (UTC): 2027-11-05T04:00:00Z | Visible: Northern (approx peak ±1d)\n- **[First Quarter — 11/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-11-06\n  First Quarter occurs 2027-11-06T08:00:00Z UTC.\n  Event (UTC): 2027-11-06T08:00:00Z\n- **[Northern Taurids peak 2027-11-12T04:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-11-12\n  Peak 2027-11-12T04:00:00Z UTC. ZHR 5. Best: Northern. Radiant Taurus. Moon: check USNO phase that night.\n  Event (UTC): 2027-11-12T04:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Full Moon — 11/14/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-11-14\n  Full Moon occurs 2027-11-14T03:26:00Z UTC.\n  Event (UTC): 2027-11-14T03:26:00Z\n- **[Leonids peak 2027-11-17T22:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-11-17\n  Peak 2027-11-17T22:00:00Z UTC. ZHR 15. Best: Northern. Radiant Leon. Moon: check USNO phase that night.\n  Event (UTC): 2027-11-17T22:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Last Quarter — 11/21/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-11-21\n  Last Quarter occurs 2027-11-21T00:48:00Z UTC.\n  Event (UTC): 2027-11-21T00:48:00Z\n- **[New Moon — 11/28/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-11-28\n  New Moon occurs 2027-11-28T03:24:00Z UTC.\n  Event (UTC): 2027-11-28T03:24:00Z\n- **[First Quarter — 12/6/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-06\n  First Quarter occurs 2027-12-06T05:22:00Z UTC.\n  Event (UTC): 2027-12-06T05:22:00Z\n- **[Full Moon — 12/13/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-13\n  Full Moon occurs 2027-12-13T16:09:00Z UTC.\n  Event (UTC): 2027-12-13T16:09:00Z\n- **[Geminids peak 2027-12-14T02:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-12-14\n  Peak 2027-12-14T02:00:00Z UTC. ZHR 150. Best: Northern. Radiant Gemini. Moon: check USNO phase that night.\n  Event (UTC): 2027-12-14T02:00:00Z | Visible: Northern (approx peak ±1d)\n- **[Last Quarter — 12/20/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-20\n  Last Quarter occurs 2027-12-20T09:11:00Z UTC.\n  Event (UTC): 2027-12-20T09:11:00Z\n- **[Solstice 2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-22\n  Solstice occurs 2027-12-22T02:42:00Z UTC (global instant).\n  Event (UTC): 2027-12-22T02:42:00Z | Visible: Global\n- **[Ursids peak 2027-12-22T10:00:00Z](https://www.imo.net/members/imo_showers/calendar/)** — IMO/AMS, published 2027-12-22\n  Peak 2027-12-22T10:00:00Z UTC. ZHR 10. Best: Northern. Radiant Ursa Minor. Moon: check USNO phase that night.\n  Event (UTC): 2027-12-22T10:00:00Z | Visible: Northern (approx peak ±1d)\n- **[New Moon — 12/27/2027](https://aa.usno.navy.mil/)** — USNO, published 2027-12-27\n  New Moon occurs 2027-12-27T20:12:00Z UTC.\n  Event (UTC): 2027-12-27T20:12:00Z",
   "cached": false,
   "context": {
-    "now_utc": "2026-09-27T11:47:57.144827Z",
-    "today": "Sunday, 2026-09-27",
+    "now_utc": "2026-10-04T12:07:16.102361Z",
+    "today": "Sunday, 2026-10-04",
     "tz": "UTC"
   },
-  "generated_at": "2026-09-27T11:47:57.144827Z",
+  "generated_at": "2026-10-04T12:07:16.102361Z",
   "data_as_of": {
     "static_yearly": "2027-01-01 (eclipses, seasons, meteor peaks: fixed for the year)",
-    "live_snapshot": "2026-09-27T11:47:57.144827Z (moon phases yearly-static; Kp/asteroids/APOD: re-query live when fresh matters)"
+    "live_snapshot": "2026-10-04T12:07:16.102361Z (moon phases yearly-static; Kp/asteroids/APOD: re-query live when fresh matters)"
   }
 }
