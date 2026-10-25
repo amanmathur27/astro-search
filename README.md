@@ -113,36 +113,36 @@ The library provides 5 tool declarations via `TOOL_DECLARATIONS`:
 ## Live Source Availability & Health
 
 <!-- START_SOURCE_HEALTH_TABLE -->
-**Last Automated Check:** `2026-10-24 10:19 UTC` | **Overall Health:** 🟡 **Degraded** (26/31 sources healthy, `83.9%`)
+**Last Automated Check:** `2026-10-25 10:45 UTC` | **Overall Health:** 🟡 **Degraded** (25/31 sources healthy, `80.6%`)
 
 | Source | Type | Status | HTTP | Details | Freshness |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **The Astronomer's Telegram** | `RSS` | 🟢 OK | `200` | 10 entries | 13h ago |
-| **NASA News** | `RSS` | 🟢 OK | `200` | 10 entries | 6h ago |
+| **The Astronomer's Telegram** | `RSS` | 🟢 OK | `200` | 10 entries | 38h ago |
+| **NASA News** | `RSS` | 🔴 Fail | `-` | 0 entries | - |
 | **NASA Science** | `RSS` | 🟡 Review | `200` | 0 entries | - |
-| **JPL News** | `RSS` | 🟢 OK | `200` | 100 entries | 41h ago |
-| **NASA Artemis** | `RSS` | 🟢 OK | `200` | 10 entries | 14h ago |
-| **NASA Space Station** | `RSS` | 🟢 OK | `200` | 10 entries | 18h ago |
-| **ESA News** | `RSS` | 🟢 OK | `200` | 15 entries | 50h ago |
-| **ESO** | `RSS` | 🟢 OK | `200` | 10 entries | 1579h ago |
-| **NRAO** | `RSS` | 🟢 OK | `200` | 10 entries | 118h ago |
-| **Royal Astronomical Society** | `RSS` | 🟢 OK | `200` | 10 entries | 1271h ago |
-| **Phys.org** | `RSS` | 🟢 OK | `200` | 30 entries | 0h ago |
-| **Universe Today** | `RSS` | 🟢 OK | `200` | 20 entries | 8h ago |
-| **EarthSky** | `RSS` | 🟢 OK | `200` | 10 entries | 23h ago |
+| **JPL News** | `RSS` | 🟢 OK | `200` | 100 entries | 66h ago |
+| **NASA Artemis** | `RSS` | 🟢 OK | `200` | 10 entries | 38h ago |
+| **NASA Space Station** | `RSS` | 🟢 OK | `200` | 10 entries | 42h ago |
+| **ESA News** | `RSS` | 🟢 OK | `200` | 15 entries | 74h ago |
+| **ESO** | `RSS` | 🟢 OK | `200` | 10 entries | 1603h ago |
+| **NRAO** | `RSS` | 🟢 OK | `200` | 10 entries | 142h ago |
+| **Royal Astronomical Society** | `RSS` | 🟢 OK | `200` | 10 entries | 1295h ago |
+| **Phys.org** | `RSS` | 🟢 OK | `200` | 30 entries | 16h ago |
+| **Universe Today** | `RSS` | 🟢 OK | `200` | 20 entries | 2h ago |
+| **EarthSky** | `RSS` | 🟢 OK | `200` | 10 entries | 24h ago |
 | **Astronomy Magazine** | `RSS` | 🟢 OK | `200` | 10 entries | 2h ago |
-| **ScienceDaily Astronomy** | `RSS` | 🟢 OK | `200` | 60 entries | 31h ago |
-| **ScienceDaily Astrophysics** | `RSS` | 🟢 OK | `200` | 60 entries | 31h ago |
-| **ScienceDaily Space** | `RSS` | 🟢 OK | `200` | 60 entries | 47h ago |
+| **ScienceDaily Astronomy** | `RSS` | 🟢 OK | `200` | 60 entries | 21h ago |
+| **ScienceDaily Astrophysics** | `RSS` | 🟢 OK | `200` | 60 entries | 21h ago |
+| **ScienceDaily Space** | `RSS` | 🟢 OK | `200` | 60 entries | 21h ago |
 | **New Scientist Space** | `RSS` | 🔴 Fail | `-` | 0 entries | - |
-| **AAS Nova** | `RSS` | 🟢 OK | `200` | 600 entries | 18h ago |
+| **AAS Nova** | `RSS` | 🟢 OK | `200` | 600 entries | 42h ago |
 | **arXiv astro-ph Recent** | `RSS` | 🟡 Review | `200` | 0 entries | - |
-| **SpaceNews** | `RSS` | 🟢 OK | `200` | 12 entries | 14h ago |
-| **Centauri Dreams** | `RSS` | 🟢 OK | `200` | 10 entries | 64h ago |
-| **Science News Space** | `RSS` | 🟢 OK | `200` | 20 entries | 43h ago |
-| **Keck Observatory** | `RSS` | 🟢 OK | `200` | 10 entries | 376h ago |
-| **SpaceDaily** | `RSS` | 🟢 OK | `200` | 10 entries | 65h ago |
-| **The Space Review** | `RSS` | 🟢 OK | `200` | 730 entries | 118h ago |
+| **SpaceNews** | `RSS` | 🟢 OK | `200` | 12 entries | 38h ago |
+| **Centauri Dreams** | `RSS` | 🟢 OK | `200` | 10 entries | 89h ago |
+| **Science News Space** | `RSS` | 🟢 OK | `200` | 20 entries | 67h ago |
+| **Keck Observatory** | `RSS` | 🟢 OK | `200` | 10 entries | 400h ago |
+| **SpaceDaily** | `RSS` | 🟢 OK | `200` | 10 entries | 89h ago |
+| **The Space Review** | `RSS` | 🟢 OK | `200` | 730 entries | 142h ago |
 | **NASA APOD API** | `API` | 🔴 Fail | `-` | API Online | - |
 | **NASA DONKI CME API** | `API` | 🔴 Fail | `-` | API Online | - |
 | **NOAA SWPC Kp 1-minute** | `API` | 🟢 OK | `200` | API Online | - |
