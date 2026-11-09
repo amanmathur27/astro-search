@@ -113,41 +113,41 @@ The library provides 5 tool declarations via `TOOL_DECLARATIONS`:
 ## Live Source Availability & Health
 
 <!-- START_SOURCE_HEALTH_TABLE -->
-**Last Automated Check:** `2026-11-08 12:47 UTC` | **Overall Health:** 🟡 **Degraded** (26/31 sources healthy, `83.9%`)
+**Last Automated Check:** `2026-11-09 15:14 UTC` | **Overall Health:** 🟡 **Degraded** (26/31 sources healthy, `83.9%`)
 
 | Source | Type | Status | HTTP | Details | Freshness |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **The Astronomer's Telegram** | `RSS` | 🟢 OK | `200` | 10 entries | 29h ago |
-| **NASA News** | `RSS` | 🟢 OK | `200` | 10 entries | 7h ago |
+| **The Astronomer's Telegram** | `RSS` | 🟢 OK | `200` | 10 entries | 6h ago |
+| **NASA News** | `RSS` | 🟢 OK | `200` | 10 entries | 4h ago |
 | **NASA Science** | `RSS` | 🟡 Review | `200` | 0 entries | - |
-| **JPL News** | `RSS` | 🟢 OK | `200` | 100 entries | 13h ago |
-| **NASA Artemis** | `RSS` | 🟢 OK | `200` | 10 entries | 376h ago |
-| **NASA Space Station** | `RSS` | 🟢 OK | `200` | 10 entries | 42h ago |
+| **JPL News** | `RSS` | 🟢 OK | `200` | 100 entries | 40h ago |
+| **NASA Artemis** | `RSS` | 🟢 OK | `200` | 10 entries | 402h ago |
+| **NASA Space Station** | `RSS` | 🟢 OK | `200` | 10 entries | 69h ago |
 | **ESA News** | `RSS` | 🔴 Fail | `-` | 0 entries | - |
-| **ESO** | `RSS` | 🟢 OK | `200` | 10 entries | 287h ago |
-| **NRAO** | `RSS` | 🟢 OK | `200` | 10 entries | 306h ago |
-| **Royal Astronomical Society** | `RSS` | 🟢 OK | `200` | 10 entries | 1633h ago |
-| **Phys.org** | `RSS` | 🟢 OK | `200` | 30 entries | 1h ago |
-| **Universe Today** | `RSS` | 🟢 OK | `200` | 20 entries | 28h ago |
-| **EarthSky** | `RSS` | 🟢 OK | `200` | 10 entries | 0h ago |
-| **Astronomy Magazine** | `RSS` | 🟢 OK | `200` | 10 entries | 3h ago |
-| **ScienceDaily Astronomy** | `RSS` | 🟢 OK | `200` | 60 entries | 11h ago |
-| **ScienceDaily Astrophysics** | `RSS` | 🟢 OK | `200` | 60 entries | 2h ago |
-| **ScienceDaily Space** | `RSS` | 🟢 OK | `200` | 60 entries | 11h ago |
-| **New Scientist Space** | `RSS` | 🟢 OK | `200` | 10 entries | 48h ago |
-| **AAS Nova** | `RSS` | 🟢 OK | `200` | 600 entries | 43h ago |
-| **arXiv astro-ph Recent** | `RSS` | 🟡 Review | `200` | 0 entries | - |
-| **SpaceNews** | `RSS` | 🟢 OK | `200` | 13 entries | 63h ago |
-| **Centauri Dreams** | `RSS` | 🟢 OK | `200` | 10 entries | 65h ago |
-| **Science News Space** | `RSS` | 🟢 OK | `200` | 20 entries | 211h ago |
-| **Keck Observatory** | `RSS` | 🟢 OK | `200` | 10 entries | 88h ago |
-| **SpaceDaily** | `RSS` | 🟢 OK | `200` | 10 entries | 82h ago |
-| **The Space Review** | `RSS` | 🟢 OK | `200` | 741 entries | 144h ago |
+| **ESO** | `RSS` | 🟢 OK | `200` | 10 entries | 314h ago |
+| **NRAO** | `RSS` | 🟢 OK | `200` | 10 entries | 333h ago |
+| **Royal Astronomical Society** | `RSS` | 🟢 OK | `200` | 10 entries | 1660h ago |
+| **Phys.org** | `RSS` | 🟢 OK | `200` | 30 entries | 19h ago |
+| **Universe Today** | `RSS` | 🟢 OK | `200` | 20 entries | 7h ago |
+| **EarthSky** | `RSS` | 🟢 OK | `200` | 10 entries | 2h ago |
+| **Astronomy Magazine** | `RSS` | 🟢 OK | `200` | 10 entries | 1h ago |
+| **ScienceDaily Astronomy** | `RSS` | 🟢 OK | `200` | 60 entries | 5h ago |
+| **ScienceDaily Astrophysics** | `RSS` | 🟢 OK | `200` | 60 entries | 5h ago |
+| **ScienceDaily Space** | `RSS` | 🟢 OK | `200` | 60 entries | 5h ago |
+| **New Scientist Space** | `RSS` | 🟢 OK | `200` | 10 entries | 75h ago |
+| **AAS Nova** | `RSS` | 🟢 OK | `200` | 600 entries | 70h ago |
+| **arXiv astro-ph Recent** | `RSS` | 🟢 OK | `200` | 144 entries | 10h ago |
+| **SpaceNews** | `RSS` | 🟢 OK | `200` | 13 entries | 1h ago |
+| **Centauri Dreams** | `RSS` | 🟢 OK | `200` | 10 entries | 91h ago |
+| **Science News Space** | `RSS` | 🟢 OK | `200` | 20 entries | 237h ago |
+| **Keck Observatory** | `RSS` | 🟢 OK | `200` | 10 entries | 115h ago |
+| **SpaceDaily** | `RSS` | 🟢 OK | `200` | 10 entries | 109h ago |
+| **The Space Review** | `RSS` | 🟢 OK | `200` | 741 entries | 171h ago |
 | **NASA APOD API** | `API` | 🔴 Fail | `-` | API Online | - |
 | **NASA DONKI CME API** | `API` | 🔴 Fail | `-` | API Online | - |
 | **NOAA SWPC Kp 1-minute** | `API` | 🟢 OK | `200` | API Online | - |
 | **arXiv Astronomy API** | `API` | 🟢 OK | `200` | API Online | - |
-| **Open Notify ISS Position** | `API` | 🟢 OK | `200` | API Online | - |
+| **Open Notify ISS Position** | `API` | 🔴 Fail | `-` | API Online | - |
 <!-- END_SOURCE_HEALTH_TABLE -->
 
 ## License
